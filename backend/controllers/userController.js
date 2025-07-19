@@ -61,16 +61,20 @@ export const login = catchAsyncErrors(async (req, res, next) => {
             new ErrorHandler("Email, password and role are required.", 400)
         );
     }
-    const user = await User.findOne({ email }).select("+password");
-    if (!user) {
-        return next(new ErrorHandler("Invalid email or password.", 400));
+    try {
+        const user = await UserModel.findOne({ email }).select("+password");
+        if (!user) {
+            return next(new ErrorHandler("Invalid email or password.", 400));
+        }
+        const isPasswordMatched = await user.comparePassword(password);
+        if (!isPasswordMatched) {
+            return next(new ErrorHandler("Invalid email or password.", 400));
+        }
+        if (user.role !== role) {
+            return next(new ErrorHandler("Invalid user role.", 400));
+        }
+        sendToken(user, 200, res, "User logged in successfully.");
+    } catch (error) {
+        next(error)
     }
-    const isPasswordMatched = await user.comparePassword(password);
-    if (!isPasswordMatched) {
-        return next(new ErrorHandler("Invalid email or password.", 400));
-    }
-    if (user.role !== role) {
-        return next(new ErrorHandler("Invalid user role.", 400));
-    }
-    sendToken(user, 200, res, "User logged in successfully.");
 });
