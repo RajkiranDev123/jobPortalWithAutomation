@@ -10,7 +10,7 @@ router.post("/login", login);
 // only logged in user can logged out
 router.get("/logout", isAuthenticated, logout);
 
-router.get("/getuser", isAuthenticated, getUser);
+router.get("/me", isAuthenticated, getUser);
 // router.put("/update/profile", isAuthenticated, updateProfile)
 // router.put("/update/password", isAuthenticated, updatePassword)
 
