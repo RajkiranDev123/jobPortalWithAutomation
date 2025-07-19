@@ -84,7 +84,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 /////////////////////////////////////////////////////// logout /////////////////////////////////////
 
 export const logout = catchAsyncErrors(async (req, res, next) => {
-    res
+    return res
         .status(200)
         .cookie("token", "", {
             expires: new Date(Date.now()),// expires now!
@@ -100,10 +100,92 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 
 export const getUser = catchAsyncErrors(async (req, res, next) => {
     const user = req.user;
-    res.status(200).json({
+    return res.status(200).json({
         success: true,
         user,
     });
 });
 
-//////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////// update profile /////////////////////////
+
+export const updateProfile = catchAsyncErrors(async (req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        address: req.body.address,
+        coverLetter: req.body.coverLetter,
+        niches: {
+            firstNiche: req.body.firstNiche,
+            secondNiche: req.body.secondNiche,
+            thirdNiche: req.body.thirdNiche,
+        },
+    };
+    const { firstNiche, secondNiche, thirdNiche } = newUserData.niches;
+
+    if (
+        req.user.role === "Job Seeker" &&
+        (!firstNiche || !secondNiche || !thirdNiche)
+    ) {
+        return next(
+            new ErrorHandler("Please provide your all preferred job niches.", 400)
+        );
+    }
+    try {
+        if (req.files) {
+            const resume = req.files.resume;
+            if (resume) {
+                const currentResumeId = req?.user?.resume?.public_id;
+                if (currentResumeId) {
+                    await cloudinary.uploader.destroy(currentResumeId);
+                }
+                const newResume = await cloudinary.uploader.upload(resume.tempFilePath, {
+                    folder: "Job_Seekers_Resume",
+                });
+                newUserData.resume = {
+                    public_id: newResume?.public_id,
+                    url: newResume?.secure_url,
+                };
+            }
+        }
+
+        const user = await UserModel.findByIdAndUpdate(req.user.id, newUserData, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+        });
+        return res.status(200).json({
+            success: true,
+            user,
+            message: "Profile updated.",
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
+    }
+});
+
+///////////////////////////////////////////// update password ////////////////////
+export const updatePassword = catchAsyncErrors(async (req, res, next) => {
+
+    try {
+        const user = await UserModel.findById(req?.user?.id).select("+password");
+
+        const isPasswordMatched = await user.comparePassword(req?.body?.oldPassword);
+
+        if (!isPasswordMatched) {
+            return next(new ErrorHandler("Old password is incorrect.", 400));
+        }
+
+        if (req.body.newPassword !== req.body.confirmPassword) {
+            return next(
+                new ErrorHandler("New password & confirm password do not match.", 400)
+            );
+        }
+
+        user.password = req.body.newPassword;
+        await user.save();
+        sendToken(user, 200, res, "Password updated successfully.");
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
+    }
+});
