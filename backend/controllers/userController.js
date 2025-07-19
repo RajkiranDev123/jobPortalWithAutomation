@@ -47,7 +47,8 @@ export const register = catchAsyncErrors(async (req, res, next) => {
         const user = await UserModel.create(userData);//save in db
         sendToken(user, 201, res, "User is Registered.");
     } catch (error) {
-        next(error);
+        return next(new ErrorHandler("Internal Server Error!", 500))
+
     }
 });
 
@@ -75,6 +76,6 @@ export const login = catchAsyncErrors(async (req, res, next) => {
         }
         sendToken(user, 200, res, "User logged in successfully.");
     } catch (error) {
-        next(error)
+        return next(new ErrorHandler("Internal Server Error!", 500))
     }
 });
