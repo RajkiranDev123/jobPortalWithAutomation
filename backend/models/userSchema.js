@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    niches: {
+    niches: {//its an object
         firstNiche: String,
         secondNiche: String,
         thirdNiche: String,
