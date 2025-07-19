@@ -79,3 +79,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Internal Server Error!", 500))
     }
 });
+
+
+/////////////////////////////////////////////////////// logout /////////////////////////////////////
+
