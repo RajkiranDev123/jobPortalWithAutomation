@@ -4,6 +4,7 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { connection } from "./database/connection.js";
+import { errorMiddleware } from "./middlewares/error.js"
 
 const app = express()
 
@@ -21,5 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 connection();
+app.use(errorMiddleware);
 
 export default app
