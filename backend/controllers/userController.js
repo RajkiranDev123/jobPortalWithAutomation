@@ -44,7 +44,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
                 }
             }
         }
-        const user = await UserModel.create(userData);
+        const user = await UserModel.create(userData);//save in db
         sendToken(user, 201, res, "User Registered.");
         res.status(201).json({
             success: true,
