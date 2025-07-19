@@ -44,7 +44,8 @@ export const register = catchAsyncErrors(async (req, res, next) => {
                 }
             }
         }
-        const user = await UserModel.create(userData);//save in db
+        const user = await UserModel.create(userData);//This line creates and saves a new document in one step.
+        //but cant call instance methods like comparePassword etc
         sendToken(user, 201, res, "User is Registered.");
     } catch (error) {
         return next(new ErrorHandler("Internal Server Error!", 500))
@@ -168,7 +169,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
 export const updatePassword = catchAsyncErrors(async (req, res, next) => {
 
     try {
-        const user = await UserModel.findById(req?.user?.id).select("+password");
+        const user = await UserModel.findById(req?.user?.id).select("+password");//also retrive password 
 
         const isPasswordMatched = await user.comparePassword(req?.body?.oldPassword);
 
@@ -176,16 +177,17 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
             return next(new ErrorHandler("Old password is incorrect.", 400));
         }
 
-        if (req.body.newPassword !== req.body.confirmPassword) {
+        if (req?.body?.newPassword !== req?.body?.confirmPassword) {
             return next(
                 new ErrorHandler("New password & confirm password do not match.", 400)
             );
         }
 
         user.password = req.body.newPassword;
-        await user.save();
+        await user.save();//use when : If the document was fetched and modified!
+        
         sendToken(user, 200, res, "Password updated successfully.");
     } catch (error) {
-        return next(new ErrorHandler("Internal Server Error!", 500))
+        return next(new ErrorHandler(error?.message, 500))
     }
 });
