@@ -2,6 +2,7 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { UserModel } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
+import { sendToken } from "../utils/jwtToken.js";
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -44,7 +45,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
             }
         }
         const user = await UserModel.create(userData);
-        // sendToken(user, 201, res, "User Registered.");
+        sendToken(user, 201, res, "User Registered.");
         res.status(201).json({
             success: true,
             message: "User registered!"
