@@ -58,6 +58,7 @@ userSchema.pre("save", async function (next) {
         next();
     }
     this.password = await bcrypt.hash(this.password, 10);
+    // user.password == this.password
 });
 
 // used by user object from db
