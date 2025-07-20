@@ -42,7 +42,7 @@ const jobSchema = new mongoose.Schema({
         enum: ["Yes", "No"],
     },
     personalWebsite: {
-        type: String,
+        title: String,
         url: String
     },
     jobNiche: {
