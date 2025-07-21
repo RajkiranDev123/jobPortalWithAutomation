@@ -2,7 +2,7 @@ import express from "express";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
     // deleteApplication,
-    // employerGetAllApplication,
+    employerGetAllApplication,
     // jobSeekerGetAllApplication,
     postApplication,
 } from "../controllers/applicationController.js";
@@ -16,12 +16,12 @@ router.post(
     postApplication
 );
 
-// router.get(
-//     "/employer/getall",
-//     isAuthenticated,
-//     isAuthorized("Employer"),
-//     employerGetAllApplication
-// );
+router.get(
+    "/employer/getall",
+    isAuthenticated,
+    isAuthorized("Employer"),
+    employerGetAllApplication
+);
 
 // router.get(
 //     "/jobseeker/getall",
