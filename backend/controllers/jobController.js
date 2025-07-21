@@ -2,6 +2,8 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Job } from "../models/jobSchema.js";
 
+///////////////////////////////////////// post job ///////////////////////////////////////////////////////
+
 export const postJob = catchAsyncErrors(async (req, res, next) => {
     const { title, jobType, location, companyName, introduction, responsibilities, qualifications, offers, salary, hiringMultipleCandidates,
         personalWebsiteTitle, personalWebsiteUrl, jobNiche } = req.body;
