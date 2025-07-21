@@ -86,8 +86,24 @@ export const deleteJob = catchAsyncErrors(async (req, res, next) => {
             message: "Job deleted.",
         });
     } catch (error) {
-        return next(new ErrorHandler(error.message||"Internal Server Error!", 500))
+        return next(new ErrorHandler(error.message || "Internal Server Error!", 500))
     }
 });
 
-///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// get a job by id //////////////////////////////////////
+
+export const getSingleJob = catchAsyncErrors(async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const job = await Job.findById(id);
+        if (!job) {
+            return next(new ErrorHandler("Job not found.", 404));
+        }
+        return res.status(200).json({
+            success: true,
+            job,
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
+    }
+});
