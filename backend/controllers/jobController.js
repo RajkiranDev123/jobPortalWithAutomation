@@ -30,3 +30,64 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler(error?.message || "Internal Server Error", 500))
     }
 });
+
+/////////////////////////////////////////////////// get all jobs /////////////////////////////////////////////////////
+export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
+    const { city, niche, searchKeyword } = req.query;
+    const query = {};
+    if (city) {
+        query.location = city;
+    }
+    if (niche) {
+        query.jobNiche = niche;
+    }
+    if (searchKeyword) {
+
+        query.$or = [
+            { title: { $regex: searchKeyword, $options: "i" } },
+            { companyName: { $regex: searchKeyword, $options: "i" } },
+            { introduction: { $regex: searchKeyword, $options: "i" } },
+        ];
+    }
+    try {
+        const jobs = await Job.find(query);
+        return res.status(200).json({
+            success: true,
+            jobs,
+            count: jobs.length,
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
+    }
+});
+
+/////////////////////////////////////////////////////// get my job : by poster id ///////////////////////////////////////////////
+export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
+    const myJobs = await Job.find({ postedBy: req.user._id });
+    return res.status(200).json({
+        success: true,
+        myJobs,
+    });
+});
+
+///////////////////////////////////////////////////////////////////////////////////// delete ////////////////////////////////////
+
+export const deleteJob = catchAsyncErrors(async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const job = await Job.findById(id);
+
+        if (!job) {
+            return next(new ErrorHandler("Oops! Job not found.", 404));
+        }
+        await job.deleteOne();
+        res.status(200).json({
+            success: true,
+            message: "Job deleted.",
+        });
+    } catch (error) {
+        return next(new ErrorHandler(error.message||"Internal Server Error!", 500))
+    }
+});
+
+///////////////////////////////////////////////////////////////
