@@ -99,31 +99,35 @@ export const jobSeekerGetAllApplication = catchAsyncErrors(
 
 export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
     const { id } = req.params;
-    const application = await Application.findById(id);
-    if (!application) {
-        return next(new ErrorHandler("Application not found.", 404));
-    }
-    const { role } = req.user;
-    switch (role) {
-        case "Job Seeker":
-            application.deletedBy.jobSeeker = true;
-            await application.save();
-            break;
-        case "Employer":
-            application.deletedBy.employer = true;
-            await application.save();
-            break;
+    try {
+        const application = await Application.findById(id);
+        if (!application) {
+            return next(new ErrorHandler("Application not found.", 404));
+        }
+        const { role } = req.user;
+        switch (role) {
+            case "Job Seeker":
+                application.deletedBy.jobSeeker = true;
+                await application.save();
+                break;
+            case "Employer":
+                application.deletedBy.employer = true;
+                await application.save();
+                break;
 
-        default:
-            console.log("Default case for application delete function.");
-            break;
-    }
+            default:
+                console.log("Default case for application delete function.");
+                break;
+        }
 
-    if (application.deletedBy.employer === true && application.deletedBy.jobSeeker === true) {
-        await application.deleteOne();
+        if (application.deletedBy.employer === true && application.deletedBy.jobSeeker === true) {
+            await application.deleteOne();
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Application Deleted.",
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
     }
-    return res.status(200).json({
-        success: true,
-        message: "Application Deleted.",
-    });
 });
