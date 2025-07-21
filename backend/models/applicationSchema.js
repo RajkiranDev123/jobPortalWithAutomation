@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 const applicationSchema = new mongoose.Schema({
     jobSeekerInfo: {
-        id: {
+        id: {// from auth middleware
             type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
