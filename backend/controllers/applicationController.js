@@ -79,3 +79,51 @@ export const employerGetAllApplication = catchAsyncErrors(
         }
     }
 );
+
+export const jobSeekerGetAllApplication = catchAsyncErrors(
+    async (req, res, next) => {
+        const { _id } = req.user;//employer id 
+        try {
+            const applications = await Application.find({
+                "jobSeekerInfo.id": _id,
+                "deletedBy.jobSeeker": false,
+            });
+            return res.status(200).json({ success: true, applications });
+        } catch (error) {
+            return next(new ErrorHandler("Internal Server Error!", 500))
+        }
+    }
+);
+
+////////////////////////////////////////// delete application ///////////////////////////////////
+
+export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
+    const { id } = req.params;
+    const application = await Application.findById(id);
+    if (!application) {
+        return next(new ErrorHandler("Application not found.", 404));
+    }
+    const { role } = req.user;
+    switch (role) {
+        case "Job Seeker":
+            application.deletedBy.jobSeeker = true;
+            await application.save();
+            break;
+        case "Employer":
+            application.deletedBy.employer = true;
+            await application.save();
+            break;
+
+        default:
+            console.log("Default case for application delete function.");
+            break;
+    }
+
+    if (application.deletedBy.employer === true && application.deletedBy.jobSeeker === true) {
+        await application.deleteOne();
+    }
+    return res.status(200).json({
+        success: true,
+        message: "Application Deleted.",
+    });
+});

@@ -1,9 +1,9 @@
 import express from "express";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
-    // deleteApplication,
+    deleteApplication,
     employerGetAllApplication,
-    // jobSeekerGetAllApplication,
+    jobSeekerGetAllApplication,
     postApplication,
 } from "../controllers/applicationController.js";
 
@@ -23,13 +23,13 @@ router.get(
     employerGetAllApplication
 );
 
-// router.get(
-//     "/jobseeker/getall",
-//     isAuthenticated,
-//     isAuthorized("Job Seeker"),
-//     jobSeekerGetAllApplication
-// );
+router.get(
+    "/jobseeker/getall",
+    isAuthenticated,
+    isAuthorized("Job Seeker"),
+    jobSeekerGetAllApplication
+);
 
-// router.delete("/delete/:id", isAuthenticated, deleteApplication);
+router.delete("/delete/:id", isAuthenticated, deleteApplication);
 
 export default router;
