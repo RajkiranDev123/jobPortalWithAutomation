@@ -82,7 +82,7 @@ export const employerGetAllApplication = catchAsyncErrors(
 
 export const jobSeekerGetAllApplication = catchAsyncErrors(
     async (req, res, next) => {
-        const { _id } = req.user;//employer id 
+        const { _id } = req.user;//jobSeeker id 
         try {
             const applications = await Application.find({
                 "jobSeekerInfo.id": _id,
