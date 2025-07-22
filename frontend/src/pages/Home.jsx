@@ -1,8 +1,15 @@
-import React from 'react'
 
+import Intro from "../components/Intro";
+import TopNiches from "../components/TopNiches";
+import HowItWorks from "../components/HowItWorks";
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <Intro />
+      <TopNiches />
+      <HowItWorks />
+
+    </>
   )
 }
 
