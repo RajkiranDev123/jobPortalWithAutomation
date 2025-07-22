@@ -552,7 +552,7 @@ footer div ul a span {
 
 .howItWorks .container .card:hover {
   transition: 0.3s;
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   background: #111;
   color: #fff;
 }

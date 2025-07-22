@@ -5,14 +5,11 @@ const Intro = () => {
         <section className="hero">
             <h1>Find Your Dream Job Today</h1>
             <h4>
-                Connecting Talent with Opportunities Across the Nation for Every Skill
-                Level
+                Linking Skills to Jobs — From Entry-Level to Expert, Across the Nation
             </h4>
             <div className="box">
-                Explore a vast array of job listings in diverse industries. Whether
-                you're a seasoned professional or just starting out, find the perfect
-                role to advance your career. Our platform makes job searching easy and
-                efficient, bringing you closer to your next big opportunity.
+                Your next career move starts here. Explore jobs in every industry,
+                from entry-level to executive. No matter your experience, our platform helps you find the right role—fast and easy.
             </div>
         </section>
     );
