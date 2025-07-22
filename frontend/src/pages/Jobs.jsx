@@ -37,6 +37,7 @@ const Jobs = () => {
       dispatch(clearAllJobErrors());
     }
     dispatch(fetchJobs(city, niche, searchKeyword));
+    console.log(pdfRefs)
   }, [dispatch, error, city, niche]);
 
   const handleSearch = () => {
@@ -131,7 +132,7 @@ const Jobs = () => {
               {/* display jobs here */}
               <div className="jobs_container" style={{ border: "0px solid red" }}>
                 {jobs && jobs.length > 0 ? (jobs.map((element) => {
-                  
+
                   if (!pdfRefs.current[element._id]) {
                     pdfRefs.current[element._id] = React.createRef();
                   }
