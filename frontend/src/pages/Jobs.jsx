@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { clearAllJobErrors, fetchJobs } from "../store/slices/jobSlice";
 import Spinner from "../components/Spinner";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+//
+import QRCode from "react-qr-code"
+//
+import downloadPdf from "../utils/downloadAsPdf.js"
 
 const Jobs = () => {
+  const pdfRefs = useRef({})
   const [city, setCity] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [niche, setNiche] = useState("");
@@ -65,7 +70,7 @@ const Jobs = () => {
                   <>
                     <div key={index}>
                       <input
-                
+
                         type="radio"
                         id={city}
                         name="city"
@@ -83,7 +88,7 @@ const Jobs = () => {
                 {nichesArray.map((niche, index) => (
                   <div key={index}>
                     <input
-                  
+
                       type="radio"
                       id={niche}
                       name="niche"
@@ -126,8 +131,14 @@ const Jobs = () => {
               {/* display jobs here */}
               <div className="jobs_container" style={{ border: "0px solid red" }}>
                 {jobs && jobs.length > 0 ? (jobs.map((element) => {
+                  
+                  if (!pdfRefs.current[element._id]) {
+                    pdfRefs.current[element._id] = React.createRef();
+                  }
+
                   return (
-                    <div className="card" key={element._id}>
+                    <div className="card" ref={pdfRefs.current[element._id]} key={element._id}>
+
                       {element.hiringMultipleCandidates === "Yes" ? (
                         <p className="hiring-multiple">
                           Hiring Multiple Candidates
@@ -145,6 +156,26 @@ const Jobs = () => {
                         <span>Posted On:</span>{" "}
                         {element.jobPostedOn.substring(0, 10)}
                       </p>
+
+
+
+
+                      {/* qr and pdf */}
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
+                        {/* qr */}
+                        <QRCode style={{ height: 100, width: 100 }}
+                          value={`Title : ${element?.title}, Company Name : ${element?.companyName}, Location : ${element?.location}, Salary : Rs.${element?.salary}, Posted On : ${element?.jobPostedOn.substring(0, 10)}`} />
+
+                        {/* qr */}
+                        <p>or</p>
+
+                        <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
+                          style={{ border: "none", borderRadius: 4, background: "blue", color: "white", padding: 2, cursor: "pointer" }}>
+                          Download as PDF</button>
+
+                      </div>
+
+                      {/* qr and pdf ends*/}
                       <div className="btn-wrapper">
                         <Link
                           className="btn"
@@ -153,7 +184,13 @@ const Jobs = () => {
                           Apply Now
                         </Link>
                       </div>
+
+
+
                     </div>
+                    // card
+
+
                   );
                 })) : (
                   /************************************************************/
