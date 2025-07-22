@@ -109,8 +109,9 @@ export const fetchJobs = (city, niche, searchKeyword = "") => async (dispatch) =
     try {
         dispatch(jobSlice.actions.requestForAllJobs());
         let link = `${import.meta.env.VITE_BASE_URL}/api/v1/job/getall?`;
-        
+
         let queryParams = [];
+        
         if (searchKeyword) {
             queryParams.push(`searchKeyword=${searchKeyword}`);
         }
@@ -146,7 +147,10 @@ export const fetchJobs = (city, niche, searchKeyword = "") => async (dispatch) =
         /***************************************************/
 
         link += queryParams.join("&");
-        const response = await axios.get(link, { withCredentials: true });
+        const response = await axios.get(
+            link,
+            // { withCredentials: true }
+        );
         dispatch(jobSlice.actions.successForAllJobs(response.data.jobs));
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {

@@ -19,8 +19,8 @@ input::-webkit-outer-spin-button {
 .btn,
 .black_btn,
 .outline_btn {
-  background: #dfdf07;
-  color: #111;
+  background: rgba(8, 146, 208, 1);
+  color: #fff;
   font-weight: 500;
   border: none;
   transition: 0.3s;
@@ -248,11 +248,12 @@ input::-webkit-outer-spin-button {
 .notfound .content h1 {
   font-size: 5rem;
   font-weight: 500;
+  color: #8f0c0c;
 }
 
 .notfound .content p {
   font-size: 18px;
-  color: #111;
+  color: black;
 }
 
 .notfound .content .btn {
