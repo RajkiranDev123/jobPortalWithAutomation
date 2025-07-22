@@ -399,7 +399,7 @@ footer div ul a span {
 }
 
 .hero {
-  min-height: 800px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -408,6 +408,7 @@ footer div ul a span {
   max-width: 1700px;
   margin: 0 auto;
   gap: 50px;
+  /* border: 2px solid red; */
 }
 
 .hero h1 {
@@ -476,29 +477,29 @@ footer div ul a span {
 .services h3 {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #dfdf07;
+  color: rgba(8, 146, 208, 1);
   text-transform: uppercase;
 }
 
 .services .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 40px;
 }
 
 .services .grid .card {
-  background: black;
+  background: linear-gradient(159deg, rgba(0, 51, 102, 1) 0%, rgba(15, 82, 186, 1) 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 32px 20px;
+  gap: 12px;
+  padding: 28px 16px;
   border-radius: 6px;
   transition: 0.3s;
 }
 
 .services .grid .card:hover {
-  background: #dfdf07;
+  background: #fdfdfc;
   color: #111;
   transition: 0.3s;
 }
@@ -516,20 +517,20 @@ footer div ul a span {
 }
 
 .howItWorks {
-  padding: 50px 110px;
+  padding: 40px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  gap: 50px;
-  background: #dfdf07;
+  gap: 10px;
+  background: rgb(8, 146, 208);
 }
 
 .howItWorks h3 {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #111;
+  color: #fff;
   text-transform: uppercase;
 }
 
@@ -541,7 +542,7 @@ footer div ul a span {
 
 .howItWorks .container .card {
   background: #fff;
-  padding: 30px 50px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   gap: 15px;
