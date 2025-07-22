@@ -36,10 +36,10 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
     const { city, niche, searchKeyword } = req.query;
     const query = {};
     if (city) {
-        query.location = city;
+        query.location = { $regex: `^${city}$`, $options: "i" };
     }
     if (niche) {
-        query.jobNiche = niche;
+        query.jobNiche = { $regex: `^${niche}$`, $options: "i" };
     }
     if (searchKeyword) {
 
