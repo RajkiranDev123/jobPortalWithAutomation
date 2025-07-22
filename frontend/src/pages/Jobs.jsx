@@ -54,7 +54,7 @@ const Jobs = () => {
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
-            <button style={{background:"rgba(8, 146, 208, 1)",color:"#fff"}} onClick={handleSearch}>Find Job</button>
+            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff" }} onClick={handleSearch}>Find Job</button>
             <FaSearch />
           </div>
           <div className="wrapper">
@@ -65,6 +65,7 @@ const Jobs = () => {
                   <>
                     <div key={index}>
                       <input
+                
                         type="radio"
                         id={city}
                         name="city"
@@ -82,6 +83,7 @@ const Jobs = () => {
                 {nichesArray.map((niche, index) => (
                   <div key={index}>
                     <input
+                  
                       type="radio"
                       id={niche}
                       name="niche"
@@ -94,7 +96,10 @@ const Jobs = () => {
                 ))}
               </div>
             </div>
-            <div className="container">
+
+            <div className="container" style={{ border: "0px solid red" }}>
+
+              {/* on mobile */}
               <div className="mobile-filter">
                 <select value={city} onChange={(e) => setCity(e.target.value)}>
                   <option value="">Filter By City</option>
@@ -116,7 +121,10 @@ const Jobs = () => {
                   ))}
                 </select>
               </div>
-              <div className="jobs_container">
+              {/* on mobile ends */}
+
+              {/* display jobs here */}
+              <div className="jobs_container" style={{ border: "0px solid red" }}>
                 {jobs && jobs.length > 0 ? (jobs.map((element) => {
                   return (
                     <div className="card" key={element._id}>
@@ -151,7 +159,7 @@ const Jobs = () => {
                   /************************************************************/
                   /* BUG No.2 */
                   // <img src="./notfound.png" alt="job-not-found" style={{ width: "100%" }} />
-                  <p style={{textAlign:"center"}}>Job Not Found!</p>
+                  <p style={{ textAlign: "center" }}>Job Not Found!</p>
                 )
                   /************************************************************/
 
@@ -160,6 +168,8 @@ const Jobs = () => {
 
                 }
               </div>
+              {/* display jobs ends */}
+
             </div>
           </div>
         </section>
