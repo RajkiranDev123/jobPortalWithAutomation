@@ -348,7 +348,7 @@ footer div ul a {
 }
 
 footer div ul a:hover {
-  color: #dfdf07;
+  color: #07034c;
   transition: 0.3s;
 }
 
@@ -480,6 +480,11 @@ footer div ul a span {
   gap: 50px;
 }
 
+.services:hover {
+
+  background: linear-gradient(159deg, rgb(209, 209, 212) 0%, rgb(255, 255, 255) 100%);
+}
+
 .services h3 {
   font-size: 1.75rem;
   font-weight: 600;
@@ -517,7 +522,7 @@ footer div ul a span {
 
 .services .grid .card p {
 
-font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
 
 }
@@ -537,7 +542,7 @@ font-family: Arial, Helvetica, sans-serif;
   align-items: center;
   margin: 0 auto;
   gap: 10px;
-  background: rgb(8, 146, 208);
+  background: rgb(3, 62, 90);
 }
 
 .howItWorks h3 {
