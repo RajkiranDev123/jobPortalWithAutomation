@@ -89,6 +89,8 @@ input::-webkit-outer-spin-button {
   border-bottom: 1px solid rgb(133, 133, 133);
   padding: 20px 110px;
   align-items: center;
+
+  background: linear-gradient(159deg, rgba(0, 0, 128, 1) 0%, rgba(0, 191, 255, 1) 100%);
 }
 
 .navbar .hamburger {
@@ -130,12 +132,12 @@ input::-webkit-outer-spin-button {
 
 .navbar .links ul li a {
   text-decoration: none;
-  color: #444;
+  color: #fff;
   transition: 0.3s;
 }
 
 .navbar .links ul li a:hover {
-  color: #dfdf07;
+  color: #07043b;
   transition: 0.3s;
 }
 
@@ -295,7 +297,8 @@ input::-webkit-outer-spin-button {
 }
 
 footer {
-  background: #111;
+
+  background: linear-gradient(159deg, rgba(0, 0, 128, 1) 0%, rgba(0, 191, 255, 1) 100%);
   display: flex;
   border-bottom: 1px solid rgb(133, 133, 133);
   padding: 40px 20px 20px 20px;
@@ -358,7 +361,7 @@ footer div ul a span {
   display: flex;
   justify-content: center;
   text-align: center;
-  color: #8080805c;
+  color: #f7efefdc;
   font-weight: 300;
   padding: 20px;
 }
@@ -410,6 +413,8 @@ footer div ul a span {
   margin: 0 auto;
   gap: 50px;
   /* border: 2px solid red; */
+
+  background: linear-gradient(2deg, #57606F, #D3D3D3 50%);
 }
 
 .hero h1 {
@@ -721,9 +726,9 @@ footer div ul a span {
 }
 
 .authPage .container form a:hover {
- background: #080c7e;
- color: #fff;
- transform: translateY(-6px);
+  background: #080c7e;
+  color: #fff;
+  transform: translateY(-6px);
 
 }
 

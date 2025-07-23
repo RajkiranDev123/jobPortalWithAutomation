@@ -8,8 +8,8 @@ const Intro = () => {
                 Linking Skills to Jobs — From Entry-Level to Expert, Across the Nation
             </h4>
             <div className="box">
-                Your next career move starts here. Explore jobs in every industry,
-                from entry-level to executive. No matter your experience, our platform helps you find the right role—fast and easy.
+                Your next web development opportunity starts here. Discover roles across all levels—from junior developers to senior engineers and tech leads.
+                Whether you're just starting out or looking to advance your career, our platform connects you with the right web dev jobs—quickly and effortlessly.
             </div>
         </section>
     );
