@@ -494,7 +494,7 @@ footer div ul a span {
 }
 
 .services .grid .card {
-  background: linear-gradient(159deg, rgba(0, 51, 102, 1) 0%, rgba(15, 82, 186, 1) 100%);
+  background: linear-gradient(159deg, rgba(0, 51, 102, 1) 0%, rgb(123, 129, 139) 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -513,6 +513,13 @@ footer div ul a span {
 .services .grid .card h4 {
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.services .grid .card p {
+
+font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+
 }
 
 @media (max-width: 1720px) {
