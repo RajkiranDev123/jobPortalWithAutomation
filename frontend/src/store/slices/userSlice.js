@@ -111,7 +111,7 @@ export const login = (data) => async (dispatch) => {
     dispatch(userSlice.actions.loginRequest());
     try {
         const response = await axios.post(
-            "http://localhost:4000/api/v1/user/login",
+            `${import.meta.env.VITE_BASE_URL}/api/v1/user/login`,
             data,
             {
                 withCredentials: true,
@@ -129,9 +129,11 @@ export const getUser = () => async (dispatch) => {
     dispatch(userSlice.actions.fetchUserRequest());
     try {
         const response = await axios.get(
-            "http://localhost:4000/api/v1/user/getuser",
+            `${import.meta.env.VITE_BASE_URL}/api/v1/user/getuser`,
             {
                 withCredentials: true,
+                // is used to send cookies and authentication headers along with cross-origin requests. 5173 to 3000
+                // frontend and backend are on different domains
             }
         );
         dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
