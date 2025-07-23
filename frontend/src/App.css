@@ -723,6 +723,7 @@ footer div ul a span {
 .authPage .container form a:hover {
  background: #080c7e;
  color: #fff;
+ transform: translateY(-6px);
 
 }
 

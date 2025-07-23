@@ -247,6 +247,7 @@ const Register = () => {
             <button type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
+            <p>If you already have an Account then login below!</p>
             <Link to={"/login"}>Login Now</Link>
           </form>
         </div>
