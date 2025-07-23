@@ -7,6 +7,7 @@ import { FaAddressBook, FaPencilAlt, FaRegUser } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { MdCategory, MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
+import "./loader.css"
 
 const Register = () => {
   const [role, setRole] = useState("");
@@ -244,7 +245,7 @@ const Register = () => {
               </>
             )}
             <button type="submit" disabled={loading}>
-              Register
+              {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
             <Link to={"/login"}>Login Now</Link>
           </form>
