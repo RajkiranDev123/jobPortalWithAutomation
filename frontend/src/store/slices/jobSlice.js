@@ -159,7 +159,7 @@ export const fetchJobs = (city, niche, searchKeyword = "") => async (dispatch) =
 };
 
 
-
+// usefull to get job details when job seeker will apply to a particular job using job id
 export const fetchSingleJob = (jobId) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForSingleJob());
     try {
