@@ -60,7 +60,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     const { role, email, password } = req.body;
     if (!role || !email || !password) {
         return next(
-            new ErrorHandler("Email, password and role are required.", 400)
+            new ErrorHandler("All fields are required.", 400)
         );
     }
     try {
