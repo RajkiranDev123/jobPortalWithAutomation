@@ -149,7 +149,7 @@ export const fetchJobs = (city, niche, searchKeyword = "") => async (dispatch) =
         link += queryParams.join("&");
         const response = await axios.get(
             link,
-            // { withCredentials: true }
+            { withCredentials: true }
         );
         dispatch(jobSlice.actions.successForAllJobs(response.data.jobs));
         dispatch(jobSlice.actions.clearAllErrors());

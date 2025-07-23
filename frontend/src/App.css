@@ -690,7 +690,7 @@ footer div ul a span {
 .authPage .container form .inputTag div svg {
   width: 10%;
   font-size: 1.5rem;
-  background: #dfdf07;
+  background: #06438e;
   height: 46px;
   padding: 8px;
   color: #fff;
@@ -703,7 +703,7 @@ footer div ul a span {
   margin-top: 25px;
   font-weight: 700;
   color: #fff;
-  background: #dfdf07;
+  background: #080c7e;
   font-size: 1.2rem;
   border-radius: 7px;
 }
@@ -711,13 +711,19 @@ footer div ul a span {
 .authPage .container form a {
   padding: 12px;
   text-align: center;
-  border: 1px solid #dfdf07;
+  border: 1px solid #1b0774;
   margin-top: 25px;
   font-weight: 700;
-  color: #dfdf07;
+  color: #2c0f8a;
   font-size: 1.2rem;
   text-decoration: none;
   border-radius: 7px;
+}
+
+.authPage .container form a:hover {
+ background: #080c7e;
+ color: #fff;
+
 }
 
 .authPage .banner {
