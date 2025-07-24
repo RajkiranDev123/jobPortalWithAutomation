@@ -41,7 +41,7 @@ const jobSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-        //////////////////////////////////////////////////
+        ///////////////////// by employer /////////////////////////////
         requestForPostJob(state, action) {
             state.message = null;
             state.error = null;
@@ -180,7 +180,7 @@ export const postJob = (data) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForPostJob());
     try {
         const response = await axios.post(
-            `https://job-portal-backend-sifx.onrender.com/api/v1/job/post`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/job/post`,
             data,
             { withCredentials: true, headers: { "Content-Type": "application/json" } }
         );
@@ -195,7 +195,7 @@ export const getMyJobs = () => async (dispatch) => {
     dispatch(jobSlice.actions.requestForMyJobs());
     try {
         const response = await axios.get(
-            `https://job-portal-backend-sifx.onrender.com/api/v1/job/getmyjobs`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/job/getmyjobs`,
             { withCredentials: true }
         );
         dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
@@ -209,7 +209,7 @@ export const deleteJob = (id) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForDeleteJob());
     try {
         const response = await axios.delete(
-            `https://job-portal-backend-sifx.onrender.com/api/v1/job/delete/${id}`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/job/delete/${id}`,
             { withCredentials: true }
         );
         dispatch(jobSlice.actions.successForDeleteJob(response.data.message));

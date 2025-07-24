@@ -13,6 +13,8 @@ import JobPost from "../components/JobPost";
 import Applications from "../components/Applications";
 import MyApplications from "../components/MyApplications";
 
+import { AiOutlineLogout } from "react-icons/ai";
+
 const Dashboard = () => {
   const [show, setShow] = useState(false);
   const [componentName, setComponentName] = useState("My Profile");
@@ -131,7 +133,7 @@ const Dashboard = () => {
                 </li>
               )}
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <button style={{color:"red"}} onClick={handleLogout}> Logout</button>
               </li>
             </ul>
           </div>
