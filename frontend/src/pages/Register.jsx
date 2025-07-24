@@ -8,6 +8,7 @@ import { FaPhoneFlip } from "react-icons/fa6";
 import { MdCategory, MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import "./loader.css"
+import { MdAppRegistration } from "react-icons/md";
 
 const Register = () => {
   const [role, setRole] = useState("");
@@ -74,7 +75,7 @@ const Register = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <h3>Let's begin by Creating a new account!</h3>
+            <h5><MdAppRegistration /> Let's begin by Creating a new account!</h5>
           </div>
           <form onSubmit={handleRegsiter}>
             <div className="wrapper">
@@ -247,7 +248,7 @@ const Register = () => {
             <button type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
-            <p>If you already have an Account then login below!</p>
+            <p style={{color:"grey",fontStyle:"italic"}}>If you already have an Account then login below!</p>
             <Link to={"/login"}>Login Now</Link>
           </form>
         </div>

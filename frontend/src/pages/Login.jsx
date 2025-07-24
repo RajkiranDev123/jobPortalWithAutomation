@@ -88,6 +88,7 @@ const Login = () => {
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
+            <p style={{color:"grey",fontStyle:"italic"}}>If you don't have an Account then click Register below!</p>
             <Link to={"/register"}>Register Now</Link>
           </form>
         </div>

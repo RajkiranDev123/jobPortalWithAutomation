@@ -6,7 +6,7 @@ import { BiSolidLike } from "react-icons/bi";
 const HowItWorks = () => {
   return (
     <section className="howItWorks">
-      <h3>How does it work?</h3>
+      <h3>How to Start?</h3>
 
       <div className="container">
 

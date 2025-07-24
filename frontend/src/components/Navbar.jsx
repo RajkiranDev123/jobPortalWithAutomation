@@ -6,6 +6,7 @@ import appLogo from "../assets/jobdev.png"
 import { FcHome } from "react-icons/fc";
 import { RxDashboard } from "react-icons/rx";
 import { FcSearch } from "react-icons/fc";
+import { RiLoginCircleFill } from "react-icons/ri";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -25,25 +26,41 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li>
-              <Link style={{display:"flex",alignItems:"center"}} to={"/"} onClick={() => setShow(!show)}>
-               <FcHome />HOME
+              <Link style={{
+                display: "flex", alignItems: "center",
+                background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                padding: 3, borderRadius: 3
+              }} to={"/"} onClick={() => setShow(!show)}>
+                <FcHome />Home
               </Link>
             </li>
             <li>
-              <Link style={{display:"flex",alignItems:"center"}} to={"/jobs"} onClick={() => setShow(!show)}>
-                <FcSearch />JOBS
+              <Link style={{
+                display: "flex", alignItems: "center",
+                background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                padding: 3, borderRadius: 3
+              }} to={"/jobs"} onClick={() => setShow(!show)}>
+                <FcSearch />Jobs
               </Link>
             </li>
             {isAuthenticated ? (
               <li>
-                <Link style={{display:"flex",alignItems:"center"}} to={"/dashboard"} onClick={() => setShow(!show)}>
-                 <RxDashboard />DASHBOARD
+                <Link style={{
+                  display: "flex", alignItems: "center",
+                  background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                  padding: 3, borderRadius: 3
+                }} to={"/dashboard"} onClick={() => setShow(!show)}>
+                  <RxDashboard /> Dashboard
                 </Link>
               </li>
             ) : (
               <li>
-                <Link to={"/login"} onClick={() => setShow(!show)}>
-                  LOGIN
+                <Link style={{
+                  display: "flex", alignItems: "center",
+                  background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                  padding: 3, borderRadius: 3
+                }} to={"/login"} onClick={() => setShow(!show)}>
+                  <RiLoginCircleFill /> Login
                 </Link>
               </li>
             )}
