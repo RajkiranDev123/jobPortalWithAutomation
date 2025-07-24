@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import appLogo from "../assets/jobdev.png"
+import { FcHome } from "react-icons/fc";
+import { RxDashboard } from "react-icons/rx";
+import { FcSearch } from "react-icons/fc";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -22,19 +25,19 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li>
-              <Link to={"/"} onClick={() => setShow(!show)}>
-                HOME
+              <Link style={{display:"flex",alignItems:"center"}} to={"/"} onClick={() => setShow(!show)}>
+               <FcHome />HOME
               </Link>
             </li>
             <li>
-              <Link to={"/jobs"} onClick={() => setShow(!show)}>
-                JOBS
+              <Link style={{display:"flex",alignItems:"center"}} to={"/jobs"} onClick={() => setShow(!show)}>
+                <FcSearch />JOBS
               </Link>
             </li>
             {isAuthenticated ? (
               <li>
-                <Link to={"/dashboard"} onClick={() => setShow(!show)}>
-                  DASHBOARD
+                <Link style={{display:"flex",alignItems:"center"}} to={"/dashboard"} onClick={() => setShow(!show)}>
+                 <RxDashboard />DASHBOARD
                 </Link>
               </li>
             ) : (

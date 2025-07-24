@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   clearAllApplicationErrors,
   postApplication,
@@ -26,7 +26,7 @@ const PostApplication = () => {
   const [coverLetter, setCoverLetter] = useState("");
   const [resume, setResume] = useState("");
 
-  const navigateTo = useNavigate();
+
   const dispatch = useDispatch();
 
   const handlePostApplication = (e) => {
@@ -44,7 +44,8 @@ const PostApplication = () => {
   };
 
   useEffect(() => {
-    if (user) {//if refreshed
+    //if refreshed
+    if (user) {
       setName(user.name || "");
       setEmail(user.email || "");
       setPhone(user.phone || "");

@@ -1048,7 +1048,7 @@ footer div ul a span {
 }
 
 .account .component_header p:last-child span {
-  color: #dfdf07;
+  color: #0d0981;
 }
 
 .account .container {
@@ -1060,6 +1060,7 @@ footer div ul a span {
   display: flex;
   flex-direction: column;
   gap: 25px;
+
 }
 
 .account .container .sidebar h4 {
@@ -1330,6 +1331,7 @@ footer div ul a span {
     width: 308px;
     padding: 20px 5px;
     z-index: 2;
+
   }
 
   .left_arrow {

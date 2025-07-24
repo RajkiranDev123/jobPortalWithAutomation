@@ -25,6 +25,8 @@ const Dashboard = () => {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
+
+
   };
   useEffect(() => {
     if (error) {
@@ -42,7 +44,7 @@ const Dashboard = () => {
         <div className="component_header">
           <p>Dashboard</p>
           <p>
-            Welcome! <span>{user && user.name}</span>
+            hi! <span>{user && user.name}</span>
           </p>
         </div>
         <div className="container">
@@ -133,7 +135,7 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
-          <div className="banner">
+          <div className="banner" style={{ border: "0px solid red" }}>
             <div
               className={
                 show ? "sidebar_icon move_right" : "sidebar_icon move_left"
