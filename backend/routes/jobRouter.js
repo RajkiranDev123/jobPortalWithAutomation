@@ -5,7 +5,8 @@ import { postJob, getAllJobs, getMyJobs, deleteJob, getSingleJob } from "../cont
 const router = express.Router();
 
 router.post("/post", isAuthenticated, isAuthorized("Employer"), postJob);
-router.get("/getall", getAllJobs);
+
+router.get("/getall", getAllJobs);//all can see
 
 router.get("/getmyjobs", isAuthenticated, isAuthorized("Employer"), getMyJobs);
 router.delete("/delete/:id", isAuthenticated, isAuthorized("Employer"), deleteJob);
