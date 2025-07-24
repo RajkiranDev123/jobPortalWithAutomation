@@ -2,8 +2,17 @@
 import { LuUserPlus } from "react-icons/lu";
 import { VscTasklist } from "react-icons/vsc";
 import { BiSolidLike } from "react-icons/bi";
+import { useSelector } from "react-redux";
+
+import { FcHome } from "react-icons/fc";
+import { RxDashboard } from "react-icons/rx";
+import { FcSearch } from "react-icons/fc";
+import { RiLoginCircleFill } from "react-icons/ri";
+
+import { Link } from "react-router-dom"
 
 const HowItWorks = () => {
+  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <section className="howItWorks">
       <h3>How to Start?</h3>
@@ -48,6 +57,26 @@ const HowItWorks = () => {
 
       </div>
       {/* container */}
+
+
+      {/*  */}
+      <div className="navbar" style={{ background: "none" }}>
+        <div className="links">
+          <ul>
+
+            <li>
+              <Link style={{
+                display: "flex", alignItems: "center",
+                background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                padding: 3, borderRadius: 3
+              }} to={"/jobs"} onClick={() => setShow(!show)}>
+                Click here to see Jobs
+              </Link>
+            </li>
+
+          </ul>
+        </div>
+      </div>
     </section>
   );
 };

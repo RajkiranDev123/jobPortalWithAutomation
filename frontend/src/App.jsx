@@ -34,7 +34,7 @@ const App = () => {
       </Routes>
 
       <Footer />
-      <ToastContainer position="top-right" theme="dark" autoClose={3000} />
+      <ToastContainer position="top-right" theme="dark" autoClose={1000} />
     </Router>
   )
 }
