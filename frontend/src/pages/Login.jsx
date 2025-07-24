@@ -8,7 +8,7 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import "./loader.css"
 import TestCredentials from "../components/TestCredentials"
-
+import { RiLoginCircleFill } from "react-icons/ri";
 const Login = () => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -45,9 +45,9 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h3>Login to your account</h3>
+            <h5><RiLoginCircleFill />Login to your account</h5>
           </div>
-          <TestCredentials/>
+          <TestCredentials />
           <form onSubmit={handleLogin}>
             <div className="inputTag">
               <label>Login As</label>

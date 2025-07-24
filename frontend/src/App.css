@@ -649,8 +649,9 @@ footer div ul a span {
   flex-direction: column;
 }
 
-.authPage .container .header h3 {
+.authPage .container .header h5 {
   font-size: 1.6rem;
+  color: #0d0981;
 }
 
 .authPage .container .header img {
@@ -714,7 +715,7 @@ footer div ul a span {
 }
 
 .authPage .container form button {
-  padding: 12px;
+  padding: 1px;
   text-align: center;
   border: none;
   margin-top: 25px;
@@ -726,7 +727,7 @@ footer div ul a span {
 }
 
 .authPage .container form a {
-  padding: 12px;
+  padding: 1px;
   text-align: center;
   border: 1px solid #1b0774;
   margin-top: 25px;
