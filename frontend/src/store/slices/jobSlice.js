@@ -111,7 +111,7 @@ export const fetchJobs = (city, niche, searchKeyword = "") => async (dispatch) =
         let link = `${import.meta.env.VITE_BASE_URL}/api/v1/job/getall?`;
 
         let queryParams = [];
-        
+
         if (searchKeyword) {
             queryParams.push(`searchKeyword=${searchKeyword}`);
         }
@@ -164,13 +164,15 @@ export const fetchSingleJob = (jobId) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForSingleJob());
     try {
         const response = await axios.get(
-            `https://job-portal-backend-sifx.onrender.com/api/v1/job/get/${jobId}`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/job/get/${jobId}`,
             { withCredentials: true }
         );
-        dispatch(jobSlice.actions.successForSingleJob(response.data.job));
+        dispatch(jobSlice.actions.successForSingleJob(response?.data?.job));
+        console.log("single job", response?.data?.job)
+
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
-        dispatch(jobSlice.actions.failureForSingleJob(error.response.data.message));
+        dispatch(jobSlice.actions.failureForSingleJob(error?.response?.data?.message));
     }
 };
 

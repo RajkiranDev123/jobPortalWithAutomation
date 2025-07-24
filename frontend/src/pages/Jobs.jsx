@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import QRCode from "react-qr-code"
 //
 import downloadPdf from "../utils/downloadAsPdf.js"
+import pdfIcon from "../assets/pdfDown.png"
 
 const Jobs = () => {
   const pdfRefs = useRef({})
@@ -171,8 +172,9 @@ const Jobs = () => {
                         <p>or</p>
 
                         <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
-                          style={{ border: "none", borderRadius: 4, background: "blue", color: "white", padding: 2, cursor: "pointer" }}>
-                          Download as PDF</button>
+                          style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
+                          <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
+                        </button>
 
                       </div>
 
