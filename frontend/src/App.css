@@ -417,15 +417,21 @@ footer div ul a span {
   background: linear-gradient(2deg, #57606F, #D3D3D3 50%);
 }
 
+.hero:hover {
+
+  background: linear-gradient(2deg, #5a667c, #bab5b5 50%);
+
+}
+
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   text-transform: uppercase;
   font-weight: 700;
   color: rgba(8, 146, 208, 1);
 }
 
 .hero h4 {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
   color: gray;
 }
@@ -571,14 +577,14 @@ footer div ul a span {
 .howItWorks .container .card:hover {
   transition: 0.3s;
   transform: translateY(-5px);
-  background: #111;
+  background: #000845;
   color: #fff;
 }
 
 .howItWorks .container .card .icon {
   width: fit-content;
   display: flex;
-  background: #111;
+  background: #110253;
   padding: 10px;
   border-radius: 100%;
   justify-content: center;
@@ -592,7 +598,7 @@ footer div ul a span {
 }
 
 .howItWorks .container .card:hover .icon {
-  background: #fff;
+  background: #ffffff;
   transition: 0.3s;
 }
 
@@ -637,6 +643,12 @@ footer div ul a span {
   background: #fff;
   padding: 20px 20px;
   max-width: 1500px;
+}
+
+.authPage .container:hover {
+
+  background: #eeebeb;
+
 }
 
 .authPage .login-container {
@@ -693,7 +705,7 @@ footer div ul a span {
 .authPage .container form .inputTag div select,
 .authPage .container form .inputTag div textarea {
   background: #87878778;
-  padding: 8px;
+  padding: 3px;
   border: none;
   width: 100%;
   /* height: 100%; */
@@ -709,9 +721,14 @@ footer div ul a span {
   width: 10%;
   font-size: 1.5rem;
   background: linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%);
-  height: 46px;
-  padding: 8px;
+  height: 36px;
+  padding: 3px;
   color: #fff;
+}
+
+.authPage .container form .inputTag label {
+
+  color: #1c0a83;
 }
 
 .authPage .container form button {

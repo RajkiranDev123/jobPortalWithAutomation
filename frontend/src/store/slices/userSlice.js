@@ -136,10 +136,13 @@ export const getUser = () => async (dispatch) => {
                 // frontend and backend are on different domains
             }
         );
-        dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
+        dispatch(userSlice.actions.fetchUserSuccess(response?.data?.user));
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
-        dispatch(userSlice.actions.fetchUserFailed(error.response.data.message));
+
+        dispatch(userSlice.actions.fetchUserFailed(error?.response?.data?.message));
+        dispatch(userSlice.actions.clearAllErrors());
+
     }
 };
 export const logout = () => async (dispatch) => {

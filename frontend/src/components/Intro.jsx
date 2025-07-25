@@ -3,9 +3,9 @@
 const Intro = () => {
     return (
         <section className="hero">
-            <h1>Find Your Dream Job Today</h1>
+            <h1>Find Your Dream Job Today!</h1>
             <h4>
-                Linking Skills to Jobs — From Entry-Level to Expert, Across the Nation
+                Connecting Developers to Opportunities — From Junior to Senior, Nationwide
             </h4>
             <div className="box">
                 Your next web development opportunity starts here. Discover roles across all levels—from junior developers to senior engineers and tech leads.

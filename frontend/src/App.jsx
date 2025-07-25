@@ -14,11 +14,16 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/slices/userSlice";
+// import { useLocation } from "react-router-dom";
 const App = () => {
+  console.log("app.jsx")
   const dispatch = useDispatch();
+  // const location = useLocation();
 
   useEffect(() => {
+    // if (location.pathname !== "/register") {
     dispatch(getUser());
+    // }
   }, []);
   return (
     <Router>

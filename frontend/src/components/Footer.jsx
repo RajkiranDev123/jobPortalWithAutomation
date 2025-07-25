@@ -44,22 +44,8 @@ const Footer = () => {
         <div>
           <h4>Follow Us</h4>
           <ul>
-            <li>
-              <Link to={"/"}>
-                <span>
-                  <FaSquareXTwitter />
-                </span>
-                <span>Twitter (X)</span>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <span>
-                  <FaSquareInstagram />
-                </span>
-                <span>Instagram</span>
-              </Link>
-            </li>
+           
+      
             <li>
               <Link to={"/"}>
                 <span>

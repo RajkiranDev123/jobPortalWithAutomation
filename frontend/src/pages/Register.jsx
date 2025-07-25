@@ -39,6 +39,7 @@ const Register = () => {
 
   const handleRegsiter = (e) => {
     e.preventDefault();
+    
     const formData = new FormData();
     formData.append("role", role);
     formData.append("name", name);
@@ -80,7 +81,7 @@ const Register = () => {
           <form onSubmit={handleRegsiter}>
             <div className="wrapper">
               <div className="inputTag">
-                <label>Register As</label>
+                <label>Register As :</label>
                 <div>
                   <select
                     value={role}
@@ -94,7 +95,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="inputTag">
-                <label>Name</label>
+                <label>Name :</label>
                 <div>
                   <input
                     type="text"
@@ -108,7 +109,7 @@ const Register = () => {
             </div>
             <div className="wrapper">
               <div className="inputTag">
-                <label>Email Address</label>
+                <label>Email Address :</label>
                 <div>
                   <input
                     type="email"
@@ -120,7 +121,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="inputTag">
-                <label>Phone Number</label>
+                <label>Phone Number :</label>
                 <div>
                   <input
                     type="number"
@@ -134,7 +135,7 @@ const Register = () => {
             </div>
             <div className="wrapper">
               <div className="inputTag">
-                <label>Address</label>
+                <label>Address :</label>
                 <div>
                   <input
                     type="text"
@@ -146,7 +147,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="inputTag">
-                <label>Password</label>
+                <label>Password :</label>
                 <div>
                   <input
                     type="password"
@@ -162,13 +163,13 @@ const Register = () => {
               <>
                 <div className="wrapper">
                   <div className="inputTag">
-                    <label>Your First Niche</label>
+                    <label>Your First Niche :</label>
                     <div>
                       <select
                         value={firstNiche}
                         onChange={(e) => setFirstNiche(e.target.value)}
                       >
-                        <option value="">Your Niche</option>
+                        <option value="">Your Niche :</option>
                         {nichesArray.map((niche, index) => {
                           return (
                             <option key={index} value={niche}>
@@ -181,13 +182,13 @@ const Register = () => {
                     </div>
                   </div>
                   <div className="inputTag">
-                    <label>Your Second Niche</label>
+                    <label>Your Second Niche :</label>
                     <div>
                       <select
                         value={secondNiche}
                         onChange={(e) => setSecondNiche(e.target.value)}
                       >
-                        <option value="">Your Niche</option>
+                        <option value="">Your Niche :</option>
                         {nichesArray.map((niche, index) => {
                           return (
                             <option key={index} value={niche}>
@@ -200,13 +201,13 @@ const Register = () => {
                     </div>
                   </div>
                   <div className="inputTag">
-                    <label>Your Third Niche</label>
+                    <label>Your Third Niche :</label>
                     <div>
                       <select
                         value={thirdNiche}
                         onChange={(e) => setThirdNiche(e.target.value)}
                       >
-                        <option value="">Your Niche</option>
+                        <option value="">Your Niche :</option>
                         {nichesArray.map((niche, index) => {
                           return (
                             <option key={index} value={niche}>
@@ -221,7 +222,7 @@ const Register = () => {
                 </div>
                 <div className="wrapper">
                   <div className="inputTag">
-                    <label>Coverletter</label>
+                    <label>Cover Letter :</label>
                     <div>
                       <textarea
                         value={coverLetter}
@@ -233,7 +234,7 @@ const Register = () => {
                 </div>
                 <div className="wrapper">
                   <div className="inputTag">
-                    <label>Resume</label>
+                    <label>Resume :</label>
                     <div>
                       <input
                         type="file"
