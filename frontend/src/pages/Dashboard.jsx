@@ -13,6 +13,14 @@ import JobPost from "../components/JobPost";
 import Applications from "../components/Applications";
 import MyApplications from "../components/MyApplications";
 
+import { CiUser } from "react-icons/ci";
+import { TfiWrite } from "react-icons/tfi";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { BsFillPostcardFill } from "react-icons/bs";
+import { TfiLayoutListPost } from "react-icons/tfi";
+import { VscGitStashApply } from "react-icons/vsc";
+import { IoIosLogOut } from "react-icons/io";
+
 
 
 const Dashboard = () => {
@@ -28,7 +36,7 @@ const Dashboard = () => {
     dispatch(logout());
     toast.success("Logged out successfully.");
   };
-  
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -59,7 +67,7 @@ const Dashboard = () => {
                     setShow(!show);
                   }}
                 >
-                  My Profile
+                  <CiUser style={{ height: 13 }} />  My Profile
                 </button>
               </li>
               <li>
@@ -69,7 +77,7 @@ const Dashboard = () => {
                     setShow(!show);
                   }}
                 >
-                  Update Profile
+                  <TfiWrite style={{ height: 13 }} />   Update Profile
                 </button>
               </li>
               <li>
@@ -79,7 +87,7 @@ const Dashboard = () => {
                     setShow(!show);
                   }}
                 >
-                  Update Password
+                  <RiLockPasswordLine style={{ height: 13 }} />   Update Password
                 </button>
               </li>
 
@@ -91,7 +99,7 @@ const Dashboard = () => {
                       setShow(!show);
                     }}
                   >
-                    Post New Job
+                    <BsFillPostcardFill style={{ height: 13 }} />   Post New Job
                   </button>
                 </li>
               )}
@@ -103,7 +111,7 @@ const Dashboard = () => {
                       setShow(!show);
                     }}
                   >
-                    My Jobs
+                    <TfiLayoutListPost style={{ height: 13 }} />    My Posted Jobs
                   </button>
                 </li>
               )}
@@ -115,7 +123,7 @@ const Dashboard = () => {
                       setShow(!show);
                     }}
                   >
-                    Applications
+                    <VscGitStashApply style={{ height: 13 }} />   Applications
                   </button>
                 </li>
               )}
@@ -132,7 +140,7 @@ const Dashboard = () => {
                 </li>
               )}
               <li>
-                <button style={{ color: "red" }} onClick={handleLogout}> Logout</button>
+                <button style={{ color: "red" }} onClick={handleLogout}><IoIosLogOut style={{ height: 13 }} /> Logout</button>
               </li>
             </ul>
           </div>
