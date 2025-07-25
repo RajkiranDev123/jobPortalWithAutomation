@@ -59,7 +59,7 @@ const UpdateProfile = () => {
     }
     if (isUpdated) {
       toast.success("Profile Updated.");
-      dispatch(getUser());
+      dispatch(getUser(true));
       dispatch(clearAllUpdateProfileErrors());
     }
   }, [dispatch, loading, error, isUpdated, user]);

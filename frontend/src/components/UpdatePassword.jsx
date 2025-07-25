@@ -47,7 +47,7 @@ const UpdatePassword = () => {
     }
     if (isUpdated) {
       toast.success("Password Updated");
-      dispatch(getUser());
+      dispatch(getUser(true));
       dispatch(clearAllUpdateProfileErrors());
     }
   }, [dispatch, loading, error, isUpdated]);

@@ -56,7 +56,7 @@ const userSlice = createSlice({
         },
         fetchUserRequest(state, action) {
             state.loading = true;
-            state.isAuthenticated = false;
+            state.isAuthenticated =action.payload==true?true: false;
             state.user = {};
             state.error = null;
         },
@@ -129,8 +129,8 @@ export const login = (data) => async (dispatch) => {
     }
 };
 
-export const getUser = () => async (dispatch) => {
-    dispatch(userSlice.actions.fetchUserRequest());
+export const getUser = (isAuthenticationToggle) => async (dispatch) => {
+    dispatch(userSlice.actions.fetchUserRequest(isAuthenticationToggle));
     try {
         const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/api/v1/user/getuser`,
