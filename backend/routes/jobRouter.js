@@ -11,5 +11,5 @@ router.get("/getall", getAllJobs);//all can see
 router.get("/getmyjobs", isAuthenticated, isAuthorized("Employer"), getMyJobs);
 router.delete("/delete/:id", isAuthenticated, isAuthorized("Employer"), deleteJob);
 
-router.get("/get/:id",isAuthenticated, getSingleJob)
+router.get("/get/:id", getSingleJob)
 export default router;
