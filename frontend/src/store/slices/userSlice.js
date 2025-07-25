@@ -86,6 +86,10 @@ const userSlice = createSlice({
             state.error = null;
             state.user = state.user;
         },
+        clearMessage(state, action) {
+      
+            state.message = null;
+        },
     },
 });
 

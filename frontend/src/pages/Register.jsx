@@ -39,7 +39,26 @@ const Register = () => {
 
   const handleRegsiter = (e) => {
     e.preventDefault();
-    
+    if (!role) {
+      toast.error("Role is must!")
+      return
+    }
+    if (role === "Employer") {
+      if (!name || !email || !phone || !address || !password) {
+        toast.error("All fields are required!")
+        return
+      }
+
+    }
+    if (role === "Job Seeker") {
+      if (!name || !email || !phone || !address || !password || !firstNiche) {
+        toast.error("All fields are required!")
+        return
+      }
+
+    }
+
+
     const formData = new FormData();
     formData.append("role", role);
     formData.append("name", name);
@@ -249,7 +268,7 @@ const Register = () => {
             <button type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
-            <p style={{color:"grey",fontStyle:"italic"}}>If you already have an Account then login below!</p>
+            <p style={{ color: "grey", fontStyle: "italic" }}>If you already have an Account then login below!</p>
             <Link to={"/login"}>Login Now</Link>
           </form>
         </div>
