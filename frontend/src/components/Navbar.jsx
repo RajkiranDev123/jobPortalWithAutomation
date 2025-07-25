@@ -37,7 +37,9 @@ const Navbar = () => {
             <li>
               <Link style={{
                 display: "flex", alignItems: "center", fontFamily: "monospace",
-                background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                // background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                border: "2px solid white",
+
                 padding: 5, borderRadius: 3
               }} to={"/jobs"} onClick={() => setShow(!show)}>
                 <MdSavedSearch />Search & Apply Jobs
@@ -47,7 +49,8 @@ const Navbar = () => {
               <li>
                 <Link style={{
                   display: "flex", alignItems: "center", fontFamily: "monospace",
-                  background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                  // background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                  border: "2px solid white",
 
                   padding: 5, borderRadius: 3
                 }} to={"/dashboard"} onClick={() => setShow(!show)}>
@@ -58,7 +61,9 @@ const Navbar = () => {
               <li>
                 <Link style={{
                   display: "flex", alignItems: "center",
-                  background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                  // background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
+                  border: "2px solid white",
+
 
                   padding: 3, borderRadius: 3
                 }} to={"/login"} onClick={() => setShow(!show)}>

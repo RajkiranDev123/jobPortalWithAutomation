@@ -73,7 +73,7 @@ const jobSlice = createSlice({
             state.error = action.payload;
             state.message = null;
         },
-        ///////////////////////////////////
+        /////////////////// get jobs posted by employer ////////////////
         requestForMyJobs(state, action) {
             state.loading = true;
             state.myJobs = [];
@@ -191,6 +191,7 @@ export const postJob = (data) => async (dispatch) => {
     }
 };
 
+////////////////// get jobs posted by an employer //////////////////////
 export const getMyJobs = () => async (dispatch) => {
     dispatch(jobSlice.actions.requestForMyJobs());
     try {
@@ -205,6 +206,7 @@ export const getMyJobs = () => async (dispatch) => {
     }
 };
 
+//////////////////////// only by employer
 export const deleteJob = (id) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForDeleteJob());
     try {
