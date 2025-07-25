@@ -1139,7 +1139,7 @@ footer div ul a span {
 .account_components h3 {
   font-size: 30px;
   font-weight: 600;
-  color: #dfdf07;
+  color: #140b8a;
 }
 
 .account_components div:first-child {
@@ -1172,6 +1172,10 @@ footer div ul a span {
   gap: 8px;
   font-size: 12px;
 }
+.account_components div label{
+  font-size: 14px;
+  color: #140b8a;
+}
 
 .account_components div input,
 .account_components div select,
@@ -1179,7 +1183,8 @@ footer div ul a span {
   background: #8080805e;
   border: none;
   color: #555;
-  padding: 8px 3px;
+  padding: 3px 3px;
+  border-radius: 3px;
 }
 
 .account_components div input:focus,
@@ -1212,7 +1217,7 @@ footer div ul a span {
 
 .eye_icon {
   position: absolute;
-  bottom: 12px;
+  bottom: 6px;
   right: 20px;
   font-size: 24px;
 }

@@ -52,7 +52,7 @@ const Dashboard = () => {
         <div className="container">
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
-              <h4>Manage Account</h4>
+              <h4>Start Managing!</h4>
               <li>
                 <button
                   onClick={() => {

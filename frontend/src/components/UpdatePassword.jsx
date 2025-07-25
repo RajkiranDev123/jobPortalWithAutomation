@@ -13,7 +13,10 @@ const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
+
 
   const { loading, error, isUpdated } = useSelector(
     (state) => state.updateProfile
@@ -22,6 +25,14 @@ const UpdatePassword = () => {
   const dispatch = useDispatch();
 
   const handleUpdatePassword = () => {
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      toast.error("All fields are required!")
+      return
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error("New & Confirm Password don't match!")
+      return
+    }
     const formData = new FormData();
     formData.append("oldPassword", oldPassword);
     formData.append("newPassword", newPassword);
@@ -47,57 +58,57 @@ const UpdatePassword = () => {
       <div>
         <label>Current Password</label>
         <input
-          type={showPassword ? "text" : "password"}
+          type={showPassword1 ? "text" : "password"}
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
-        {showPassword ? (
+        {showPassword1 ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword1(!showPassword1)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword1(!showPassword1)}
           />
         )}
       </div>
       <div>
         <label>New Password</label>
         <input
-          type={showPassword ? "text" : "password"}
+          type={showPassword2 ? "text" : "password"}
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
-        {showPassword ? (
+        {showPassword2 ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword2(!showPassword2)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword2(!showPassword2)}
           />
         )}
       </div>
       <div>
         <label>Confirm Password</label>
         <input
-          type={showPassword ? "text" : "password"}
+          type={showPassword3 ? "text" : "password"}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        {showPassword ? (
+        {showPassword3 ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword3(!showPassword3)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword3(!showPassword3)}
           />
         )}
       </div>

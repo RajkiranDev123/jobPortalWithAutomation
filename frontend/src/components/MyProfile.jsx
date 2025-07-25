@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useSelector } from "react-redux";
 
 const MyProfile = () => {
@@ -7,7 +7,7 @@ const MyProfile = () => {
     <div className="account_components">
       <h3>My Profile</h3>
       <div>
-        <label>Full Name</label>
+        <label>Full Name :</label>
         <input
           type="text"
           disabled
@@ -16,7 +16,7 @@ const MyProfile = () => {
         />
       </div>
       <div>
-        <label>Email Address</label>
+        <label>Email Address :</label>
         <input
           type="email"
           disabled
@@ -26,7 +26,7 @@ const MyProfile = () => {
       </div>
       {user && user.role === "Job Seeker" && (
         <div>
-          <label>My Preferred Job Niches</label>
+          <label>My Preferred Job Niches :</label>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
           >
@@ -52,7 +52,7 @@ const MyProfile = () => {
         </div>
       )}
       <div>
-        <label>Phone Number</label>
+        <label>Phone Number :</label>
         <input
           type="number"
           disabled
@@ -61,7 +61,7 @@ const MyProfile = () => {
         />
       </div>
       <div>
-        <label>Address</label>
+        <label>Address :</label>
         <input
           type="text"
           disabled
@@ -70,7 +70,7 @@ const MyProfile = () => {
         />
       </div>
       <div>
-        <label>Role</label>
+        <label>Role :</label>
         <input
           type="text"
           disabled
@@ -79,11 +79,11 @@ const MyProfile = () => {
         />
       </div>
       <div>
-        <label>Joined On</label>
+        <label>Joined On :</label>
         <input
           type="text"
           disabled
-          value={user && user.createdAt}
+          value={user && user.createdAt?.slice(0,10)}
           onChange={(e) => e.target.value}
         />
       </div>
