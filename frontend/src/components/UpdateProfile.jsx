@@ -31,6 +31,10 @@ const UpdateProfile = () => {
   const [resumePreview, setResumePreview] = useState(user && user.resume?.url);
 
   const handleUpdateProfile = () => {
+    if (!name || !email || !phone || !address) {
+      toast.error("All fields are required!")
+      return
+    }
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -70,28 +74,7 @@ const UpdateProfile = () => {
     };
   };
 
-  const nichesArray = [
-    "Software Development",
-    "Web Development",
-    "Cybersecurity",
-    "Data Science",
-    "Artificial Intelligence",
-    "Cloud Computing",
-    "DevOps",
-    "Mobile App Development",
-    "Blockchain",
-    "Database Administration",
-    "Network Administration",
-    "UI/UX Design",
-    "Game Development",
-    "IoT (Internet of Things)",
-    "Big Data",
-    "Machine Learning",
-    "IT Project Management",
-    "IT Support and Helpdesk",
-    "Systems Administration",
-    "IT Consulting",
-  ];
+  const nichesArray = ["Frontend", "Backend", "Full-Stack"];
 
   return (
     <div className="account_components">
