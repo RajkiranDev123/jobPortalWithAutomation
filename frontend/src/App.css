@@ -1358,12 +1358,13 @@ footer div ul a span {
   .account .container .showSidebar {
     left: 0;
     transition: 0.3s;
-    background: #111;
-    height: 100%;
+    background: #1a0b0b;
+    height: 900px;
     width: 308px;
-    padding: 20px 5px;
+    padding: 15px 5px;
     z-index: 2;
     border-radius: 6px;
+
 
   }
 

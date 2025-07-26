@@ -35,7 +35,7 @@ const MyJobs = () => {
       {loading ? (
         <Spinner />
       ) : myJobs && myJobs?.length <= 0 ? (
-        <h1 style={{ fontSize: "1.4rem", fontWeight: "600" }}>
+        <h1 style={{ fontSize: "1rem",marginTop:8 ,height:500  }}>
           You have not posted any job!
         </h1>
       ) : (

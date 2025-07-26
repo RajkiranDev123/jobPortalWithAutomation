@@ -57,6 +57,7 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="container">
+          {/* sb */}
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
               <h4>Start Managing!</h4>
@@ -144,13 +145,15 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
+          {/* sb ends */}
+
           <div className="banner" style={{ border: "0px solid red" }}>
-            <div
+            <div style={{ border: "2px solid white" }}
               className={
                 show ? "sidebar_icon move_right" : "sidebar_icon move_left"
               }
             >
-              <LuMoveRight 
+              <LuMoveRight
                 onClick={() => setShow(!show)}
                 className={show ? "left_arrow" : "right_arrow"}
               />
@@ -159,29 +162,29 @@ const Dashboard = () => {
               switch (componentName) {
                 case "My Profile":
                   return <MyProfile />;
-         
+
                 case "Update Profile":
                   return <UpdateProfile />;
-            
+
                 case "Update Password":
                   return <UpdatePassword />;
-        
+
                 case "Job Post":
                   return <JobPost />;
-             
+
                 case "My Jobs":
                   return <MyJobs />;
-           
+
                 case "Applications":
                   return <Applications />;
-             
+
                 case "My Applications":
                   return <MyApplications />;
-             
+
 
                 default:
-                  <MyProfile />;
-                  break;
+                  return <MyProfile />;
+
               }
             })()}
           </div>
