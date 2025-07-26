@@ -5,7 +5,7 @@ const TestCredentials = () => {
         <>
             {/*  */}
             <p style={{ fontSize: 12, fontFamily: "monospace", color: "red", display: "flex", alignItems: "center", gap: 3 }}>Employer Test Email :
-                <CopyToClipboard text="rajkir783@gmail.com">
+                <CopyToClipboard text="rajtech645@gmail.com">
                     <span style={{fontSize:11, cursor: "pointer", color: "blue", display: "flex", alignItems: "center"}}> Copy!</span>
                 </CopyToClipboard>
             </p>
@@ -19,7 +19,7 @@ const TestCredentials = () => {
 
             {/*  */}
             <p style={{ fontSize: 12, fontFamily: "monospace", color: "red", display: "flex", alignItems: "center", gap: 3 }}>Job Seeker Test Email :
-                <CopyToClipboard text="rajtech645@gmail.com">
+                <CopyToClipboard text="rajkir783@gmail.com">
                     <span style={{fontSize:11,  cursor: "pointer", color: "blue", display: "flex", alignItems: "center" }}> Copy!</span>
                 </CopyToClipboard>
             </p>
