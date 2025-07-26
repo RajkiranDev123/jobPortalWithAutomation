@@ -15,22 +15,15 @@ import pdfIcon from "../assets/pdfDown.png"
 const Jobs = () => {
   const pdfRefs = useRef({})
   const [city, setCity] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
+
   const [niche, setNiche] = useState("");
-  const [selectedNiche, setSelectedNiche] = useState("");
+
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const { jobs, loading, error } = useSelector((state) => state.jobs);
   const { user } = useSelector((state) => state.user);
 
-  const handleCityChange = (city) => {
-    setCity(city);
-    setSelectedCity(city);
-  };
-  const handleNicheChange = (niche) => {
-    setNiche(niche);
-    setSelectedNiche(niche);
-  };
+
 
   const dispatch = useDispatch();
 
@@ -83,15 +76,15 @@ const Jobs = () => {
 
           {/* nf */}
           <div style={{display:"flex",justifyContent:"center",gap:3,flexWrap:"wrap"}}>
-            <select style={{ outline: "none", borderRadius: 3, border: "none" }} value={city} onChange={(e) => setCity(e.target.value)}>
-              <option value="">Filter By City</option>
+            <select style={{ outline: "none", borderRadius: 3, border: "none",color:"grey" }} value={city} onChange={(e) => setCity(e.target.value)}>
+              <option  value="">Filter By City</option>
               {cities.map((city, index) => (
                 <option value={city} key={index}>
                   {city}
                 </option>
               ))}
             </select>
-            <select style={{ outline: "none", borderRadius: 3, border: "none" }}
+            <select style={{ outline: "none", borderRadius: 3, border: "none" ,color:"grey"}}
               value={niche}
               onChange={(e) => setNiche(e.target.value)}
             >

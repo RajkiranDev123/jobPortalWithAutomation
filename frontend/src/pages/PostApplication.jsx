@@ -97,7 +97,7 @@ const PostApplication = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              disabled={user?.role=="Employer"?true:false}
+              disabled={user?.role == "Employer" ? true : false}
             />
           </div>
           <div>
@@ -106,7 +106,7 @@ const PostApplication = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={user?.role=="Employer"?true:false}
+              disabled={user?.role == "Employer" ? true : false}
 
             />
           </div>
@@ -116,7 +116,7 @@ const PostApplication = () => {
               type="number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              disabled={user?.role=="Employer"?true:false}
+              disabled={user?.role == "Employer" ? true : false}
 
             />
           </div>
@@ -126,7 +126,7 @@ const PostApplication = () => {
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              disabled={user?.role=="Employer"?true:false}
+              disabled={user?.role == "Employer" ? true : false}
 
             />
           </div>
@@ -146,7 +146,8 @@ const PostApplication = () => {
                   {user?.resume?.url && <Link
                     to={user.resume && user.resume.url}
                     target="_blank"
-                    className="view-resume"
+
+                    style={{ textDecoration: "none", padding: 3, color: "white", background: "black", borderRadius:6 }}
                   >
                     View Resume
                   </Link>}
