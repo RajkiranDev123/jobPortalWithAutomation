@@ -136,7 +136,7 @@ const Dashboard = () => {
                       setShow(!show);
                     }}
                   >
-                    My Applications
+                   <VscGitStashApply style={{ height: 13 }} />    My Applications
                   </button>
                 </li>
               )}

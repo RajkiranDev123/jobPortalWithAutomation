@@ -9,6 +9,7 @@ import {
   fetchJobSeekerApplications,
 } from "../store/slices/applicationSlice";
 import Spinner from "../components/Spinner";
+import { VscGitStashApply } from "react-icons/vsc";
 
 const MyApplications = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -42,13 +43,13 @@ const MyApplications = () => {
       {loading ? (
         <Spinner />
       ) : applications && applications.length <= 0 ? (
-        <h1 style={{ fontSize: "1.4rem", fontWeight: "600" }}>
+        <h1 style={{ marginTop: 12,height:500 }}>
           You have not applied for any job.
         </h1>
       ) : (
         <>
           <div className="account_components">
-            <h3>My Application For Jobs</h3>
+            <h3>    <VscGitStashApply style={{ height: 22 }} />  My Application For Jobs</h3>
             <div className="applications_container">
               {applications.map((element) => {
                 return (
