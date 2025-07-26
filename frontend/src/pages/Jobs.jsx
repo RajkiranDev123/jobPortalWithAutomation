@@ -11,6 +11,7 @@ import QRCode from "react-qr-code"
 import downloadPdf from "../utils/downloadAsPdf.js"
 import pdfIcon from "../assets/pdfDown.png"
 
+
 const Jobs = () => {
   const pdfRefs = useRef({})
   const [city, setCity] = useState("");
@@ -43,6 +44,10 @@ const Jobs = () => {
   }, [dispatch, error, city, niche]);
 
   const handleSearch = () => {
+    if (!searchKeyword) {
+      toast.error("Search bar can't be empty!")
+      return
+    }
     dispatch(fetchJobs(city, niche, searchKeyword));
   };
 
@@ -56,177 +61,153 @@ const Jobs = () => {
         <Spinner />
       ) : (
         <section className="jobs">
-          <div className="search-tab-wrapper">
-            <input
+
+          {/* search */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
+
+            <input style={{ border: "none", outline: "none", padding: 2 }}
               type="text"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
+              placeholder="Search!"
             />
-            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff" }} onClick={handleSearch}>Search</button>
+
+            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+              onClick={handleSearch}>Search</button>
+            <button style={{ background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+              onClick={() => dispatch(fetchJobs())}>Clear</button>
+
 
           </div>
-          <div className="wrapper">
-            <div className="filter-bar">
-              <div className="cities">
-                <h2>Filter Job By City</h2>
-                {cities.map((city, index) => (
-                  <>
-                    <div key={index}>
-                      <input
+          {/* search ends */}
 
-                        type="radio"
-                        id={city}
-                        name="city"
-                        value={city}
-                        checked={selectedCity === city}
-                        onChange={() => handleCityChange(city)}
-                      />
-                      <label htmlFor={city}>{city}</label>
-                    </div>
-                  </>
-                ))}
-              </div>
-              <div className="cities">
-                <h2>Filter Job By Niche</h2>
-                {nichesArray.map((niche, index) => (
-                  <div key={index}>
-                    <input
+          {/* nf */}
+          <div style={{display:"flex",justifyContent:"center",gap:3,flexWrap:"wrap"}}>
+            <select style={{ outline: "none", borderRadius: 3, border: "none" }} value={city} onChange={(e) => setCity(e.target.value)}>
+              <option value="">Filter By City</option>
+              {cities.map((city, index) => (
+                <option value={city} key={index}>
+                  {city}
+                </option>
+              ))}
+            </select>
+            <select style={{ outline: "none", borderRadius: 3, border: "none" }}
+              value={niche}
+              onChange={(e) => setNiche(e.target.value)}
+            >
+              <option value="">Filter By Niche</option>
+              {nichesArray.map((niche, index) => (
+                <option value={niche} key={index}>
+                  {niche}
+                </option>
+              ))}
+            </select>
+          </div>
 
-                      type="radio"
-                      id={niche}
-                      name="niche"
-                      value={niche}
-                      checked={selectedNiche === niche}
-                      onChange={() => handleNicheChange(niche)}
-                    />
-                    <label htmlFor={niche}>{niche}</label>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* nf */}
 
-            <div className="container" style={{ border: "0px solid red" }}>
+          {/* instructions */}
+          {user && user?.role == "Employer" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***Employer can only view Job but Can't Apply!</p>}
+          {user && user?.role == "Job Seeker" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***Job Seeker can only Apply to Jobs but Can't Post!</p>}
+          {Object.keys(user)?.length === 0 &&
+            <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***
+              Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
+              &nbsp; <Link to={"/login"} style={{ fontSize: 13 }}>Login</Link>
+            </p>}
+          {/* instructions */}
 
-              {/* on mobile */}
-              <div className="mobile-filter">
-                <select value={city} onChange={(e) => setCity(e.target.value)}>
-                  <option value="">Filter By City</option>
-                  {cities.map((city, index) => (
-                    <option value={city} key={index}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={niche}
-                  onChange={(e) => setNiche(e.target.value)}
-                >
-                  <option value="">Filter By Niche</option>
-                  {nichesArray.map((niche, index) => (
-                    <option value={niche} key={index}>
-                      {niche}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {/* on mobile ends */}
+          {/* jnf */}
+          {jobs && jobs.length <= 0 && <p style={{ textAlign: "center", color: "grey" }}>Jobs Not Found!</p>}
+          {/* jnf */}
 
-              {user && user?.role == "Employer" && <p style={{color:"grey",fontSize:13}}>***Employer can only view Job but Can't Apply!</p>}
-              {user && user?.role == "Job Seeker" && <p style={{color:"grey",fontSize:13}}>***Job Seeker can only Apply to Jobs but Can't Post!</p>}
-              {Object.keys(user)?.length === 0 && <p style={{color:"red",fontSize:13}}>***
-                Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
+          {/* <div className="wrapper"> */}
+            {/* display jobs here */}
+            <div
+              style={{
+                border: "0px solid red", padding: 5, marginTop: 3,
+                display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 5,
+              }}>
+              {jobs && jobs.length > 0 ? (jobs.map((element) => {
 
-               &nbsp; <Link to={"/login"} style={{fontSize:13}}>Login</Link>
-                </p>}
-
-
-
-
-              {/* display jobs here */}
-              <div className="jobs_container" style={{ border: "0px solid red" }}>
-                {jobs && jobs.length > 0 ? (jobs.map((element) => {
-
-                  if (!pdfRefs.current[element._id]) {
-                    pdfRefs.current[element._id] = React.createRef();
-                  }
-
-                  return (
-                    <div className="card" ref={pdfRefs.current[element._id]} key={element._id}>
-
-                      {element.hiringMultipleCandidates === "Yes" ? (
-                        <p className="hiring-multiple">
-                          Hiring Multiple Candidates
-                        </p>
-                      ) : (
-                        <p className="hiring">Hiring</p>
-                      )}
-                      <p className="title">{element.title}</p>
-                      <p className="company">{element.companyName}</p>
-                      <p className="location">{element?.location[0]?.toUpperCase() + element?.location?.slice(1)}</p>
-                      <p className="salary">
-                        <span>Salary:</span> Rs. {element.salary}
-                      </p>
-                      <p className="posted">
-                        <span>Posted On:</span>{" "}
-                        {element.jobPostedOn.substring(0, 10)}
-                      </p>
-
-                      <p style={{ color: "grey" }}>
-                        <span>Share to your friends using scanner or pdf :</span>
-
-                      </p>
-
-                      {/* qr and pdf */}
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
-                        {/* qr */}
-                        <QRCode style={{ height: 100, width: 100 }}
-                          value={`Title : ${element?.title}, Company Name : ${element?.companyName}, Location : ${element?.location}, Salary : Rs.${element?.salary}, Posted On : ${element?.jobPostedOn.substring(0, 10)}`} />
-
-                        {/* qr */}
-                        <p>or</p>
-
-                        <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
-                          style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
-                          <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
-                        </button>
-
-                      </div>
-
-                      {/* qr and pdf ends*/}
-                      <div className="btn-wrapper">
-                        <Link
-                          className="btn"
-                          to={`/post/application/${element._id}`}
-                        >
-                          {user?.role == "Job Seeker" ? "Apply Now" : "View Job"}
-                        </Link>
-                      </div>
-
-
-
-                    </div>
-                    // card
-
-
-                  );
-                })) : (
-                  /************************************************************/
-                  /* BUG No.2 */
-                  // <img src="./notfound.png" alt="job-not-found" style={{ width: "100%" }} />
-                  <p style={{ textAlign: "center" }}>Job Not Found!</p>
-                )
-                  /************************************************************/
-
-
-
-
+                if (!pdfRefs.current[element._id]) {
+                  pdfRefs.current[element._id] = React.createRef();
                 }
-              </div>
-              {/* display jobs ends */}
 
+                return (
+                  <div
+                    style={{
+                      border: "0px solid grey", padding: 5, display: "flex", flexDirection: "column", gap: 3,
+                      boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px", background: "white", borderRadius: 3,
+                      height: "16.375rem",
+                    }}
+                    ref={pdfRefs.current[element._id]} key={element._id}>
 
+                    {element.hiringMultipleCandidates === "Yes" ? (
+                      <p >
+                        <span style={{ color: "white", background: "green", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring Multiple Candidates!</span>
+                      </p>
+                    ) : (
+                      <p ><span style={{ color: "white", background: "blue", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring!</span></p>
+                    )}
+                    <p style={{ fontSize: 14 }}>Role : {element.title}</p>
+                    <p style={{ fontSize: 14 }}>Company : {element.companyName}</p>
+                    <p style={{ fontSize: 14 }}>Location : {element?.location[0]?.toUpperCase() + element?.location?.slice(1)}</p>
+                    <p style={{ fontSize: 14 }}>
+                      <span style={{ fontSize: 14 }}>Salary :</span> Rs. {element.salary} p.a.
+                    </p>
+                    <p style={{ fontSize: 14 }}>
+                      <span style={{ fontSize: 14 }}>Posted On:</span>{" "}
+                      {element.jobPostedOn.substring(0, 10)}
+                    </p>
+
+                    <p style={{ color: "grey" }}>
+                      <span style={{ fontSize: 13 }}>Share with anyone! :</span>
+
+                    </p>
+
+                    {/* qr and pdf */}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
+                      {/* qr */}
+                      <QRCode style={{ height: 80, width: 100 }}
+                        value={`Title : ${element?.title}, Company Name : ${element?.companyName}, Location : ${element?.location}, Salary : Rs.${element?.salary}, Posted On : ${element?.jobPostedOn.substring(0, 10)}`} />
+
+                      {/* qr */}
+                      <p style={{ color: "grey", fontSize: 14 }}>or</p>
+
+                      <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
+                        style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
+                        <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
+                      </button>
+
+                    </div>
+
+                    {/* qr and pdf ends*/}
+
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        background: "blue",
+                        color: "white",
+                        padding: 1,
+                        borderRadius: 4,
+                        textAlign: "center",
+                        marginTop: 9
+                      }}
+                      className=""
+                      to={`/post/application/${element._id}`}
+                    >
+                      {user?.role == "Job Seeker" ? "Apply Now" : "View Job"}
+                    </Link>
+                  </div>
+                  // card ends
+                );
+              })) : (
+
+                <></>)
+              }
             </div>
-          </div>
+            {/* display jobs ends */}
+          {/* </div> */}
         </section>
       )}
     </>
