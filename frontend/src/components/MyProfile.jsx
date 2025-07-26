@@ -1,11 +1,11 @@
 
 import { useSelector } from "react-redux";
-
+import { CiUser } from "react-icons/ci";
 const MyProfile = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <div className="account_components">
-      <h3>My Profile</h3>
+      <h3>  <CiUser style={{ height: 22 }} /> My Profile</h3>
       <div>
         <label>Full Name :</label>
         <input

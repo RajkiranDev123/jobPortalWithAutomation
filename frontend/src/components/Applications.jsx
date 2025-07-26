@@ -9,6 +9,7 @@ import {
 } from "../store/slices/applicationSlice";
 import Spinner from "./Spinner";
 import { Link } from "react-router-dom";
+import { VscGitStashApply } from "react-icons/vsc";
 
 const Applications = () => {
   const { applications, loading, error, message } = useSelector(
@@ -42,7 +43,7 @@ const Applications = () => {
       ) : (
         <>
           <div className="account_components">
-            <h3>Applications For Your Posted Jobs</h3>
+            <h3>         <VscGitStashApply style={{ height: 22 }} /> Applications For Your Posted Jobs</h3>
             <div className="applications_container">
               {applications?.map((element) => {
                 return (

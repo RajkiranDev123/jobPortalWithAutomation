@@ -8,6 +8,8 @@ import {
   resetJobSlice,
 } from "../store/slices/jobSlice";
 import { CiCircleInfo } from "react-icons/ci";
+import { BsFillPostcardFill } from "react-icons/bs";
+
 
 const JobPost = () => {
   const [title, setTitle] = useState("");
@@ -71,7 +73,7 @@ const JobPost = () => {
 
   return (
     <div className="account_components">
-      <h3>Post A Job</h3>
+      <h3>  <BsFillPostcardFill style={{ height: 22 }} /> Post A Job</h3>
       <div>
         <label>Title</label>
         <input

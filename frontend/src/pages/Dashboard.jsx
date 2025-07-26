@@ -21,7 +21,7 @@ import { TfiLayoutListPost } from "react-icons/tfi";
 import { VscGitStashApply } from "react-icons/vsc";
 import { IoIosLogOut } from "react-icons/io";
 
-
+import { RxDashboard } from "react-icons/rx";
 
 const Dashboard = () => {
   const [show, setShow] = useState(false);
@@ -51,7 +51,7 @@ const Dashboard = () => {
     <>
       <section className="account">
         <div className="component_header">
-          <p>Dashboard</p>
+          <p style={{display:"flex",alignItems:"center"}}><RxDashboard/> Dashboard</p>
           <p>
             hi! <span>{user && user?.name}</span>
           </p>

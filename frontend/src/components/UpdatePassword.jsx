@@ -8,6 +8,7 @@ import {
 import { getUser } from "../store/slices/userSlice";
 import { FaRegEyeSlash, FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -54,7 +55,7 @@ const UpdatePassword = () => {
 
   return (
     <div className="account_components update_password_component">
-      <h3>Update Password</h3>
+      <h3>   <RiLockPasswordLine style={{ height: 22 }} />  Update Password</h3>
       <div>
         <label>Current Password</label>
         <input

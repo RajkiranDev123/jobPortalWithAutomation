@@ -633,6 +633,8 @@ footer div ul a span {
   max-width: 1500px;
   margin: 0 auto;
   min-height: 100vh;
+ background: linear-gradient(15deg, #9199a6, #d8d2d2 50%);
+
 }
 
 .authPage .container {
@@ -642,7 +644,7 @@ footer div ul a span {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #fff;
+ background: linear-gradient(15deg, #9199a6, #d8d2d2 50%);
   padding: 20px 20px;
   max-width: 1500px;
 }
@@ -818,6 +820,7 @@ footer div ul a span {
 .jobs {
   padding: 40px 100px;
   min-height: 800px;
+   background: linear-gradient(10deg, #9199a6, #d8d2d2 50%);
 }
 
 .jobs .wrapper {

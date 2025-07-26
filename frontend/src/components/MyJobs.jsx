@@ -8,6 +8,7 @@ import {
   resetJobSlice,
 } from "../store/slices/jobSlice";
 import Spinner from "../components/Spinner";
+import { TfiLayoutListPost } from "react-icons/tfi";
 
 const MyJobs = () => {
   const { loading, error, myJobs, message } = useSelector(
@@ -41,7 +42,7 @@ const MyJobs = () => {
       ) : (
         <>
           <div className="account_components">
-            <h3>My Jobs Posted</h3>
+            <h3>        <TfiLayoutListPost style={{ height: 22 }} /> My Jobs Posted</h3>
             <div className="applications_container">
               {myJobs?.map((element) => (
                 <div className="card" key={element?._id}>

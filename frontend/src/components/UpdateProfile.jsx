@@ -7,6 +7,7 @@ import {
 } from "../store/slices/updateProfileSlice";
 import { toast } from "react-toastify";
 import { getUser } from "../store/slices/userSlice";
+import { TfiWrite } from "react-icons/tfi";
 
 const UpdateProfile = () => {
   const { user } = useSelector((state) => state.user);
@@ -78,7 +79,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="account_components">
-      <h3>Update Profile</h3>
+      <h3>   <TfiWrite style={{ height: 22 }} /> Update Profile</h3>
       <div>
         <label>Full Name</label>
         <input
