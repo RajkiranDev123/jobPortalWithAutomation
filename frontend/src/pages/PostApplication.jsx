@@ -134,7 +134,19 @@ const PostApplication = () => {
                 />
               </div>
               <div>
-                <label>Resume</label>
+                <label>Resume : &nbsp;
+
+                  {user?.resume?.url && <Link
+                    to={user.resume && user.resume.url}
+                    target="_blank"
+                    className="view-resume"
+                  >
+                    View Resume
+                  </Link>}
+
+
+
+                </label>
                 <input type="file" onChange={resumeHandler} />
               </div>
             </>
@@ -154,6 +166,9 @@ const PostApplication = () => {
           )}
         </form>
 
+
+        {/* right  */}
+
         <div className="job-details">
           <header>
             <h3>{singleJob.title}</h3>
@@ -162,8 +177,8 @@ const PostApplication = () => {
                 {singleJob.personalWebsite.title}
               </Link>
             )}
-            <p>{singleJob.location}</p>
-            <p>Rs. {singleJob.salary} a month</p>
+            <p>{singleJob?.location[0]?.toUpperCase()+singleJob?.location?.slice(1)}</p>
+            <p>Rs. {singleJob.salary} p.a.</p>
           </header>
           <hr />
           <section>
@@ -189,7 +204,7 @@ const PostApplication = () => {
               <h3>Location</h3>
               <div className="location-wrapper">
                 <FaLocationDot />
-                <span>{singleJob.location}</span>
+                <span>{singleJob?.location[0]?.toUpperCase()+singleJob?.location?.slice(1)}</span>
               </div>
             </div>
             <hr />
@@ -243,7 +258,7 @@ const PostApplication = () => {
           <hr />
           <footer>
             <h3>Job Niche</h3>
-            <p>{singleJob.jobNiche}</p>
+            <p>{singleJob?.jobNiche[0]?.toUpperCase()+singleJob?.jobNiche?.slice(1)}</p>
           </footer>
         </div>
       </article>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { clearAllJobErrors, fetchJobs } from "../store/slices/jobSlice";
 import Spinner from "../components/Spinner";
-import { FaSearch } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 //
 import QRCode from "react-qr-code"
@@ -20,6 +20,7 @@ const Jobs = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const { jobs, loading, error } = useSelector((state) => state.jobs);
+   const {  user } = useSelector((state) => state.user);
 
   const handleCityChange = (city) => {
     setCity(city);
@@ -61,8 +62,8 @@ const Jobs = () => {
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
-            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff" }} onClick={handleSearch}>Find Job</button>
-            <FaSearch />
+            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff" }} onClick={handleSearch}>Search</button>
+        
           </div>
           <div className="wrapper">
             <div className="filter-bar">
@@ -150,7 +151,7 @@ const Jobs = () => {
                       )}
                       <p className="title">{element.title}</p>
                       <p className="company">{element.companyName}</p>
-                      <p className="location">{element.location}</p>
+                      <p className="location">{element?.location[0]?.toUpperCase()+element?.location?.slice(1)}</p>
                       <p className="salary">
                         <span>Salary:</span> Rs. {element.salary}
                       </p>
@@ -184,7 +185,7 @@ const Jobs = () => {
                           className="btn"
                           to={`/post/application/${element._id}`}
                         >
-                          Apply Now
+                         {user?.role=="Job Seeker"? "Apply Now":"View Job"}
                         </Link>
                       </div>
 

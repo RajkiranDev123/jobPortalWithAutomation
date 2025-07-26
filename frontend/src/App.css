@@ -65,8 +65,8 @@ input::-webkit-outer-spin-button {
 
 .outline_btn {
   background: transparent;
-  color: #dfdf07;
-  border: 1px solid #dfdf07;
+  color: #880b18;
+  border: 1px solid #1a1a0c;
 }
 
 .btn:hover {
@@ -77,7 +77,7 @@ input::-webkit-outer-spin-button {
 }
 
 .outline_btn:hover {
-  background: #dfdf07;
+  background: #ffffff;
   color: #111;
   transition: 0.3s;
   cursor: pointer;
@@ -980,7 +980,7 @@ footer div ul a span {
 
 .jobs .container .jobs_container .card:hover {
   transition: 0.3s;
-  background: rgba(133, 133, 124, 0.19);
+  /* background: rgba(255, 255, 255, 0.19); */
 }
 
 .jobs .jobs_container .card .btn-wrapper {
