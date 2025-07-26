@@ -123,6 +123,8 @@ export const login = (data) => async (dispatch) => {
             }
         );
         dispatch(userSlice.actions.loginSuccess(response.data));
+        // dispatch(userSlice.actions.clearMessage());
+
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(userSlice.actions.loginFailed(error.response.data.message));

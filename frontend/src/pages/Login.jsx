@@ -8,7 +8,8 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import "./loader.css"
 import TestCredentials from "../components/TestCredentials"
-import { RiLoginCircleFill } from "react-icons/ri";
+import { RiLoginBoxLine } from "react-icons/ri";
+import jobsearch from "../assets/jobsearch.png"
 const Login = () => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h5><RiLoginCircleFill />Login to your account</h5>
+            <h5><RiLoginBoxLine />Login to your account</h5>
           </div>
           <TestCredentials />
           <form onSubmit={handleLogin}>
@@ -88,10 +89,18 @@ const Login = () => {
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
-            <p style={{color:"grey",fontStyle:"italic"}}>If you don't have an Account then click Register below!</p>
+            <p style={{ color: "grey", fontStyle: "italic" }}>If you don't have an Account then click Register below!</p>
             <Link to={"/register"}>Register Now</Link>
           </form>
         </div>
+
+        {/* rs */}
+
+        <div>
+          <img style={{opacity:"0.7",borderRadius:5}} src={jobsearch} alt="js"/>
+        </div>
+
+        {/*  */}
       </section>
     </>
   );

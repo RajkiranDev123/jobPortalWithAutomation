@@ -27,11 +27,11 @@ const Navbar = () => {
           <ul>
             <li>
               <Link style={{
-                display: "flex", alignItems: "center",
-                background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
+                display: "flex", alignItems: "center",   border: "2px solid white",fontFamily: "monospace",
+                // background: "linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%)",
                 padding: 5, borderRadius: 3
               }} to={"/"} onClick={() => setShow(!show)}>
-                <FcHome />
+                <FcHome /> Home
               </Link>
             </li>
             <li>
@@ -39,6 +39,7 @@ const Navbar = () => {
                 display: "flex", alignItems: "center", fontFamily: "monospace",
                 // background: "linear-gradient(159deg, rgba(6, 91, 127, 1) 0%, rgba(29, 41, 141, 1) 100%)",
                 border: "2px solid white",
+           
 
                 padding: 5, borderRadius: 3
               }} to={"/jobs"} onClick={() => setShow(!show)}>
@@ -65,7 +66,7 @@ const Navbar = () => {
                   border: "2px solid white",
 
 
-                  padding: 3, borderRadius: 3
+                  padding: 1, borderRadius: 3
                 }} to={"/login"} onClick={() => setShow(!show)}>
                   <RiLoginCircleFill /> Login
                 </Link>
