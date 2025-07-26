@@ -97,6 +97,7 @@ const PostApplication = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              disabled={user?.role=="Employer"?true:false}
             />
           </div>
           <div>
@@ -105,6 +106,8 @@ const PostApplication = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={user?.role=="Employer"?true:false}
+
             />
           </div>
           <div>
@@ -113,6 +116,8 @@ const PostApplication = () => {
               type="number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              disabled={user?.role=="Employer"?true:false}
+
             />
           </div>
           <div>
@@ -121,6 +126,8 @@ const PostApplication = () => {
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+              disabled={user?.role=="Employer"?true:false}
+
             />
           </div>
           {user && user.role === "Job Seeker" && (
@@ -177,7 +184,7 @@ const PostApplication = () => {
                 {singleJob.personalWebsite.title}
               </Link>
             )}
-            <p>{singleJob?.location[0]?.toUpperCase()+singleJob?.location?.slice(1)}</p>
+            <p>{singleJob?.location && singleJob?.location[0]?.toUpperCase() + singleJob?.location?.slice(1)}</p>
             <p>Rs. {singleJob.salary} p.a.</p>
           </header>
           <hr />
@@ -188,7 +195,7 @@ const PostApplication = () => {
                 <IoMdCash />
                 <div>
                   <span>Pay</span>
-                  <span>{singleJob.salary} a month</span>
+                  <span>{singleJob.salary} p.a.</span>
                 </div>
               </div>
               <div>
@@ -204,7 +211,7 @@ const PostApplication = () => {
               <h3>Location</h3>
               <div className="location-wrapper">
                 <FaLocationDot />
-                <span>{singleJob?.location[0]?.toUpperCase()+singleJob?.location?.slice(1)}</span>
+                <span>{singleJob?.location && singleJob?.location[0]?.toUpperCase() + singleJob?.location?.slice(1)}</span>
               </div>
             </div>
             <hr />
@@ -258,7 +265,7 @@ const PostApplication = () => {
           <hr />
           <footer>
             <h3>Job Niche</h3>
-            <p>{singleJob?.jobNiche[0]?.toUpperCase()+singleJob?.jobNiche?.slice(1)}</p>
+            <p>{singleJob?.jobNiche && singleJob?.jobNiche[0]?.toUpperCase() + singleJob?.jobNiche?.slice(1)}</p>
           </footer>
         </div>
       </article>

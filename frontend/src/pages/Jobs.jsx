@@ -160,6 +160,11 @@ const Jobs = () => {
                         {element.jobPostedOn.substring(0, 10)}
                       </p>
 
+                        <p style={{color:"grey"}}>
+                        <span>Share to your friends using scanner or pdf :</span>
+                      
+                      </p>
+
 
 
 
