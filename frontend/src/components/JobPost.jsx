@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toast } from "react-toastify";
@@ -24,15 +24,19 @@ const JobPost = () => {
   const [personalWebsiteTitle, setPersonalWebsiteTitle] = useState("");
   const [personalWebsiteUrl, setPersonalWebsiteUrl] = useState("");
 
-  const nichesArray = ["frontend","backend","full-stack"];
+  const nichesArray = ["frontend", "backend", "full-stack"];
 
-  const cities = ["bengaluru","chennai","hyderabad"];
+  const cities = ["bengaluru", "chennai", "hyderabad"];
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const { loading, error, message } = useSelector((state) => state.jobs);
   const dispatch = useDispatch();
 
   const handlePostJob = (e) => {
+    if (!title || !jobType || !location || !companyName || !introduction || !responsibilities || !qualifications || !jobNiche) {
+      toast.error("All fields are required!")
+      return
+    }
     const formData = new FormData();
     formData.append("title", title);
     formData.append("jobType", jobType);
@@ -159,7 +163,7 @@ const JobPost = () => {
           type="text"
           value={salary}
           onChange={(e) => setSalary(e.target.value)}
-          placeholder="50000 - 800000"
+          placeholder="e.g.50000 - 800000"
         />
       </div>
       <div>

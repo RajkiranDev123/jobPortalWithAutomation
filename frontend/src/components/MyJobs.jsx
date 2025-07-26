@@ -41,7 +41,7 @@ const MyJobs = () => {
       ) : (
         <>
           <div className="account_components">
-            <h3>My Jobs</h3>
+            <h3>My Jobs Posted</h3>
             <div className="applications_container">
               {myJobs?.map((element) => (
                 <div className="card" key={element?._id}>

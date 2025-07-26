@@ -1363,6 +1363,7 @@ footer div ul a span {
     width: 308px;
     padding: 20px 5px;
     z-index: 2;
+    border-radius: 6px;
 
   }
 

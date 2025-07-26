@@ -38,7 +38,7 @@ const Applications = () => {
       {loading ? (
         <Spinner />
       ) : applications && applications?.length <= 0 ? (
-        <h1>You have no applications from job seekers.</h1>
+        <h1 style={{marginTop:12}}>You have no applications from job seekers.</h1>
       ) : (
         <>
           <div className="account_components">

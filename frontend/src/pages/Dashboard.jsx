@@ -53,7 +53,7 @@ const Dashboard = () => {
         <div className="component_header">
           <p>Dashboard</p>
           <p>
-            hi! <span>{user && user.name}</span>
+            hi! <span>{user && user?.name}</span>
           </p>
         </div>
         <div className="container">
@@ -91,7 +91,7 @@ const Dashboard = () => {
                 </button>
               </li>
 
-              {user && user.role === "Employer" && (
+              {user && user?.role === "Employer" && (
                 <li>
                   <button
                     onClick={() => {
@@ -103,7 +103,7 @@ const Dashboard = () => {
                   </button>
                 </li>
               )}
-              {user && user.role === "Employer" && (
+              {user && user?.role === "Employer" && (
                 <li>
                   <button
                     onClick={() => {
@@ -115,7 +115,7 @@ const Dashboard = () => {
                   </button>
                 </li>
               )}
-              {user && user.role === "Employer" && (
+              {user && user?.role === "Employer" && (
                 <li>
                   <button
                     onClick={() => {
@@ -127,7 +127,7 @@ const Dashboard = () => {
                   </button>
                 </li>
               )}
-              {user && user.role === "Job Seeker" && (
+              {user && user?.role === "Job Seeker" && (
                 <li>
                   <button
                     onClick={() => {
@@ -150,7 +150,7 @@ const Dashboard = () => {
                 show ? "sidebar_icon move_right" : "sidebar_icon move_left"
               }
             >
-              <LuMoveRight
+              <LuMoveRight 
                 onClick={() => setShow(!show)}
                 className={show ? "left_arrow" : "right_arrow"}
               />
@@ -159,25 +159,25 @@ const Dashboard = () => {
               switch (componentName) {
                 case "My Profile":
                   return <MyProfile />;
-                  break;
+         
                 case "Update Profile":
                   return <UpdateProfile />;
-                  break;
+            
                 case "Update Password":
                   return <UpdatePassword />;
-                  break;
+        
                 case "Job Post":
                   return <JobPost />;
-                  break;
+             
                 case "My Jobs":
                   return <MyJobs />;
-                  break;
+           
                 case "Applications":
                   return <Applications />;
-                  break;
+             
                 case "My Applications":
                   return <MyApplications />;
-                  break;
+             
 
                 default:
                   <MyProfile />;
