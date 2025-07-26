@@ -20,7 +20,7 @@ const Jobs = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const { jobs, loading, error } = useSelector((state) => state.jobs);
-   const {  user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const handleCityChange = (city) => {
     setCity(city);
@@ -63,7 +63,7 @@ const Jobs = () => {
               onChange={(e) => setSearchKeyword(e.target.value)}
             />
             <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff" }} onClick={handleSearch}>Search</button>
-        
+
           </div>
           <div className="wrapper">
             <div className="filter-bar">
@@ -131,6 +131,17 @@ const Jobs = () => {
               </div>
               {/* on mobile ends */}
 
+              {user && user?.role == "Employer" && <p style={{color:"grey",fontSize:13}}>***Employer can only view Job but Can't Apply!</p>}
+              {user && user?.role == "Job Seeker" && <p style={{color:"grey",fontSize:13}}>***Job Seeker can only Apply to Jobs but Can't Post!</p>}
+              {Object.keys(user)?.length === 0 && <p style={{color:"red",fontSize:13}}>***
+                Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
+
+               &nbsp; <Link to={"/login"} style={{fontSize:13}}>Login</Link>
+                </p>}
+
+
+
+
               {/* display jobs here */}
               <div className="jobs_container" style={{ border: "0px solid red" }}>
                 {jobs && jobs.length > 0 ? (jobs.map((element) => {
@@ -151,7 +162,7 @@ const Jobs = () => {
                       )}
                       <p className="title">{element.title}</p>
                       <p className="company">{element.companyName}</p>
-                      <p className="location">{element?.location[0]?.toUpperCase()+element?.location?.slice(1)}</p>
+                      <p className="location">{element?.location[0]?.toUpperCase() + element?.location?.slice(1)}</p>
                       <p className="salary">
                         <span>Salary:</span> Rs. {element.salary}
                       </p>
@@ -160,13 +171,10 @@ const Jobs = () => {
                         {element.jobPostedOn.substring(0, 10)}
                       </p>
 
-                        <p style={{color:"grey"}}>
+                      <p style={{ color: "grey" }}>
                         <span>Share to your friends using scanner or pdf :</span>
-                      
+
                       </p>
-
-
-
 
                       {/* qr and pdf */}
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
@@ -190,7 +198,7 @@ const Jobs = () => {
                           className="btn"
                           to={`/post/application/${element._id}`}
                         >
-                         {user?.role=="Job Seeker"? "Apply Now":"View Job"}
+                          {user?.role == "Job Seeker" ? "Apply Now" : "View Job"}
                         </Link>
                       </div>
 
@@ -215,6 +223,7 @@ const Jobs = () => {
                 }
               </div>
               {/* display jobs ends */}
+
 
             </div>
           </div>
