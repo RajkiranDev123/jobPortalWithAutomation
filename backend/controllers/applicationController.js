@@ -59,8 +59,8 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
         };
 
         // push job id
-         user.appliedJobIds.push(req.params.id)
-         await user.save()
+        user.appliedJobIds.push(req.params.id)
+        await user.save()
 
         /////////////////// save to db //////////////////////////////////////////////////////////
         const application = await Application.create({ jobSeekerInfo, employerInfo, jobInfo });
@@ -91,14 +91,31 @@ export const employerGetAllApplication = catchAsyncErrors(
 export const jobSeekerGetAllApplication = catchAsyncErrors(
     async (req, res, next) => {
         const { _id } = req.user;//jobSeeker id 
+        //
+        const page = req.headers.page || 1
+        const ITEM_PER_PAGE = 5
+        const skip = (page - 1) * ITEM_PER_PAGE
+        //
         try {
+            //
+            const totalDocs = await Application.countDocuments(
+                {
+                    "jobSeekerInfo.id": _id,
+                    "deletedBy.jobSeeker": false
+                }
+            )
+            const pageCount = Math.ceil(totalDocs / ITEM_PER_PAGE)//pageCount is total pages 8/4=2 pages
+            //
             const applications = await Application.find({
                 "jobSeekerInfo.id": _id,
                 "deletedBy.jobSeeker": false,
-            }).populate('jobInfo.jobId');
-            return res.status(200).json({ success: true, applications });
+            }).populate('jobInfo.jobId').skip(skip).limit(ITEM_PER_PAGE);
+
+
+            return res.status(200).json({ success: true, applications, pageCount });
+
         } catch (error) {
-            return next(new ErrorHandler("Internal Server Error!", 500))
+            return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
         }
     }
 );
