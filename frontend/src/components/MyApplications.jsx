@@ -61,7 +61,8 @@ const MyApplications = () => {
                     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                      border: "1px solid grey",
                     width: 260, padding: 3,
-                    borderRadius: 3, fontSize: 12
+                    borderRadius: 3, fontSize: 12,
+                    background:"#FAF9F6"
                   }}
                 >
                   <p style={{ fontSize: 16 }}>
@@ -83,9 +84,9 @@ const MyApplications = () => {
                   ‣  Applied on : {element?.createdAt?.slice(0, 10)}
                   </p>
 
-                  <div style={{marginTop:3, display: "flex", gap: 3, flexWrap: "wrap", alignItems: "start" }}>
+                  <div style={{marginTop:3, display: "flex", gap: 23, flexWrap: "wrap", alignItems: "start" }}>
                     <button
-                      style={{ border: "none", background: "none", color: "red", borderRadius: 3, padding: 1, cursor: "pointer" }}
+                      style={{ border: "none", background: "none", color: "red", borderRadius: 3, padding: 0, cursor: "pointer" }}
                       onClick={() => handleDeleteApplication(element._id)}
                     >
                       <RiDeleteBin6Line />
@@ -96,7 +97,7 @@ const MyApplications = () => {
                         element.jobSeekerInfo.resume.url
                       }
                       style={{
-                        fontSize: 14, display: "flex", alignItems: "center", gap: 2, border: "1px solid grey",
+                        fontSize: 14, display: "flex", alignItems: "center", gap: 2, borderBottom: "1px solid grey",
                         textDecoration: "none", color: "black", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
                       }}
 

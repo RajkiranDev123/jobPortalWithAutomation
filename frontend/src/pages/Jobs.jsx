@@ -10,6 +10,9 @@ import QRCode from "react-qr-code"
 //
 import downloadPdf from "../utils/downloadAsPdf.js"
 import pdfIcon from "../assets/pdfDown.png"
+//
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 const Jobs = () => {
@@ -24,7 +27,7 @@ const Jobs = () => {
 
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const { jobs, loading, error } = useSelector((state) => state.jobs);
+  const { jobs, loading, error,pageCount } = useSelector((state) => state.jobs);
   const { user } = useSelector((state) => state.user);
 
 
@@ -37,17 +40,17 @@ const Jobs = () => {
       toast.error(error);
       dispatch(clearAllJobErrors());
     }
-    dispatch(fetchJobs(city, niche, searchKeyword, page));
+    dispatch(fetchJobs(city, niche, searchKeyword, 1));
     console.log(pdfRefs)
 
-  }, [dispatch, error, city, niche, page]);
+  }, [dispatch, error, city, niche]);
 
   const handleSearch = () => {
     if (!searchKeyword) {
       toast.error("Search bar can't be empty!")
       return
     }
-    dispatch(fetchJobs(city, niche, searchKeyword));
+    dispatch(fetchJobs(city, niche, searchKeyword,1));
   };
 
 
@@ -56,12 +59,27 @@ const Jobs = () => {
 
   const nichesArray = ["All", "Frontend", "Backend", "Full-Stack"];
 
+  // pagination 1
+
+  const changePage = (event, value) => {
+    dispatch(fetchJobs("","","", value))
+    setPage(value)
+  }
+
+  const clearSearch=()=>{
+    setSearchKeyword("")
+    setPage(1)
+    setCity("")
+    setNiche("")
+    dispatch(fetchJobs("","","", 1))
+  }
+
   return (
     <>
       {loading ? (
         <Spinner />
       ) : (
-        <section  className="jobs">
+        <section className="jobs">
 
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
@@ -76,7 +94,7 @@ const Jobs = () => {
             <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={handleSearch}>Search</button>
             <button style={{ background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
-              onClick={() => {setSearchKeyword("");dispatch(fetchJobs())}}>Clear</button>
+              onClick={() => clearSearch()}>Clear</button>
 
 
           </div>
@@ -127,7 +145,7 @@ const Jobs = () => {
             style={{
               border: "0px solid red", padding: 5, marginTop: 3,
               display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 5,
-              overflowY: "scroll"
+              // overflowY: "scroll"
             }}>
             {jobs && jobs.length > 0 ? (jobs.map((element) => {
 
@@ -229,9 +247,16 @@ const Jobs = () => {
 
               <></>)
             }
+        
           </div>
-          {/* display jobs ends */}
-          {/* </div> */}
+              {/* pagin */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Stack spacing={2}>
+                <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
+              </Stack>
+            </div>
+            {/* pagin */}
+
         </section>
       )}
     </>

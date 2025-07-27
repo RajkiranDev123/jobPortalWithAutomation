@@ -10,6 +10,7 @@ const jobSlice = createSlice({
         message: null,
         singleJob: {},
         myJobs: [],
+        pageCount: null
     },
     reducers: {
         requestForAllJobs(state, action) {
@@ -20,6 +21,11 @@ const jobSlice = createSlice({
             state.loading = false;
             state.jobs = action.payload;
             state.error = null;
+
+        },
+        setPageCount(state, action) {
+
+            state.pageCount = action.payload
         },
         failureForAllJobs(state, action) {
             state.loading = false;
@@ -152,13 +158,15 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
             {
                 withCredentials: true,
                 headers: {
-           
+
                     "page": page,
-                
+
                 }
             }
         );
         dispatch(jobSlice.actions.successForAllJobs(response.data.jobs));
+        dispatch(jobSlice.actions.setPageCount(response.data.pageCount));
+
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(jobSlice.actions.failureForAllJobs(error.response.data.message));

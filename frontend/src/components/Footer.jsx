@@ -12,7 +12,7 @@ const Footer = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
-      <footer>
+      <footer >
         <div style={{visibility:"hidden"}}>
         
         </div>
