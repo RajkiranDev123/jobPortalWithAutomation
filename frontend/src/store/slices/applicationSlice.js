@@ -8,6 +8,7 @@ const applicationSlice = createSlice({
         loading: false,
         error: null,
         message: null,
+        pageCount: 1
     },
     reducers: {
         // employer will get all application (applied jobs) for jobs he posted
@@ -34,6 +35,10 @@ const applicationSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.applications = action.payload;
+        },
+        setPageCount(state, action) {
+
+            state.pageCount = action.payload;
         },
         failureForMyApplications(state, action) {
             state.loading = false;
@@ -112,20 +117,21 @@ export const fetchEmployerApplications = () => async (dispatch) => {
 };
 
 
-export const fetchJobSeekerApplications = () => async (dispatch) => {
+export const fetchJobSeekerApplications = (page) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForMyApplications());
     try {
         const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/api/v1/application/jobseeker/getall`,
             {
                 withCredentials: true,
+                headers: {
+                    "page": page
+                }
             }
         );
-        dispatch(
-            applicationSlice.actions.successForMyApplications(
-                response.data.applications
-            )
-        );
+        dispatch(applicationSlice.actions.successForMyApplications(response.data.applications));
+        dispatch(applicationSlice.actions.setPageCount(response.data.pageCount));
+
         dispatch(applicationSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(

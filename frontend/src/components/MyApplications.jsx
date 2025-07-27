@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,16 +12,20 @@ import Spinner from "../components/Spinner";
 import { VscGitStashApply } from "react-icons/vsc";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentUser } from "react-icons/gr";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const MyApplications = () => {
+  const [page, setPage] = useState(1);
+
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { loading, error, applications, message } = useSelector(
+  const { loading, error, applications, message, pageCount } = useSelector(
     (state) => state.applications
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchJobSeekerApplications());
+    dispatch(fetchJobSeekerApplications(page));
   }, []);
 
   useEffect(() => {
@@ -32,13 +36,20 @@ const MyApplications = () => {
     if (message) {
       toast.success(message);
       dispatch(resetApplicationSlice());
-      dispatch(fetchJobSeekerApplications());
+      dispatch(fetchJobSeekerApplications(page));
     }
   }, [dispatch, error, message]);
 
   const handleDeleteApplication = (id) => {
     dispatch(deleteApplication(id));
   };
+
+  // pagination 1
+
+  const changePage = (event, value) => {
+    dispatch(fetchJobSeekerApplications(value))
+    setPage(value)
+  }
 
   return (
     <>
@@ -59,14 +70,14 @@ const MyApplications = () => {
                 <div key={element._id}
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                     border: "1px solid grey",
+                    border: "1px solid grey",
                     width: 260, padding: 3,
                     borderRadius: 3, fontSize: 12,
-                    background:"#FAF9F6"
+                    background: "#FAF9F6"
                   }}
                 >
                   <p style={{ fontSize: 16 }}>
-                    ‣ Job Title :  {element.jobInfo.jobTitle}
+                    ‣ For :  {element.jobInfo.jobTitle}
                   </p>
 
                   <p style={{ fontSize: 16 }}>
@@ -77,14 +88,14 @@ const MyApplications = () => {
                     ‣ Company : {element?.jobInfo?.jobId?.companyName}
                   </p>
                   <p style={{ fontSize: 16 }}>
-                   ‣  Sal : {element?.jobInfo?.jobId?.salary}
+                    ‣  Sal : {element?.jobInfo?.jobId?.salary}
                   </p>
 
                   <p style={{ fontSize: 16 }}>
-                  ‣  Applied on : {element?.createdAt?.slice(0, 10)}
+                    ‣  Applied on : {element?.createdAt?.slice(0, 10)}
                   </p>
 
-                  <div style={{marginTop:3, display: "flex", gap: 23, flexWrap: "wrap", alignItems: "start" }}>
+                  <div style={{ marginTop: 3, display: "flex", gap: 23, flexWrap: "wrap", alignItems: "start" }}>
                     <button
                       style={{ border: "none", background: "none", color: "red", borderRadius: 3, padding: 0, cursor: "pointer" }}
                       onClick={() => handleDeleteApplication(element._id)}
@@ -110,7 +121,15 @@ const MyApplications = () => {
                 </div>
               );
             })}
+      
           </div>
+                {/* pagin */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Stack spacing={2}>
+                <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
+              </Stack>
+            </div>
+            {/* pagin */}
 
         </>
       )}
