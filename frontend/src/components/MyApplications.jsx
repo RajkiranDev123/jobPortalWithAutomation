@@ -53,37 +53,37 @@ const MyApplications = () => {
 
           <p style={{ fontWeight: "bold", color: "#191970", fontSize: 25 }}>    <VscGitStashApply style={{ height: 22 }} />  My Application For Jobs</p>
 
-          <div style={{ display: "flex", gap: 4, justifyContent: "center", flexWrap: "wrap" }}>
+          <div style={{ marginTop: 5, display: "flex", gap: 4, justifyContent: "center", flexWrap: "wrap" }}>
             {applications?.map((element) => {
               return (
                 <div key={element._id}
                   style={{
-                    boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
-                    //  border: "2px solid grey",
+                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                     border: "1px solid grey",
                     width: 260, padding: 3,
                     borderRadius: 3, fontSize: 12
                   }}
                 >
                   <p style={{ fontSize: 16 }}>
-                    Job Title :  {element.jobInfo.jobTitle}
+                    ‣ Job Title :  {element.jobInfo.jobTitle}
                   </p>
 
                   <p style={{ fontSize: 16 }}>
-                    Location : &nbsp;
+                    ‣ Location : &nbsp;
                     {element?.jobInfo?.jobId?.location[0]?.toUpperCase() + element?.jobInfo?.jobId?.location?.slice(1)}
                   </p>
                   <p style={{ fontSize: 16 }}>
-                    Company : {element?.jobInfo?.jobId?.companyName}
+                    ‣ Company : {element?.jobInfo?.jobId?.companyName}
                   </p>
                   <p style={{ fontSize: 16 }}>
-                    Sal : {element?.jobInfo?.jobId?.salary}
+                   ‣  Sal : {element?.jobInfo?.jobId?.salary}
                   </p>
 
                   <p style={{ fontSize: 16 }}>
-                    Applied on : {element?.createdAt?.slice(0, 10)}
+                  ‣  Applied on : {element?.createdAt?.slice(0, 10)}
                   </p>
 
-                  <div style={{ display: "flex", gap: 3, flexWrap: "wrap", alignItems: "start" }}>
+                  <div style={{marginTop:3, display: "flex", gap: 3, flexWrap: "wrap", alignItems: "start" }}>
                     <button
                       style={{ border: "none", background: "none", color: "red", borderRadius: 3, padding: 1, cursor: "pointer" }}
                       onClick={() => handleDeleteApplication(element._id)}
@@ -97,7 +97,7 @@ const MyApplications = () => {
                       }
                       style={{
                         fontSize: 14, display: "flex", alignItems: "center", gap: 2, border: "1px solid grey",
-                        textDecoration: "none", color: "black", borderRadius: 3, cursor: "pointer",paddingLeft:1,paddingRight:1
+                        textDecoration: "none", color: "black", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
                       }}
 
                       target="_blank"

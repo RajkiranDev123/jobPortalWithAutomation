@@ -12,7 +12,7 @@ const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
-      <nav className={show ? "navbar show_navbar" : "navbar"}>
+      <nav  className={show ? "navbar show_navbar" : "navbar"}>
         <div style={{ display: "flex", alignItems: "center" }}>
 
           <div style={{ background: "white", width: 38, height: 38, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>

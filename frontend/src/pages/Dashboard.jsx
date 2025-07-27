@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <section className="account">
+      <section  className="account">
         <div className="component_header">
           <p style={{display:"flex",alignItems:"center"}}><RxDashboard/> Dashboard</p>
           <p>

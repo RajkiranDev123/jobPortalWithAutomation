@@ -15,6 +15,10 @@ import pdfIcon from "../assets/pdfDown.png"
 const Jobs = () => {
   const pdfRefs = useRef({})
   const [city, setCity] = useState("");
+  const [page, setPage] = useState(1);
+
+
+
 
   const [niche, setNiche] = useState("");
 
@@ -28,13 +32,15 @@ const Jobs = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     if (error) {
       toast.error(error);
       dispatch(clearAllJobErrors());
     }
-    dispatch(fetchJobs(city, niche, searchKeyword));
+    dispatch(fetchJobs(city, niche, searchKeyword, page));
     console.log(pdfRefs)
-  }, [dispatch, error, city, niche]);
+
+  }, [dispatch, error, city, niche, page]);
 
   const handleSearch = () => {
     if (!searchKeyword) {
@@ -43,6 +49,8 @@ const Jobs = () => {
     }
     dispatch(fetchJobs(city, niche, searchKeyword));
   };
+
+
 
   const cities = ["All", "Hyderabad", "Bengaluru", "Chennai"];
 
@@ -53,7 +61,7 @@ const Jobs = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <section className="jobs">
+        <section  className="jobs">
 
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
@@ -68,7 +76,7 @@ const Jobs = () => {
             <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={handleSearch}>Search</button>
             <button style={{ background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
-              onClick={() => dispatch(fetchJobs())}>Clear</button>
+              onClick={() => {setSearchKeyword("");dispatch(fetchJobs())}}>Clear</button>
 
 
           </div>
@@ -119,6 +127,7 @@ const Jobs = () => {
             style={{
               border: "0px solid red", padding: 5, marginTop: 3,
               display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 5,
+              overflowY: "scroll"
             }}>
             {jobs && jobs.length > 0 ? (jobs.map((element) => {
 
@@ -192,7 +201,7 @@ const Jobs = () => {
                       textAlign: "center",
                       marginTop: 9,
                       cursor:
-                       user?.role === "Job Seeker"
+                        user?.role === "Job Seeker"
                           ? user?.appliedJobIds?.includes(element?._id)
                             ? "not-allowed"
                             : "pointer"
