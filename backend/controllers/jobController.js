@@ -33,11 +33,12 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 
 /////////////////////////////////////////////////// get all jobs /////////////////////////////////////////////////////
 export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
+    //
     const page = req.headers.page || 1
     const ITEM_PER_PAGE = 5
     const skip = (page - 1) * ITEM_PER_PAGE
-
     //
+
     const { city, niche, searchKeyword } = req.query;
     const query = {};
     if (city) {
@@ -54,15 +55,20 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
             { introduction: { $regex: searchKeyword, $options: "i" } },
         ];
     }
-    // 
+    
 
     try {
-        const jobs = await Job.find(query)
-        // .skip(skip).limit(ITEM_PER_PAGE);
+        const jobs = await Job.find(query).skip(skip).limit(ITEM_PER_PAGE);
+        //
+        const totalDocs = await Job.countDocuments(query)
+        const pageCount = Math.ceil(totalDocs / ITEM_PER_PAGE)//pageCount is total pages 8/4=2 pages
+        //
+        
         return res.status(200).json({
             success: true,
             jobs,
             count: jobs.length,
+            pageCount:pageCount //
         });
     } catch (error) {
         return next(new ErrorHandler("Internal Server Error!", 500))
