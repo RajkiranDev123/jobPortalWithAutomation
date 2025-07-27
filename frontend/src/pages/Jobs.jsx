@@ -58,7 +58,7 @@ const Jobs = () => {
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
 
-            <input style={{ border: "none", outline: "none", padding: 2 }}
+            <input style={{ border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               type="text"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
@@ -75,16 +75,16 @@ const Jobs = () => {
           {/* search ends */}
 
           {/* nf */}
-          <div style={{display:"flex",justifyContent:"center",gap:3,flexWrap:"wrap"}}>
-            <select style={{ outline: "none", borderRadius: 3, border: "none",color:"grey" }} value={city} onChange={(e) => setCity(e.target.value)}>
-              <option  value="">Filter By City</option>
+          <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap" }}>
+            <select style={{ outline: "none", borderRadius: 3, border: "none", color: "grey" }} value={city} onChange={(e) => setCity(e.target.value)}>
+              <option value="">Filter By City</option>
               {cities.map((city, index) => (
                 <option value={city} key={index}>
                   {city}
                 </option>
               ))}
             </select>
-            <select style={{ outline: "none", borderRadius: 3, border: "none" ,color:"grey"}}
+            <select style={{ outline: "none", borderRadius: 3, border: "none", color: "grey" }}
               value={niche}
               onChange={(e) => setNiche(e.target.value)}
             >
@@ -114,92 +114,114 @@ const Jobs = () => {
           {/* jnf */}
 
           {/* <div className="wrapper"> */}
-            {/* display jobs here */}
-            <div
-              style={{
-                border: "0px solid red", padding: 5, marginTop: 3,
-                display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 5,
-              }}>
-              {jobs && jobs.length > 0 ? (jobs.map((element) => {
+          {/* display jobs here */}
+          <div
+            style={{
+              border: "0px solid red", padding: 5, marginTop: 3,
+              display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 5,
+            }}>
+            {jobs && jobs.length > 0 ? (jobs.map((element) => {
 
-                if (!pdfRefs.current[element._id]) {
-                  pdfRefs.current[element._id] = React.createRef();
-                }
-
-                return (
-                  <div
-                    style={{
-                      border: "0px solid grey", padding: 5, display: "flex", flexDirection: "column", gap: 3,
-                      boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px", background: "white", borderRadius: 3,
-                      height: "16.375rem",
-                    }}
-                    ref={pdfRefs.current[element._id]} key={element._id}>
-
-                    {element.hiringMultipleCandidates === "Yes" ? (
-                      <p >
-                        <span style={{ color: "white", background: "green", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring Multiple Candidates!</span>
-                      </p>
-                    ) : (
-                      <p ><span style={{ color: "white", background: "blue", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring!</span></p>
-                    )}
-                    <p style={{ fontSize: 14 }}>Role : {element.title}</p>
-                    <p style={{ fontSize: 14 }}>Company : {element.companyName}</p>
-                    <p style={{ fontSize: 14 }}>Location : {element?.location[0]?.toUpperCase() + element?.location?.slice(1)}</p>
-                    <p style={{ fontSize: 14 }}>
-                      <span style={{ fontSize: 14 }}>Salary :</span> Rs. {element.salary} p.a.
-                    </p>
-                    <p style={{ fontSize: 14 }}>
-                      <span style={{ fontSize: 14 }}>Posted On:</span>{" "}
-                      {element.jobPostedOn.substring(0, 10)}
-                    </p>
-
-                    <p style={{ color: "grey" }}>
-                      <span style={{ fontSize: 13 }}>Share with anyone! :</span>
-
-                    </p>
-
-                    {/* qr and pdf */}
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
-                      {/* qr */}
-                      <QRCode style={{ height: 80, width: 100 }}
-                        value={`Title : ${element?.title}, Company Name : ${element?.companyName}, Location : ${element?.location}, Salary : Rs.${element?.salary}, Posted On : ${element?.jobPostedOn.substring(0, 10)}`} />
-
-                      {/* qr */}
-                      <p style={{ color: "grey", fontSize: 14 }}>or</p>
-
-                      <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
-                        style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
-                        <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
-                      </button>
-
-                    </div>
-
-                    {/* qr and pdf ends*/}
-
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        background: "blue",
-                        color: "white",
-                        padding: 1,
-                        borderRadius: 4,
-                        textAlign: "center",
-                        marginTop: 9
-                      }}
-                      className=""
-                      to={`/post/application/${element._id}`}
-                    >
-                      {user?.role == "Job Seeker" ? "Apply Now" : "View Job"}
-                    </Link>
-                  </div>
-                  // card ends
-                );
-              })) : (
-
-                <></>)
+              if (!pdfRefs.current[element._id]) {
+                pdfRefs.current[element._id] = React.createRef();
               }
-            </div>
-            {/* display jobs ends */}
+
+              return (
+                <div
+                  style={{
+                    border: "0px solid grey", padding: 5, display: "flex", flexDirection: "column", gap: 3,
+                    boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px", background: "white", borderRadius: 3,
+                    height: "16.375rem",
+                  }}
+                  ref={pdfRefs.current[element._id]} key={element._id}>
+
+                  {element.hiringMultipleCandidates === "Yes" ? (
+                    <p >
+                      <span style={{ color: "white", background: "green", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring Multiple Candidates!</span>
+                    </p>
+                  ) : (
+                    <p ><span style={{ color: "white", background: "blue", fontSize: 12, padding: 2, borderRadius: 3 }}>Hiring!</span></p>
+                  )}
+                  <p style={{ fontSize: 14 }}>Role : {element.title}</p>
+                  <p style={{ fontSize: 14 }}>Company : {element.companyName}</p>
+                  <p style={{ fontSize: 14 }}>Location : {element?.location[0]?.toUpperCase() + element?.location?.slice(1)}</p>
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Salary :</span> Rs. {element.salary} p.a.
+                  </p>
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Posted On:</span>{" "}
+                    {element.jobPostedOn.substring(0, 10)}
+                  </p>
+
+                  <p style={{ color: "grey" }}>
+                    <span style={{ fontSize: 13 }}>Share with anyone! :</span>
+
+                  </p>
+
+                  {/* qr and pdf */}
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
+                    {/* qr */}
+                    <QRCode style={{ height: 80, width: 100 }}
+                      value={`Title : ${element?.title}, Company Name : ${element?.companyName}, Location : ${element?.location}, Salary : Rs.${element?.salary}, Posted On : ${element?.jobPostedOn.substring(0, 10)}`} />
+
+                    {/* qr */}
+                    <p style={{ color: "grey", fontSize: 14 }}>or</p>
+
+                    <button onClick={() => downloadPdf(pdfRefs.current[element._id])}
+                      style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
+                      <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
+                    </button>
+
+                  </div>
+
+                  {/* qr and pdf ends*/}
+
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      background:
+                        user?.role === "Job Seeker"
+                          ? user?.appliedJobIds?.includes(element?._id)
+                            ? "lightgray"
+                            : "blue"
+                          : "blue",
+
+                      color: "white",
+                      padding: 1,
+                      borderRadius: 4,
+                      textAlign: "center",
+                      marginTop: 9,
+                      cursor:
+                       user?.role === "Job Seeker"
+                          ? user?.appliedJobIds?.includes(element?._id)
+                            ? "not-allowed"
+                            : "pointer"
+                          : "pointer",
+
+                    }}
+                    className=""
+                    to={`/post/application/${element._id}`}
+                  >
+
+                    {
+                      user?.role === "Job Seeker"
+                        ? user?.appliedJobIds?.includes(element?._id)
+                          ? "Applied"
+                          : "Apply Now"
+                        : "View Job"
+                    }
+
+
+                  </Link>
+                </div>
+                // card ends
+              );
+            })) : (
+
+              <></>)
+            }
+          </div>
+          {/* display jobs ends */}
           {/* </div> */}
         </section>
       )}
