@@ -1,6 +1,8 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Application } from "../models/applicationSchema.js";
+import { UserModel } from "../models/userSchema.js";
+
 import { Job } from "../models/jobSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -14,6 +16,8 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     const jobSeekerInfo = { id: req.user._id, name, email, phone, address, coverLetter, role: "Job Seeker" };
     try {
         const jobDetails = await Job.findById(id);
+        const user = await UserModel.findById(req.user._id);
+
 
         if (!jobDetails) return next(new ErrorHandler("Job not found.", 404));
 
@@ -54,6 +58,10 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
             jobTitle: jobDetails.title,
         };
 
+        // push job id
+         user.appliedJobIds.push(req.params.id)
+         await user.save()
+
         /////////////////// save to db //////////////////////////////////////////////////////////
         const application = await Application.create({ jobSeekerInfo, employerInfo, jobInfo });
         return res.status(201).json({ success: true, message: "Application submitted.", application });
@@ -87,7 +95,7 @@ export const jobSeekerGetAllApplication = catchAsyncErrors(
             const applications = await Application.find({
                 "jobSeekerInfo.id": _id,
                 "deletedBy.jobSeeker": false,
-            });
+            }).populate('jobInfo.jobId');
             return res.status(200).json({ success: true, applications });
         } catch (error) {
             return next(new ErrorHandler("Internal Server Error!", 500))

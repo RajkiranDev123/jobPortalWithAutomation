@@ -52,6 +52,7 @@ const applicationSchema = new mongoose.Schema({
     jobInfo: {
         jobId: {
             type: mongoose.Schema.Types.ObjectId,
+            ref:"Job",
             required: true,
         },
         jobTitle: {
@@ -69,6 +70,6 @@ const applicationSchema = new mongoose.Schema({
             default: false,
         },
     },
-});
+},{timestamps:true});
 
 export const Application = mongoose.model("Application", applicationSchema);

@@ -47,6 +47,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         enum: ["Job Seeker", "Employer"],
     },
+    appliedJobIds:[],
     createdAt: {
         type: Date,
         default: Date.now,
