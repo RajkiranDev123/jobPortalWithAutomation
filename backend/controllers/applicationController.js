@@ -76,12 +76,28 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
 export const employerGetAllApplication = catchAsyncErrors(
     async (req, res, next) => {
         const { _id } = req.user;//employer id 
+        //
+        const page = req.headers.page || 1
+        const ITEM_PER_PAGE = 6
+        const skip = (page - 1) * ITEM_PER_PAGE
+        //
+
         try {
+            //
+            const totalDocs = await Application.countDocuments(
+                {
+                    "employerInfo.id": _id,
+                    "deletedBy.employer": false,
+                }
+            )
+            const pageCount = Math.ceil(totalDocs / ITEM_PER_PAGE)//pageCount is total pages 8/4=2 pages
+            //
             const applications = await Application.find({
                 "employerInfo.id": _id,
                 "deletedBy.employer": false,
             });
-            return res.status(200).json({ success: true, applications });
+
+            return res.status(200).json({ success: true, applications, pageCount }).skip(skip).limit(ITEM_PER_PAGE);;
         } catch (error) {
             return next(new ErrorHandler("Internal Server Error!", 500))
         }

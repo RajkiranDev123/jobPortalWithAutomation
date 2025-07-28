@@ -55,7 +55,7 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
             { introduction: { $regex: searchKeyword, $options: "i" } },
         ];
     }
-    
+
 
     try {
         const jobs = await Job.find(query).skip(skip).limit(ITEM_PER_PAGE);
@@ -63,12 +63,12 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
         const totalDocs = await Job.countDocuments(query)
         const pageCount = Math.ceil(totalDocs / ITEM_PER_PAGE)//pageCount is total pages 8/4=2 pages
         //
-        
+
         return res.status(200).json({
             success: true,
             jobs,
             count: jobs.length,
-            pageCount:pageCount //
+            pageCount: pageCount //
         });
     } catch (error) {
         return next(new ErrorHandler("Internal Server Error!", 500))
@@ -77,11 +77,27 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
 
 /////////////////////////////////////////////////////// get my job : by poster id ///////////////////////////////////////////////
 export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
-    const myJobs = await Job.find({ postedBy: req.user._id });
-    return res.status(200).json({
-        success: true,
-        myJobs,
-    });
+    //
+    const page = req.headers.page || 1
+    const ITEM_PER_PAGE = 3
+    const skip = (page - 1) * ITEM_PER_PAGE
+    //
+
+
+    try {
+        const myJobs = await Job.find({ postedBy: req.user._id }).skip(skip).limit(ITEM_PER_PAGE);
+        //
+        const totalDocs = await Job.countDocuments({ postedBy: req.user._id })
+        const pageCount = Math.ceil(totalDocs / ITEM_PER_PAGE)//pageCount is total pages 8/4=2 pages
+        //
+        return res.status(200).json({
+            success: true,
+            myJobs,
+            pageCount
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Internal Server Error!", 500))
+    }
 });
 
 ///////////////////////////////////////////////////////////////////////////////////// delete ////////////////////////////////////
