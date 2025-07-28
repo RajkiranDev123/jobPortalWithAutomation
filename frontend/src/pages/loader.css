@@ -1,8 +1,9 @@
 
 .loader {
-  width: 20px;
+  width: 25px;
+  height: 15px;
   aspect-ratio: 4;
-  background: radial-gradient(circle closest-side,#cc0a0a 90%,#6e060600) 0/calc(100%/3) 100% space;
+  background: radial-gradient(circle closest-side,#ece4e4 90%,#6e060600) 0/calc(100%/3) 100% space;
   clip-path: inset(0 100% 0 0);
   animation: l1 1s steps(4) infinite;
 }

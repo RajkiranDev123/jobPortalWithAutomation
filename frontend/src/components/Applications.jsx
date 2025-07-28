@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import {
   clearAllApplicationErrors,
   deleteApplication,
+  viewedApplication,
   fetchEmployerApplications,
   resetApplicationSlice,
 } from "../store/slices/applicationSlice";
@@ -16,7 +17,7 @@ import Stack from '@mui/material/Stack';
 
 const Applications = () => {
   const [page, setPage] = useState(1)
-  const { applications, loading, error, message,pageCount } = useSelector(
+  const { applications, loading, error, message, pageCount } = useSelector(
     (state) => state.applications
   );
 
@@ -38,6 +39,10 @@ const Applications = () => {
     setPage(1)
 
     dispatch(deleteApplication(id));
+  };
+
+  const handleViewedApplication = (id) => {
+    dispatch(viewedApplication(id));
   };
 
   // pagination 1
@@ -85,6 +90,18 @@ const Applications = () => {
                       <span style={{ fontSize: 14 }}> Address : </span>{" "}
                       {element.jobSeekerInfo.address}
                     </p>
+                    <p>
+                      <Link style={{ fontSize: 14, textDecoration: "none", borderBottom: "1px solid grey", color: "grey" }}
+                        to={
+                          element.jobSeekerInfo &&
+                          element.jobSeekerInfo.resume.url
+                        }
+
+                        target="_blank"
+                      >
+                        See Resume
+                      </Link>
+                    </p>
                     <p style={{ fontSize: 14 }}>
                       <span style={{ fontSize: 14 }}>CoverLetter : </span>
                       <textarea style={{ fontSize: 14, display: "block" }}
@@ -102,16 +119,14 @@ const Applications = () => {
                         Delete
                       </button>
                       &nbsp;
-                      <Link style={{ fontSize: 14, textDecoration: "none", borderBottom: "1px solid grey", color: "grey" }}
-                        to={
-                          element.jobSeekerInfo &&
-                          element.jobSeekerInfo.resume.url
-                        }
 
-                        target="_blank"
+                      {/*  */}
+                     {element?.viewed==false&& <button style={{ background: "green", color: "white", border: "none", borderRadius: 5, padding: 1, margin: 2, fontSize: 14 }}
+
+                        onClick={() => handleViewedApplication(element._id)}
                       >
-                        See Resume
-                      </Link>
+                        Set as Viewed?
+                      </button>}
                     </div>
                   </div>
                 );

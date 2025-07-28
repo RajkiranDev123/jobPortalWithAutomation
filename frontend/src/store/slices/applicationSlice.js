@@ -78,6 +78,32 @@ const applicationSlice = createSlice({
             state.error = action.payload;
             state.message = null;
         },
+        /////////////////////////////////// viewed application///////////////
+
+        requestForViewedApplication(state, action) {
+            state.loading = true;
+            state.error = null;
+            state.message = null;
+        },
+        successForViewedApplication(state, action) {
+            state.loading = false;
+            state.error = null;
+            state.message = action.payload;
+        },
+        failureForViewedApplication(state, action) {
+            state.loading = false;
+            state.error = action.payload;
+            state.message = null;
+        },
+
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////
 
         clearAllErrors(state, action) {
             state.error = null;
@@ -99,8 +125,8 @@ export const fetchEmployerApplications = (page) => async (dispatch) => {
             `${import.meta.env.VITE_BASE_URL}/api/v1/application/employer/getall`,
             {
                 withCredentials: true,
-                headers:{
-                    "page":page
+                headers: {
+                    "page": page
                 }
             }
         );
@@ -183,6 +209,28 @@ export const deleteApplication = (id) => async (dispatch) => {
     } catch (error) {
         dispatch(
             applicationSlice.actions.failureForDeleteApplication(
+                error.response.data.message
+            )
+        );
+    }
+};
+
+//////////////////////////////// viewed application ///////////////////////////
+export const viewedApplication = (id) => async (dispatch) => {
+    dispatch(applicationSlice.actions.requestForViewedApplication());
+    try {
+        const response = await axios.put(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/application/viewed/${id}`,
+            {},
+            { withCredentials: true }
+        );
+        dispatch(applicationSlice.actions.successForViewedApplication(response?.data?.message));
+        // dispatch(fetchJobSeekerApplications(1));
+
+        dispatch(clearAllApplicationErrors());
+    } catch (error) {
+        dispatch(
+            applicationSlice.actions.failureForViewedApplication(
                 error.response.data.message
             )
         );

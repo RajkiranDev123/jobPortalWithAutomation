@@ -15,6 +15,7 @@ import { GrDocumentUser } from "react-icons/gr";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import moment from "moment"
+import { GoThumbsup } from "react-icons/go";
 
 const MyApplications = () => {
   const [page, setPage] = useState(1);
@@ -44,7 +45,7 @@ const MyApplications = () => {
   const handleDeleteApplication = (id) => {
     setPage(1)
     dispatch(deleteApplication(id));
-   
+
 
   };
 
@@ -66,10 +67,10 @@ const MyApplications = () => {
       ) : (
         <>
 
-          <p style={{ fontWeight: "bold", color: "#191970", fontSize: 25 ,marginTop:9}}>    <VscGitStashApply style={{ height: 22 }} />  My Application For Jobs</p>
+          <p style={{ fontWeight: "bold", color: "#191970", fontSize: 25, marginTop: 9 }}>    <VscGitStashApply style={{ height: 22 }} />  My Application For Jobs</p>
 
           <div style={{ marginTop: 8, display: "flex", gap: 3, justifyContent: "center", flexWrap: "wrap" }}>
-            {applications?.map((element) => {
+            {applications?.length > 0 && applications?.map((element) => {
               return (
                 <div key={element._id}
                   style={{
@@ -77,10 +78,16 @@ const MyApplications = () => {
                     borderTop: "2px dashed grey",
                     width: 195, padding: 3,
                     borderRadius: 3, fontSize: 12,
-                    background: "#FAF9F6",margin:1,
-                    borderTopRightRadius:19
+                    background: "#FAF9F6", margin: 1,
+                    borderTopRightRadius: 19
                   }}
                 >
+                  {element?.viewed && <p style={{
+                    display: "flex", alignItems: "center",
+                    fontSize: 10, background: "green", color: "white", display: "inline-block", borderRadius: 3, padding: 2
+                  }}>
+                    <GoThumbsup size={11} /> <span style={{fontSize:11}}>Viewed by Employer!</span>
+                  </p>}
                   <p style={{ fontSize: 12 }}>
                     ‣ For :  {element.jobInfo.jobTitle}
                   </p>
@@ -97,7 +104,7 @@ const MyApplications = () => {
                   </p>
 
                   <p style={{ fontSize: 12 }}>
-                    ‣  Applied on :{moment(element?.createdAt).format("YYYY-MM-DD") }
+                    ‣  Applied on :{moment(element?.createdAt).format("YYYY-MM-DD")}
                   </p>
 
                   <div style={{ marginTop: 3, display: "flex", gap: 23, flexWrap: "wrap", alignItems: "start" }}>

@@ -135,7 +135,7 @@ const Jobs = () => {
           {user && user?.role == "Job Seeker" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>
             ***Job Seeker can only Apply to Jobs but Can't Post!</p>}
 
-          {Object.keys(user)?.length === 0 &&
+          {user && Object.keys(user)?.length === 0 &&
             <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***
               Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
               &nbsp; <Link to={"/login"} style={{ fontSize: 13 }}>Login</Link>

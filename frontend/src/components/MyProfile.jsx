@@ -65,7 +65,7 @@ const MyProfile = () => {
         <input
           type="text"
           disabled
-          value={user && user?.address[0]?.toUpperCase()+user?.address?.slice(1)}
+          value={user && Object.keys(user)?.length > 0  && user?.address[0]?.toUpperCase()+user?.address?.slice(1)}
           onChange={(e) => e.target.value}
         />
       </div>

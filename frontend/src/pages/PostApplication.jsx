@@ -12,6 +12,8 @@ import { IoMdCash } from "react-icons/io";
 import { FaToolbox } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import "./loader.css"
+import { getUser } from "../store/slices/userSlice";
+
 const PostApplication = () => {
   const { singleJob } = useSelector((state) => state.jobs);
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -41,6 +43,7 @@ const PostApplication = () => {
       formData.append("resume", resume);
     }
     dispatch(postApplication(formData, jobId));
+   
   };
 
   useEffect(() => {
@@ -59,6 +62,7 @@ const PostApplication = () => {
     }
     if (message) {
       toast.success(message);
+       dispatch(getUser());
       dispatch(resetApplicationSlice());
     }
     dispatch(fetchSingleJob(jobId));
@@ -147,7 +151,7 @@ const PostApplication = () => {
                     to={user.resume && user.resume.url}
                     target="_blank"
 
-                    style={{ textDecoration: "none", padding: 3, color: "white", background: "black", borderRadius:6 }}
+                    style={{ textDecoration: "none", padding: 3, color: "white", background: "black", borderRadius: 6 }}
                   >
                     View Resume
                   </Link>}
