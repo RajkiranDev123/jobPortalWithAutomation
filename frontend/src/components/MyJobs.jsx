@@ -9,6 +9,7 @@ import {
 } from "../store/slices/jobSlice";
 import Spinner from "../components/Spinner";
 import { TfiLayoutListPost } from "react-icons/tfi";
+import { TbArrowBadgeRightFilled } from "react-icons/tb";
 
 const MyJobs = () => {
   const { loading, error, myJobs, message } = useSelector(
@@ -42,51 +43,52 @@ const MyJobs = () => {
       ) : (
         <>
           <div >
-            <h3 style={{display:"flex",alignItems:"center",gap:3,color:"blue",marginTop:9}}> <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</h3>
-            <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap" }}>
+            <h3 style={{ display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 9 }}> <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</h3>
+            <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap" }}>
               {myJobs?.map((element) => (
                 <div
                   style={{
-                    border: "1px solid grey", padding: 3, borderRadius: 3,background:"#F9F6EE"
+                    padding: 3, borderRadius: 3, background: "#FAFAFA",
+                    boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
                   }}
                   key={element?._id} >
                   <p style={{ fontSize: 14 }} >
-                    <span style={{ fontSize: 14 }}>Job Title : </span>
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Title : </span>
                     {element.title}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Job Niche :</span> {element.jobNiche}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Niche :</span> {element.jobNiche}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Salary : </span> {element.salary}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Salary : </span> {element.salary}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Location :</span> {element.location}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Location :</span> {element.location}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Job Type :</span> {element.jobType}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Type :</span> {element.jobType}
                   </p>
                   <p style={{ fontSize: 14 }} >
-                    <span style={{ fontSize: 14 }}>Company Name :</span> {element.companyName}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Company Name :</span> {element.companyName}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Introduction :</span>
-                    <textarea style={{ display: "block", fontSize: 12 }} rows={2} cols={35}>{element.introduction}</textarea>
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Introduction :</span>
+                    <textarea style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.introduction}</textarea>
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Qualifications :</span> {element.qualifications}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Qualifications :</span> {element.qualifications}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Responsibilities:</span>
-                    <textarea style={{ display: "block", fontSize: 12 }} rows={2} cols={35}>{element.responsibilities}</textarea>
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Responsibilities :</span>
+                    <textarea style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.responsibilities}</textarea>
 
                   </p>
                   {element.offers && (
                     <p style={{ fontSize: 14 }}>
-                      <span style={{ fontSize: 14 }}>What Are We Offering :</span> {element.offers}
+                      <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />What Are We Offering :</span> {element.offers}
                     </p>
                   )}
-                  <button style={{ background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2 }}
+                  <button style={{ background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2, fontSize: 14 }}
 
                     onClick={() => handleDeleteJob(element._id)}
                   >
