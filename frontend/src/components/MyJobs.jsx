@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -24,7 +24,7 @@ const MyJobs = () => {
       toast.success(message);
       dispatch(resetJobSlice());
     }
-    dispatch(getMyJobs());
+    dispatch(getMyJobs());//call api
   }, [dispatch, error, message]);
 
   const handleDeleteJob = (id) => {
@@ -36,54 +36,61 @@ const MyJobs = () => {
       {loading ? (
         <Spinner />
       ) : myJobs && myJobs?.length <= 0 ? (
-        <h1 style={{ fontSize: "1rem",marginTop:8 ,height:500  }}>
+        <h1 style={{ fontSize: "1rem", marginTop: 8, height: 500 }}>
           You have not posted any job!
         </h1>
       ) : (
         <>
-          <div className="account_components">
-            <h3>        <TfiLayoutListPost style={{ height: 22 }} /> My Jobs Posted</h3>
-            <div className="applications_container">
+          <div >
+            <h3 style={{display:"flex",alignItems:"center",gap:3,color:"blue",marginTop:9}}> <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</h3>
+            <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap" }}>
               {myJobs?.map((element) => (
-                <div className="card" key={element?._id} >
-                  <p className="sub-sec">
-                    <span>Job Title: </span>
+                <div
+                  style={{
+                    border: "1px solid grey", padding: 3, borderRadius: 3,background:"#F9F6EE"
+                  }}
+                  key={element?._id} >
+                  <p style={{ fontSize: 14 }} >
+                    <span style={{ fontSize: 14 }}>Job Title : </span>
                     {element.title}
                   </p>
-                  <p className="sub-sec">
-                    <span>Job Niche:</span> {element.jobNiche}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Job Niche :</span> {element.jobNiche}
                   </p>
-                  <p className="sub-sec">
-                    <span>Salary: </span> {element.salary}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Salary : </span> {element.salary}
                   </p>
-                  <p className="sub-sec">
-                    <span>Location:</span> {element.location}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Location :</span> {element.location}
                   </p>
-                  <p className="sub-sec">
-                    <span>Job Type:</span> {element.jobType}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Job Type :</span> {element.jobType}
                   </p>
-                  <p className="sub-sec">
-                    <span>Company Name:</span> {element.companyName}
+                  <p style={{ fontSize: 14 }} >
+                    <span style={{ fontSize: 14 }}>Company Name :</span> {element.companyName}
                   </p>
-                  <p className="sub-sec">
-                    <span>Introduction:</span> {element.introduction}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Introduction :</span>
+                    <textarea style={{ display: "block", fontSize: 12 }} rows={2} cols={35}>{element.introduction}</textarea>
                   </p>
-                  <p className="sub-sec">
-                    <span>Qualifications:</span> {element.qualifications}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Qualifications :</span> {element.qualifications}
                   </p>
-                  <p className="sub-sec">
-                    <span>Responsibilities:</span> {element.responsibilities}
+                  <p style={{ fontSize: 14 }}>
+                    <span style={{ fontSize: 14 }}>Responsibilities:</span>
+                    <textarea style={{ display: "block", fontSize: 12 }} rows={2} cols={35}>{element.responsibilities}</textarea>
+
                   </p>
                   {element.offers && (
-                    <p className="sub-sec">
-                      <span>What Are We Offering:</span> {element.offers}
+                    <p style={{ fontSize: 14 }}>
+                      <span style={{ fontSize: 14 }}>What Are We Offering :</span> {element.offers}
                     </p>
                   )}
-                  <button
-                    className="btn"
+                  <button style={{ background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2 }}
+
                     onClick={() => handleDeleteJob(element._id)}
                   >
-                    Delete Job
+                    Delete
                   </button>
                 </div>
               ))}

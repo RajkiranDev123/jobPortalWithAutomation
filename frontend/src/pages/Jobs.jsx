@@ -27,7 +27,7 @@ const Jobs = () => {
 
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const { jobs, loading, error,pageCount } = useSelector((state) => state.jobs);
+  const { jobs, loading, error, pageCount } = useSelector((state) => state.jobs);
   const { user } = useSelector((state) => state.user);
 
 
@@ -50,7 +50,7 @@ const Jobs = () => {
       toast.error("Search bar can't be empty!")
       return
     }
-    dispatch(fetchJobs(city, niche, searchKeyword,1));
+    dispatch(fetchJobs(city, niche, searchKeyword, 1));
   };
 
 
@@ -62,16 +62,16 @@ const Jobs = () => {
   // pagination 1
 
   const changePage = (event, value) => {
-    dispatch(fetchJobs("","","", value))
+    dispatch(fetchJobs("", "", "", value))
     setPage(value)
   }
 
-  const clearSearch=()=>{
+  const clearSearch = () => {
     setSearchKeyword("")
     setPage(1)
     setCity("")
     setNiche("")
-    dispatch(fetchJobs("","","", 1))
+    dispatch(fetchJobs("", "", "", 1))
   }
 
   return (
@@ -101,7 +101,7 @@ const Jobs = () => {
           {/* search ends */}
 
           {/* nf */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap",margin:3 }}>
             <select style={{ outline: "none", borderRadius: 3, border: "none", color: "grey" }} value={city} onChange={(e) => setCity(e.target.value)}>
               <option value="">Filter By City</option>
               {cities.map((city, index) => (
@@ -126,8 +126,15 @@ const Jobs = () => {
           {/* nf */}
 
           {/* instructions */}
-          {user && user?.role == "Employer" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***Employer can only view Job but Can't Apply!</p>}
-          {user && user?.role == "Job Seeker" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***Job Seeker can only Apply to Jobs but Can't Post!</p>}
+          {user && user?.role == "Employer" && <p style={{
+            color: "red", fontSize: 13, textAlign: "center",
+            background: "white", padding: 2, borderTopRightRadius: 9, margin: "auto", borderBottomLeftRadius: 9, width: "50%"
+          }}>
+            ***Employer can only view Job but Can't Apply!</p>}
+
+          {user && user?.role == "Job Seeker" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>
+            ***Job Seeker can only Apply to Jobs but Can't Post!</p>}
+
           {Object.keys(user)?.length === 0 &&
             <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***
               Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
@@ -247,15 +254,15 @@ const Jobs = () => {
 
               <></>)
             }
-        
+
           </div>
-              {/* pagin */}
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Stack spacing={2}>
-                <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
-              </Stack>
-            </div>
-            {/* pagin */}
+          {/* pagin */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Stack spacing={2}>
+              <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
+            </Stack>
+          </div>
+          {/* pagin */}
 
         </section>
       )}
