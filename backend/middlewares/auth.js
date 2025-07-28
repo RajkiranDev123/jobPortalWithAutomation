@@ -7,12 +7,15 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
     console.log("isAuthenticated is called!")
 
     const { token } = req.cookies;
+    console.log("cookie",token)
     if (!token) {
         return next(new ErrorHandler("User is not authenticated.", 400));
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    console.log("decoded",decoded)
 
     req.user = await UserModel.findById(decoded?.id);
+    console.log(999,req.user)
 
     next();
 });

@@ -95,11 +95,11 @@ export const employerGetAllApplication = catchAsyncErrors(
             const applications = await Application.find({
                 "employerInfo.id": _id,
                 "deletedBy.employer": false,
-            });
+            }).skip(skip).limit(ITEM_PER_PAGE);
 
-            return res.status(200).json({ success: true, applications, pageCount }).skip(skip).limit(ITEM_PER_PAGE);;
+            return res.status(200).json({ success: true, applications, pageCount })
         } catch (error) {
-            return next(new ErrorHandler("Internal Server Error!", 500))
+            return next(new ErrorHandler(error||"Internal Server Error!", 500))
         }
     }
 );
@@ -172,3 +172,29 @@ export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Internal Server Error!", 500))
     }
 });
+
+///////////////////////////////////////////// viewed application /////////////////////////
+export const employerViewedApplication = catchAsyncErrors(
+    async (req, res, next) => {
+
+        const { id } = req.params;//application id
+        console.log("id from viewed",id)
+
+        try {
+            const application = await Application.findById(id);
+            if (application.viewed == true) {
+                return next(new ErrorHandler("Application already set as viewed.", 400));
+            }
+
+            const updatedUser = await Application.findByIdAndUpdate(
+                id,
+                { $set: { viewed: true } },
+                { new: true }
+            );
+
+            return res.status(200).json({ success: true, message: "Application Viewed.", updatedUser })
+        } catch (error) {
+            return next(new ErrorHandler(error?.message||"Internal Server Error!", 500))
+        }
+    }
+);
