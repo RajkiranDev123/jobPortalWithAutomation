@@ -175,11 +175,9 @@ export const deleteApplication = (id) => async (dispatch) => {
             `${import.meta.env.VITE_BASE_URL}/api/v1/application/delete/${id}`,
             { withCredentials: true }
         );
-        dispatch(
-            applicationSlice.actions.successForDeleteApplication(
-                response.data.message
-            )
-        );
+        dispatch(applicationSlice.actions.successForDeleteApplication(response?.data?.message));
+        // dispatch(fetchJobSeekerApplications(1));
+
         dispatch(clearAllApplicationErrors());
     } catch (error) {
         dispatch(

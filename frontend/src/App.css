@@ -137,7 +137,8 @@ input::-webkit-outer-spin-button {
 }
 
 .navbar .links ul li a:hover {
-  color: #9a99b0;
+  /* color: #0b074f; */
+  font-weight: bold;
   transition: 0.3s;
 }
 
