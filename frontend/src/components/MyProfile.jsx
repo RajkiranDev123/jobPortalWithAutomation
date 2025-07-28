@@ -5,7 +5,7 @@ const MyProfile = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <div className="account_components">
-      <h3>  <CiUser style={{ height: 22 }} /> My Profile</h3>
+      <p style={{color:"blue",display:"flex",alignItems:"center"}}>  <CiUser style={{ height: 22 }} /> My Profile</p>
       <div>
         <label>Full Name :</label>
         <input
@@ -65,7 +65,7 @@ const MyProfile = () => {
         <input
           type="text"
           disabled
-          value={user && user.address}
+          value={user && user?.address[0]?.toUpperCase()+user?.address?.slice(1)}
           onChange={(e) => e.target.value}
         />
       </div>

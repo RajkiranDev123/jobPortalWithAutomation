@@ -92,20 +92,21 @@ const applicationSlice = createSlice({
     },
 });
 
-export const fetchEmployerApplications = () => async (dispatch) => {
+export const fetchEmployerApplications = (page) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForAllApplications());
     try {
         const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/api/v1/application/employer/getall`,
             {
                 withCredentials: true,
+                headers:{
+                    "page":page
+                }
             }
         );
-        dispatch(
-            applicationSlice.actions.successForAllApplications(
-                response.data.applications
-            )
-        );
+        dispatch(applicationSlice.actions.successForAllApplications(response.data.applications));
+        dispatch(applicationSlice.actions.setPageCount(response.data.pageCount));
+
         dispatch(applicationSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(

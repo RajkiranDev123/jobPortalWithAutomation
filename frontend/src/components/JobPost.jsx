@@ -73,7 +73,7 @@ const JobPost = () => {
 
   return (
     <div className="account_components">
-      <h3>  <BsFillPostcardFill style={{ height: 22 }} /> Post A Job</h3>
+      <p style={{color:"blue",display:"flex",alignItems:"center"}}>  <BsFillPostcardFill style={{ height: 22 }} />&nbsp; Post A Job</p>
       <div>
         <label>Title</label>
         <input

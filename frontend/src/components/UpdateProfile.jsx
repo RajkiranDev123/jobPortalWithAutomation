@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   clearAllUpdateProfileErrors,
   updateProfile,
@@ -16,7 +16,7 @@ const UpdateProfile = () => {
   );
 
   const dispatch = useDispatch();
-  const navigateTo = useNavigate();
+
 
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
@@ -79,7 +79,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="account_components">
-      <h3>   <TfiWrite style={{ height: 22 }} /> Update Profile</h3>
+      <p style={{color:"blue",display:"flex",alignItems:"center"}}>   <TfiWrite style={{ height: 22 }} /> &nbsp;Update Profile</p>
       <div>
         <label>Full Name</label>
         <input

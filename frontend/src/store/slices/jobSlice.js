@@ -207,14 +207,21 @@ export const postJob = (data) => async (dispatch) => {
 };
 
 ////////////////// get jobs posted by an employer //////////////////////
-export const getMyJobs = () => async (dispatch) => {
+export const getMyJobs = (page) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForMyJobs());
     try {
         const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/api/v1/job/getmyjobs`,
-            { withCredentials: true }
+            {
+                withCredentials: true,
+                headers: {
+                    "page": page
+                }
+            }
         );
         dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
+        dispatch(jobSlice.actions.setPageCount(response.data.pageCount));
+
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(jobSlice.actions.failureForMyJobs(error.response.data.message));

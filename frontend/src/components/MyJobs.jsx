@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -10,9 +10,14 @@ import {
 import Spinner from "../components/Spinner";
 import { TfiLayoutListPost } from "react-icons/tfi";
 import { TbArrowBadgeRightFilled } from "react-icons/tb";
+//
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const MyJobs = () => {
-  const { loading, error, myJobs, message } = useSelector(
+  const [page, setPage] = useState(1)
+
+  const { loading, error, myJobs, message, pageCount } = useSelector(
     (state) => state.jobs
   );
   const dispatch = useDispatch();
@@ -25,12 +30,20 @@ const MyJobs = () => {
       toast.success(message);
       dispatch(resetJobSlice());
     }
-    dispatch(getMyJobs());//call api
+    dispatch(getMyJobs(page));//call api
   }, [dispatch, error, message]);
 
   const handleDeleteJob = (id) => {
+    setPage(1)
     dispatch(deleteJob(id));
   };
+
+  // pagination 1
+
+  const changePage = (event, value) => {
+    dispatch(getMyJobs(value));
+    setPage(value)
+  }
 
   return (
     <>
@@ -43,8 +56,9 @@ const MyJobs = () => {
       ) : (
         <>
           <div >
-            <h3 style={{ display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 9 }}> <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</h3>
-            <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap" }}>
+            <p style={{ display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 10 }}>
+              <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</p>
+            <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap",marginTop:5 }}>
               {myJobs?.map((element) => (
                 <div
                   style={{
@@ -97,7 +111,15 @@ const MyJobs = () => {
                 </div>
               ))}
             </div>
+
           </div>
+          {/* pagin */}
+          <div style={{ display: "flex", justifyContent: "center",margin:3 }}>
+            <Stack spacing={2}>
+              <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
+            </Stack>
+          </div>
+          {/* pagin */}
         </>
       )}
     </>
