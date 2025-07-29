@@ -6,6 +6,7 @@ import { sendToken } from "../utils/jwtToken.js";
 import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplate.js"
 import { validatePassword } from "../utils/validatePassword.js"
 import crypto from "crypto"
+import {sendEmail} from "../utils/sendEmail.js"
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -211,7 +212,7 @@ export const forgotPassword = catchAsyncErrors(
 
         const message = generateForgotPasswordEmailTemplate("", resetToken)
         try {
-            await sendEmail({ email: user.email, subject: "Forgot Password recovery token ffrom Jobs4orDevs!", message })
+            await sendEmail({ email: user.email, subject: "Forgot Password recovery token from Jobs4orDevs!", message })
             return res.status(200).json({ success: true, message: `Email sent to ${user.email} !` })
         } catch (error) {
             user.resetPasswordToken = undefined
