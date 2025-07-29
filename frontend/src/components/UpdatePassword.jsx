@@ -124,6 +124,7 @@ const UpdatePassword = () => {
         {" "}
         {isUpdated ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Update Password"}
       </button>
+      {/*  */}
     </div>
   );
 };

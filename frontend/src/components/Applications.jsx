@@ -112,20 +112,20 @@ const Applications = () => {
                       ></textarea>
                     </p>
                     <div style={{}}>
-                      <button style={{ background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2, fontSize: 14 }}
+                      <button style={{ width: "100%", background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2, fontSize: 14 }}
 
                         onClick={() => handleDeleteApplication(element._id)}
                       >
-                        Delete
+                        {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
                       </button>
-                      &nbsp;
+               
 
                       {/*  */}
-                     {element?.viewed==false&& <button style={{ background: "green", color: "white", border: "none", borderRadius: 5, padding: 1, margin: 2, fontSize: 14 }}
+                      {element?.viewed == false && <button style={{ width: "100%", display: "flex", justifyContent: "center", background: "green", color: "white", border: "none", borderRadius: 5, padding: 1, margin: 2, fontSize: 14 }}
 
                         onClick={() => handleViewedApplication(element._id)}
                       >
-                        Set as Viewed?
+                        {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Set as Viewed?"}
                       </button>}
                     </div>
                   </div>

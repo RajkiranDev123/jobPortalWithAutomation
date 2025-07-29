@@ -106,7 +106,7 @@ const MyJobs = () => {
 
                     onClick={() => handleDeleteJob(element._id)}
                   >
-                    Delete
+         {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
                   </button>
                 </div>
               ))}

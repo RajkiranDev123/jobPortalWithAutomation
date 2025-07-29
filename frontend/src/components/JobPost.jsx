@@ -9,6 +9,7 @@ import {
 } from "../store/slices/jobSlice";
 import { CiCircleInfo } from "react-icons/ci";
 import { BsFillPostcardFill } from "react-icons/bs";
+import "../pages/loader.css"
 
 
 const JobPost = () => {
@@ -212,16 +213,17 @@ const JobPost = () => {
           placeholder="Peronsal Website Link (URL)"
         />
       </div>
-      <div>
-        <button
-          style={{ margin: "0 auto" }}
-          className="btn"
-          onClick={handlePostJob}
-          disabled={loading}
-        >
-          Post Job
-        </button>
-      </div>
+    
+         {/*  */}
+       <button style={{ display: "flex", justifyContent: "center", background: "#2A5792", color: "white", border: "none", borderRadius: 4 }}
+
+        onClick={handlePostJob}
+
+      >
+        {" "}
+        {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Post Job"}
+      </button>
+      {/*  */}
     </div>
   );
 };
