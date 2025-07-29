@@ -104,7 +104,7 @@ const MyApplications = () => {
                   </p>
 
                   <p style={{ fontSize: 12 }}>
-                    ‣  Applied on :{moment(element?.createdAt).format("YYYY-MM-DD")}
+                    ‣  Applied on : {moment(element?.createdAt).format("YYYY-MM-DD")}
                   </p>
 
                   <div style={{ marginTop: 3, }}>

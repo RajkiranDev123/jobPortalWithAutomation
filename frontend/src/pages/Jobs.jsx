@@ -84,11 +84,11 @@ const Jobs = () => {
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
 
-            <input style={{ border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+            <input style={{ border: "none", outline: "none", padding: 2, borderRadius: 3,fontSize:14 }}
               type="text"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
-              placeholder="Search!"
+              placeholder=" Role / Company / etc"
             />
 
             <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
