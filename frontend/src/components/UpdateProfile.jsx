@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { getUser } from "../store/slices/userSlice";
 import { TfiWrite } from "react-icons/tfi";
+import "../pages/loader.css"
 
 const UpdateProfile = () => {
   const { user } = useSelector((state) => state.user);
@@ -79,7 +80,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="account_components">
-      <p style={{color:"blue",display:"flex",alignItems:"center"}}>   <TfiWrite style={{ height: 22 }} /> &nbsp;Update Profile</p>
+      <p style={{ color: "blue", display: "flex", alignItems: "center" }}>   <TfiWrite style={{ height: 22 }} /> &nbsp;Update Profile</p>
       <div>
         <label>Full Name</label>
         <input
@@ -184,16 +185,16 @@ const UpdateProfile = () => {
           </div>
         </>
       )}
-      <div className="save_change_btn_wrapper">
-        <button
-          className="btn"
-          onClick={handleUpdateProfile}
-          disabled={loading}
-        >
-          {" "}
-          Save Changes
-        </button>
-      </div>
+
+      <button style={{ display: "flex", justifyContent: "center", background: "#2A5792", color: "white", border: "none", borderRadius: 4 }}
+
+        onClick={handleUpdateProfile}
+
+      >
+        {" "}
+        {isUpdated ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Save"}
+      </button>
+
     </div>
   );
 };

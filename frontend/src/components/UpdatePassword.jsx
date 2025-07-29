@@ -9,6 +9,7 @@ import { getUser } from "../store/slices/userSlice";
 import { FaRegEyeSlash, FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { RiLockPasswordLine } from "react-icons/ri";
+import "../pages/loader.css"
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -113,15 +114,16 @@ const UpdatePassword = () => {
           />
         )}
       </div>
-      <div className="save_change_btn_wrapper">
-        <button
-          className="btn"
-          onClick={handleUpdatePassword}
-          disabled={loading}
-        >
-          Update Password
-        </button>
-      </div>
+  
+      {/*  */}
+       <button style={{ display: "flex", justifyContent: "center", background: "#2A5792", color: "white", border: "none", borderRadius: 4 }}
+
+        onClick={handleUpdatePassword}
+
+      >
+        {" "}
+        {isUpdated ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Update Password"}
+      </button>
     </div>
   );
 };

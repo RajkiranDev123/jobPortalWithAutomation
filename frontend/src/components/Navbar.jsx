@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import appLogo from "../assets/jobdev.png"
+
 import { FcHome } from "react-icons/fc";
 import { RxDashboard } from "react-icons/rx";
 import { MdSavedSearch } from "react-icons/md";

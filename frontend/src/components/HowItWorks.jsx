@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom"
+
 
 const HowItWorks = () => {
+  const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate()
   return (
     <section className="howItWorks">
@@ -16,23 +17,23 @@ const HowItWorks = () => {
 
       <div className="container">
 
-        <div onClick={() => navigate("/register")} style={{ cursor: "pointer" }} className="card">
+        {!isAuthenticated && <div onClick={() => navigate("/register")} style={{ cursor: "pointer" }} className="card">
           <div className="icon">
             <LuUserPlus />
           </div>
-          <h4>1.Create an Account</h4>
+          <h4>Create an Account</h4>
           <p>
             Sign up for a free account as a job seeker or employer. Set up your
             profile in minutes to start posting jobs or applying for jobs.
-          
-          </p>
-        </div>
 
-        <div onClick={() => navigate("/jobs")} style={{cursor:"pointer"}} className="card">
+          </p>
+        </div>}
+
+        <div onClick={() => navigate("/jobs")} style={{ cursor: "pointer" }} className="card">
           <div className="icon">
             <VscTasklist />
           </div>
-          <h4>2.Post or Browse Jobs</h4>
+          <h4>Post or Browse Jobs</h4>
           <p>
             Employers can post detailed job descriptions, and job seekers can
             browse a comprehensive list of available positions. Utilize filters
@@ -44,7 +45,7 @@ const HowItWorks = () => {
           <div className="icon">
             <BiSolidLike />
           </div>
-          <h4>3.Hire or Get Hired</h4>
+          <h4>Hire or Get Hired</h4>
           <p>
             Employers can shortlist candidates and extend job offers. Job
             seekers can review job offers and accept positions that align with
