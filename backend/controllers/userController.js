@@ -3,6 +3,8 @@ import ErrorHandler from "../middlewares/error.js";
 import { UserModel } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { sendToken } from "../utils/jwtToken.js";
+import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplate.js"
+import { validatePassword } from "../utils/validatePassword.js"
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -185,9 +187,76 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
 
         user.password = req.body.newPassword;
         await user.save();//use when : If the document was fetched and modified!
-        
+
         sendToken(user, 200, res, "Password updated successfully.");
     } catch (error) {
         return next(new ErrorHandler(error?.message, 500))
     }
 });
+
+//////////////////////////////////////////////////// forgot password //////////////////////////////////////
+
+export const forgotPassword = catchAsyncErrors(
+    async (req, res, next) => {
+
+        if (!req.body.email) return next(new ErrorHandler("Email is required!", 400))
+        const user = await UserModel.findOne({ email: req.body.email })
+
+        if (!user) return next(new ErrorHandler("Invalid email!", 400))
+
+        const resetToken = user.getResetPasswordToken()
+        await user.save({ validateBeforeSave: false })//internally save also resetPasswordToken and resetPasswordExpire
+
+
+        const message = generateForgotPasswordEmailTemplate("", resetToken)
+        try {
+            await sendEmail({ email: user.email, subject: "Password recovery token for Jobs4orDevs!", message })
+            return res.status(200).json({ success: true, message: `Email sent to ${user.email} !` })
+        } catch (error) {
+            user.resetPasswordToken = undefined
+            user.resetPasswordExpire = undefined
+            await user.save({ validateBeforeSave: false })
+            return next(new ErrorHandler(error.message || "Internal Server Error", 500))
+        }
+    }
+)
+
+////////////////////////////////////////////////////////// reset now /////////////////////////////////////////////////
+
+export const resetPassword = catchAsyncErrors(
+    async (req, res, next) => {
+        try {
+            const { token } = req.params
+
+            const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex")
+
+            const user = await UserModel.findOne({
+                resetPasswordToken,
+                resetPasswordExpire: { $gt: Date.now() }
+            }).select("+password");
+            // console.log(user)
+            if (!user) return next(new ErrorHandler("Reset password token is invalid or expired!", 400))
+
+            const isPasswordValid = validatePassword(req.body.password, req.body.confirmPassword)
+
+            if (isPasswordValid) {
+                return next(new ErrorHandler(isPasswordValid, 400))
+            }
+
+            // const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            // user.password = hashedPassword
+            user.password = req.body.password;
+
+            user.resetPasswordToken = undefined
+
+            user.resetPasswordExpire = undefined
+
+            await user.save()
+
+            return res.status(200).json({ success: true, message: `Password reset done!` })
+
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500))
+        }
+    }
+)
