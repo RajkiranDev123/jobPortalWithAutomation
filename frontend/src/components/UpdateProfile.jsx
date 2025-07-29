@@ -168,17 +168,28 @@ const UpdateProfile = () => {
             />
           </div>
           <div>
-            <label>Upload Resume</label>
+               {resumePreview && resume?.type === "application/pdf" && (
+                <embed
+                  src={resumePreview}
+                  type="application/pdf"
+                  width="100%"
+                  height="500px"
+                />
+              )}
+            <label>Upload Resume : {resume?.name}
+
+           
+            </label>
             <input type="file" onChange={resumeHandler} />
-            {user && user.resume && (
+            {user && user?.resume && (
               <div>
-                <p>Current Resume:</p>
-                <Link
-                  to={user.resume && user.resume.url}
+
+                <Link style={{ color: "grey" }}
+                  to={user?.resume && user?.resume.url}
                   target="_blank"
-                  className="view-resume"
+
                 >
-                  View Resume
+                  View already uploaded Resume
                 </Link>
               </div>
             )}

@@ -83,10 +83,10 @@ const MyApplications = () => {
                   }}
                 >
                   {element?.viewed && <p style={{
-                  alignItems: "center",
+                    alignItems: "center",
                     fontSize: 10, background: "green", color: "white", display: "inline-block", borderRadius: 3, padding: 2
                   }}>
-                    <GoThumbsup size={11} /> <span style={{fontSize:11}}>Viewed by Employer!</span>
+                    <GoThumbsup size={11} /> <span style={{ fontSize: 11 }}>Viewed by Employer!</span>
                   </p>}
                   <p style={{ fontSize: 12 }}>
                     ‣ For :  {element.jobInfo.jobTitle}
@@ -107,30 +107,33 @@ const MyApplications = () => {
                     ‣  Applied on :{moment(element?.createdAt).format("YYYY-MM-DD")}
                   </p>
 
-                  <div style={{ marginTop: 3, display: "flex", gap: 23, flexWrap: "wrap", alignItems: "start" }}>
-                    <button
-                      style={{
-                        fontSize: 14, display: "flex", alignItems: "center", gap: 2, background: "red", border: "none",
-                        textDecoration: "none", color: "white", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
-                      }}
-                      onClick={() => handleDeleteApplication(element._id)}
-                    >
-                      Delete
-                    </button>
+                  <div style={{ marginTop: 3, }}>
                     <Link
                       to={
                         element.jobSeekerInfo &&
                         element.jobSeekerInfo.resume.url
                       }
-                      style={{
-                        fontSize: 14, display: "flex", alignItems: "center", gap: 2, borderBottom: "1px solid grey",
+                      style={{margin:2,
+                        fontSize: 14, display: "flex", justifyContent: "center", alignItems: "center", gap: 2, borderBottom: "1px solid grey",
                         textDecoration: "none", color: "black", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
                       }}
 
                       target="_blank"
                     >
-                      <GrDocumentUser size={9} /> Resume
+                      <GrDocumentUser size={9} />View Resume
                     </Link>
+                    <button
+                      style={{
+                        width: "100%",
+                        fontSize: 14, display: "flex", justifyContent: "center", alignItems: "center", gap: 2, background: "red", border: "none",
+                        textDecoration: "none", color: "white", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
+                      }}
+                      onClick={() => handleDeleteApplication(element._id)}
+                    >
+                      {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
+
+                    </button>
+
                   </div>
 
                 </div>
