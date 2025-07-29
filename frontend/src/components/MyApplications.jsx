@@ -83,7 +83,7 @@ const MyApplications = () => {
                   }}
                 >
                   {element?.viewed && <p style={{
-                    display: "flex", alignItems: "center",
+                  alignItems: "center",
                     fontSize: 10, background: "green", color: "white", display: "inline-block", borderRadius: 3, padding: 2
                   }}>
                     <GoThumbsup size={11} /> <span style={{fontSize:11}}>Viewed by Employer!</span>

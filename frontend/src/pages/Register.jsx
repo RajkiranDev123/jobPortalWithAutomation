@@ -268,8 +268,9 @@ const Register = () => {
             <button type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
-            <p style={{ color: "grey", fontStyle: "italic" }}>If you already have an Account then login below!</p>
-            <Link to={"/login"}>Login Now</Link>
+         <p style={{ color: "grey", fontStyle: "italic" ,fontSize: 14}}>If you already have an account then click &nbsp; 
+              <Link style={{textDecoration:"underline", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/login"}>Login</Link>
+            </p>
           </form>
         </div>
       </section>

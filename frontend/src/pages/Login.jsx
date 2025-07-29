@@ -24,6 +24,11 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    if (!role || !email || !password) {
+      toast.error("All fields are required!")
+      return
+    }
     const formData = new FormData();
     formData.append("role", role);
     formData.append("email", email);
@@ -53,7 +58,7 @@ const Login = () => {
             <div className="inputTag">
               <label>Login As</label>
               <div>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <select style={{color:"grey"}} value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Employer">Login as an Employer</option>
                   <option value="Job Seeker">Login as a Job Seeker</option>
@@ -66,7 +71,7 @@ const Login = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="youremail@gmail.com"
+                  placeholder="xyz@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -78,7 +83,7 @@ const Login = () => {
               <div>
                 <input
                   type="password"
-                  placeholder="Your Password"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -89,15 +94,16 @@ const Login = () => {
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
-            <p style={{ color: "grey", fontStyle: "italic" }}>If you don't have an Account then click Register below!</p>
-            <Link to={"/register"}>Register Now</Link>
+            <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>If you don't have an Account then click &nbsp;
+              <Link style={{textDecoration:"underline", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
+            </p>
           </form>
         </div>
 
         {/* rs */}
 
         <div>
-          <img style={{opacity:"0.7",borderRadius:5}} src={jobsearch} alt="js"/>
+          <img style={{ opacity: "0.7", borderRadius: 5 }} src={jobsearch} alt="js" />
         </div>
 
         {/*  */}
