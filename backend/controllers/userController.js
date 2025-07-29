@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { sendToken } from "../utils/jwtToken.js";
 import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplate.js"
 import { validatePassword } from "../utils/validatePassword.js"
+import crypto from "crypto"
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -210,7 +211,7 @@ export const forgotPassword = catchAsyncErrors(
 
         const message = generateForgotPasswordEmailTemplate("", resetToken)
         try {
-            await sendEmail({ email: user.email, subject: "Password recovery token for Jobs4orDevs!", message })
+            await sendEmail({ email: user.email, subject: "Forgot Password recovery token ffrom Jobs4orDevs!", message })
             return res.status(200).json({ success: true, message: `Email sent to ${user.email} !` })
         } catch (error) {
             user.resetPasswordToken = undefined
@@ -237,15 +238,14 @@ export const resetPassword = catchAsyncErrors(
             // console.log(user)
             if (!user) return next(new ErrorHandler("Reset password token is invalid or expired!", 400))
 
-            const isPasswordValid = validatePassword(req.body.password, req.body.confirmPassword)
+            const isPasswordValid = validatePassword(req.body.newPassword, req.body.confirmNewPassword)
 
             if (isPasswordValid) {
                 return next(new ErrorHandler(isPasswordValid, 400))
             }
 
-            // const hashedPassword = await bcrypt.hash(req.body.password, 10)
-            // user.password = hashedPassword
-            user.password = req.body.password;
+       
+            user.password = req.body.newPassword;
 
             user.resetPasswordToken = undefined
 
