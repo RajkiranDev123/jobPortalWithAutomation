@@ -42,9 +42,12 @@ const ResetPassword = () => {
             toast.error(error);
             dispatch(clearAllUserErrors());
         }
-        if (message) {
+        if (message) {//error : false , loading : false after success
             toast.success(message);
             dispatch(clearMessage());
+            setConfirmNewPassword("")
+            setNewPassword("")
+            setToken("")
         }
     }, [error, loading, message]);
 

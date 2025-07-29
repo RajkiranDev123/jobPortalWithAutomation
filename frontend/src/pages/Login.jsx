@@ -94,14 +94,14 @@ const Login = () => {
 
 
 
-            <button type="submit" disabled={loading}>
+            <button style={{margin:3}} type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
             <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>If you don't have an Account then click &nbsp;
-              <Link style={{ background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
+              <Link style={{margin:0, background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
             </p>
-            <Link style={{color:"red", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/forgot/password"}>Click here if you Forgot your Password ?</Link>
+            <Link style={{margin:0,color:"red", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/forgot/password"}>Click here if you Forgot your Password ?</Link>
 
           </form>
         </div>

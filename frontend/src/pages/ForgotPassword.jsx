@@ -70,7 +70,7 @@ const ForgotPassword = () => {
                         </div>
 
                         <button type="submit" disabled={loading}>
-                            {!loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Submit"}
+                            {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Submit"}
 
                         </button>
                         <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>Go back to :   
