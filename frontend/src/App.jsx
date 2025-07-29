@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/slices/userSlice";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 // import { useLocation } from "react-router-dom";
 const App = () => {
   console.log("app.jsx")
@@ -35,6 +37,10 @@ const App = () => {
         <Route path="/post/application/:jobId" element={<PostApplication />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/reset/password" element={<ResetPassword />} />
+
+
         <Route path="*" element={<NotFound />} />
       </Routes>
 

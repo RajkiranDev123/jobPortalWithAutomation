@@ -90,6 +90,10 @@ const Login = () => {
                 <RiLock2Fill />
               </div>
             </div>
+
+
+
+
             <button type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
@@ -97,6 +101,8 @@ const Login = () => {
             <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>If you don't have an Account then click &nbsp;
               <Link style={{ background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
             </p>
+            <Link style={{color:"red", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/forgot/password"}>Click here if you Forgot your Password ?</Link>
+
           </form>
         </div>
 
@@ -108,8 +114,8 @@ const Login = () => {
           background: "linear-gradient(159deg, rgba(8,146,208,1) 0%, rgba(75,0,130,1) 100%)",
           display: "flex", justifyContent: "center", alignItems: "center"
         }}>
-          <p style={{color:"white",display:"block",padding:2}}>console.log("hi, devs!")</p>&nbsp;
-          <img style={{ width: "60%", height: "60%", borderRadius: 210}} src={jobsearch} alt="js" />
+          <p style={{ color: "white", display: "block", padding: 2 }}>console.log("hi, devs!")</p>&nbsp;
+          <img style={{ width: "60%", height: "60%", borderRadius: 210 }} src={jobsearch} alt="js" />
         </div>
 
         {/*  */}

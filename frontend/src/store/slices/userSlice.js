@@ -54,9 +54,48 @@ const userSlice = createSlice({
             state.error = action.payload;
             state.message = null;
         },
+        ///////////////////// forgot password ///////////////////////
+        forgotPasswordRequest(state, action) {
+            state.loading = true;
+            state.error = null;
+            state.message = null;
+        },
+        forgotPasswordSuccess(state, action) {
+            state.loading = false;
+            state.error = null;
+            state.message = action.payload.message;
+        },
+        forgotPasswordFailed(state, action) {
+            state.loading = false;
+            state.error = action.payload;//you need msg of failed to show in the ui and clear later using another action
+            state.message = null;
+        },
+        //////////////////// reset Password ///////////////////////
+        resetPasswordRequest(state, action) {
+            state.loading = true;
+            state.error = null;
+            state.message = null;
+        },
+        resetPasswordSuccess(state, action) {
+            state.loading = false;
+            state.error = null;
+            state.message = action.payload.message;
+        },
+        resetPasswordFailed(state, action) {
+            state.loading = false;
+            state.error = action.payload;//you need msg of failed to show in the ui and clear later using another action
+            state.message = null;
+        },
+
+
+
+
+
+
+        //////////////////////////////////////////////////
         fetchUserRequest(state, action) {
             state.loading = true;
-            state.isAuthenticated =action.payload==true?true: false;
+            state.isAuthenticated = action.payload == true ? true : false;
             state.user = {};
             state.error = null;
         },
@@ -87,7 +126,7 @@ const userSlice = createSlice({
             state.user = state.user;
         },
         clearMessage(state, action) {
-      
+
             state.message = null;
         },
     },
@@ -166,8 +205,58 @@ export const logout = () => async (dispatch) => {
     }
 };
 
+//forgot password
+export const forgotPassword = (email) => async (dispatch) => {
+    dispatch(userSlice.actions.forgotPasswordRequest());
+    try {
+        const response = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/user/forgot/password`,
+            { email },
+            {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+        dispatch(userSlice.actions.forgotPasswordSuccess(response.data));
+        // dispatch(userSlice.actions.clearMessage());
+
+        dispatch(userSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(userSlice.actions.forgotPasswordFailed(error.response.data.message));
+    }
+};
+
+//reset password
+export const resetPassword = (token, data) => async (dispatch) => {
+    dispatch(userSlice.actions.resetPasswordRequest());
+    try {
+        const response = await axios.put(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/user/reset/password/${token}`,
+            data,
+            {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+        dispatch(userSlice.actions.resetPasswordSuccess(response.data));
+        // dispatch(userSlice.actions.clearMessage());
+
+        dispatch(userSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(userSlice.actions.resetPasswordFailed(error.response.data.message));
+    }
+};
+
+
+
+
+
 export const clearAllUserErrors = () => (dispatch) => {
     dispatch(userSlice.actions.clearAllErrors());
+};
+
+export const clearMessage = () => (dispatch) => {
+    dispatch(userSlice.actions.clearMessage());
 };
 
 export default userSlice.reducer;
