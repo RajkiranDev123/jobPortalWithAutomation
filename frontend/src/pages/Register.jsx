@@ -95,7 +95,7 @@ const Register = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <h5><MdAppRegistration /> Let's begin by Creating a new account!</h5>
+            <h4 style={{display:"flex",alignItems:"center",justifyContent:"center"}}><MdAppRegistration /> Let's begin by Creating a new account!</h4>
           </div>
           <form onSubmit={handleRegsiter}>
             <div className="wrapper">
@@ -269,7 +269,7 @@ const Register = () => {
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Register"}
             </button>
          <p style={{ color: "grey", fontStyle: "italic" ,fontSize: 14}}>If you already have an account then click &nbsp; 
-              <Link style={{textDecoration:"underline", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/login"}>Login</Link>
+              <Link style={{ background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/login"}>Login</Link>
             </p>
           </form>
         </div>

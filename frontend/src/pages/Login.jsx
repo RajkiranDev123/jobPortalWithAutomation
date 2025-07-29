@@ -9,7 +9,7 @@ import { RiLock2Fill } from "react-icons/ri";
 import "./loader.css"
 import TestCredentials from "../components/TestCredentials"
 import { RiLoginBoxLine } from "react-icons/ri";
-import jobsearch from "../assets/jobsearch.png"
+import jobsearch from "../assets/jobsearch.bmp"
 const Login = () => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -51,14 +51,14 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h5><RiLoginBoxLine />Login to your account</h5>
+            <h4 style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><RiLoginBoxLine />Login here...</h4>
           </div>
           <TestCredentials />
           <form onSubmit={handleLogin}>
             <div className="inputTag">
               <label>Login As</label>
               <div>
-                <select style={{color:"grey"}} value={role} onChange={(e) => setRole(e.target.value)}>
+                <select style={{ color: "grey" }} value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Employer">Login as an Employer</option>
                   <option value="Job Seeker">Login as a Job Seeker</option>
@@ -95,15 +95,21 @@ const Login = () => {
 
             </button>
             <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>If you don't have an Account then click &nbsp;
-              <Link style={{textDecoration:"underline", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
+              <Link style={{ background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
             </p>
           </form>
         </div>
 
         {/* rs */}
 
-        <div>
-          <img style={{ opacity: "0.7", borderRadius: 5 }} src={jobsearch} alt="js" />
+        <div style={{
+          borderLeft: "2px solid grey", opacity: 0.8, width: "60%",
+
+          background: "linear-gradient(159deg, rgba(8,146,208,1) 0%, rgba(75,0,130,1) 100%)",
+          display: "flex", justifyContent: "center", alignItems: "center"
+        }}>
+          <p style={{color:"white",display:"block",padding:2}}>console.log("hi, devs!")</p>&nbsp;
+          <img style={{ width: "60%", height: "60%", borderRadius: 210}} src={jobsearch} alt="js" />
         </div>
 
         {/*  */}

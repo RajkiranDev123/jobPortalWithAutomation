@@ -101,7 +101,7 @@ const Jobs = () => {
           {/* search ends */}
 
           {/* nf */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap",margin:3 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap", margin: 3 }}>
             <select style={{ outline: "none", borderRadius: 3, border: "none", color: "grey" }} value={city} onChange={(e) => setCity(e.target.value)}>
               <option value="">Filter By City</option>
               {cities.map((city, index) => (
@@ -128,15 +128,21 @@ const Jobs = () => {
           {/* instructions */}
           {user && user?.role == "Employer" && <p style={{
             color: "red", fontSize: 13, textAlign: "center",
-            background: "white", padding: 2, borderTopRightRadius: 9, margin: "auto", borderBottomLeftRadius: 9, width: "50%"
+            background: "white", padding: 2, borderTopRightRadius: 9, margin: "auto", borderBottomLeftRadius: 9, width: "30%"
           }}>
             ***Employer can only view Job but Can't Apply!</p>}
 
-          {user && user?.role == "Job Seeker" && <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>
+          {user && user?.role == "Job Seeker" && <p style={{
+            color: "red", fontSize: 13, textAlign: "center",
+            background: "white", padding: 2, borderTopRightRadius: 9, margin: "auto", borderBottomLeftRadius: 9, width: "30%"
+          }}>
             ***Job Seeker can only Apply to Jobs but Can't Post!</p>}
 
           {user && Object.keys(user)?.length === 0 &&
-            <p style={{ color: "red", fontSize: 13, textAlign: "center" }}>***
+            <p style={{
+              color: "red", fontSize: 13, textAlign: "center",
+              background: "white", padding: 2, borderTopRightRadius: 9, margin: "auto", borderBottomLeftRadius: 9, width: "40%"
+            }}>***
               Login as a Job seeker to Apply jobs or Login as an Employer to post a new Job!
               &nbsp; <Link to={"/login"} style={{ fontSize: 13 }}>Login</Link>
             </p>}

@@ -645,14 +645,15 @@ footer div ul a span {
   display: flex;
   flex-direction: column;
   justify-content: center;
- background: linear-gradient(15deg, #9199a6, #d8d2d2 50%);
+  background: #fff;
+
   padding: 20px 20px;
   max-width: 1500px;
 }
 
 .authPage .container:hover {
 
-  background: #eeebeb;
+  background: #fff;
 
 }
 
@@ -762,8 +763,9 @@ footer div ul a span {
 
 .authPage .container form a:hover {
   background: linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%);
-  color: #fff;
+  color: #6a0f0f;
   transform: translateY(-6px);
+  text-decoration: underline;
 
 }
 
