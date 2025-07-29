@@ -16,7 +16,7 @@ const Navbar = () => {
         <div style={{ display: "flex", alignItems: "center" }}>
 
           <div style={{ background: "white", width: 38, height: 38, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <img style={{ width: 18, height: 18 }} src={appLogo} alt="appLogo" />
+           <p style={{fontSize:14}}>J4D</p>
 
           </div>
           <p style={{ fontFamily: "monospace", color: "white", textShadow: "1px 1px 2px pink" }}> &nbsp;Jobs4orDevs</p>
