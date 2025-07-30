@@ -115,7 +115,7 @@ const Login = () => {
           display: "flex", justifyContent: "center", alignItems: "center"
         }}>
           <p style={{ color: "white", display: "block", padding: 2 }}>console.log("hi, devs!")</p>&nbsp;
-          <img style={{ width: "60%", height: "60%", borderRadius: 210 }} src={jobsearch} alt="js" />
+          <img style={{ width: "60%", height: "60%", borderRadius: 210,boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" }} src={jobsearch} alt="js" />
         </div>
 
         {/*  */}

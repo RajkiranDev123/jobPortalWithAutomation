@@ -31,10 +31,10 @@ const TopNiches = () => {
 
   return (
     <section className="services">
-      <h3>Top Niches</h3>
+      <h3>Top Niches!</h3>
       <div className="grid">
         {services.map(({ id, service, description, icon: Icon }) => (
-          <div className="card" key={id}>
+          <div className="card" style={{boxShadow: "rgba(72, 57, 236, 0.16) 0px 3px 6px, rgba(17, 72, 189, 0.23) 0px 3px 6px"}} key={id}>
 
             <h4>{service}    {Icon && <Icon className="text-3xl text-blue-600 mb-2" />} </h4>
             <p>{description}</p>

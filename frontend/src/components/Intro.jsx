@@ -8,7 +8,7 @@ const Intro = () => {
             <h4>
                 Connecting Developers to Opportunities — From Junior to Senior, Nationwide
             </h4>
-            <div className="box">
+            <div style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" }} className="box">
                 Your next web development opportunity starts here. Discover roles across all levels—from junior developers to senior engineers and tech leads.
                 Whether you're just starting out or looking to advance your career, our platform connects you with the right web dev jobs—quickly and effortlessly.
             </div>
