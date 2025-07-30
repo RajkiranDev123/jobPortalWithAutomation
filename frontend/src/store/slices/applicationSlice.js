@@ -8,7 +8,8 @@ const applicationSlice = createSlice({
         loading: false,
         error: null,
         message: null,
-        pageCount: 1
+        pageCount: 1,
+        viewed:false
     },
     reducers: {
         // employer will get all application (applied jobs) for jobs he posted
@@ -81,27 +82,20 @@ const applicationSlice = createSlice({
         /////////////////////////////////// viewed application///////////////
 
         requestForViewedApplication(state, action) {
-            state.loading = true;
+            state.viewed = true;
             state.error = null;
             state.message = null;
         },
         successForViewedApplication(state, action) {
-            state.loading = false;
+            state.viewed = false;
             state.error = null;
             state.message = action.payload;
         },
         failureForViewedApplication(state, action) {
-            state.loading = false;
+            state.viewed = false;
             state.error = action.payload;
             state.message = null;
         },
-
-
-
-
-
-
-
 
         /////////////////////////////////////////////////////////////////////////
 
@@ -114,6 +108,7 @@ const applicationSlice = createSlice({
             state.applications = state.applications;
             state.message = null;//imp
             state.loading = false;
+            state.viewed=false
         },
     },
 });
@@ -216,12 +211,12 @@ export const deleteApplication = (id) => async (dispatch) => {
 };
 
 //////////////////////////////// viewed application ///////////////////////////
-export const viewedApplication = (id) => async (dispatch) => {
+export const viewedApplication = (id,jobTitle,email) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForViewedApplication());
     try {
         const response = await axios.put(
             `${import.meta.env.VITE_BASE_URL}/api/v1/application/viewed/${id}`,
-            {},
+            {jobTitle,email},
             { withCredentials: true }
         );
         dispatch(applicationSlice.actions.successForViewedApplication(response?.data?.message));

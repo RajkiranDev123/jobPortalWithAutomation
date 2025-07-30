@@ -17,7 +17,7 @@ import Stack from '@mui/material/Stack';
 
 const Applications = () => {
   const [page, setPage] = useState(1)
-  const { applications, loading, error, message, pageCount } = useSelector(
+  const { applications, loading, error, message, pageCount ,viewed} = useSelector(
     (state) => state.applications
   );
 
@@ -41,8 +41,8 @@ const Applications = () => {
     dispatch(deleteApplication(id));
   };
 
-  const handleViewedApplication = (id) => {
-    dispatch(viewedApplication(id));
+  const handleViewedApplication = (id,jobTitle,email) => {
+    dispatch(viewedApplication(id,jobTitle,email));
   };
 
   // pagination 1
@@ -118,14 +118,14 @@ const Applications = () => {
                       >
                         {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
                       </button>
-               
+
 
                       {/*  */}
                       {element?.viewed == false && <button style={{ width: "100%", display: "flex", justifyContent: "center", background: "green", color: "white", border: "none", borderRadius: 5, padding: 1, margin: 2, fontSize: 14 }}
 
-                        onClick={() => handleViewedApplication(element._id)}
+                        onClick={() => handleViewedApplication(element._id, element.jobInfo.jobTitle, element.jobSeekerInfo.email)}
                       >
-                        {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Set as Viewed?"}
+                        {viewed ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Set as Viewed?"}
                       </button>}
                     </div>
                   </div>

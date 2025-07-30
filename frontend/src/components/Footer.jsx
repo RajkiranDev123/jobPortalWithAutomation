@@ -1,12 +1,17 @@
-import appLogo from "../assets/jobdev.png"
+
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  FaSquareXTwitter,
-  FaSquareInstagram,
+
   FaYoutube,
   FaLinkedin,
 } from "react-icons/fa6";
+import { FcHome } from "react-icons/fc";
+import { CgWorkAlt } from "react-icons/cg";
+import { RxDashboard } from "react-icons/rx";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { CiPhone } from "react-icons/ci";
 
 const Footer = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -19,9 +24,9 @@ const Footer = () => {
         <div>
           <h4>Support</h4>
           <ul>
-            <li>Bengaluru, India</li>
-            <li>rajtech645@gmail.com</li>
-            <li>+91 8293620595</li>
+            <li><IoLocationOutline/>Bengaluru, India</li>
+            <li><MdOutlineMailOutline/> rajtech645@gmail.com</li>
+            <li><CiPhone/>+91 8293620595</li>
           </ul>
         </div>
 
@@ -29,14 +34,14 @@ const Footer = () => {
           <h4>Quick Links</h4>
           <ul>
             <li >
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"}><FcHome/>Home</Link>
             </li>
             <li >
-              <Link to={"/jobs"}>Jobs</Link>
+              <Link to={"/jobs"}><CgWorkAlt/>Jobs</Link>
             </li>
             {isAuthenticated && (
               <li>
-                <Link to={"/dashboard"}>Dashboard</Link>
+                <Link to={"/dashboard"}><RxDashboard/>Dashboard</Link>
               </li>
             )}
           </ul>
