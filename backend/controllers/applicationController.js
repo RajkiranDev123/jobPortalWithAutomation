@@ -6,6 +6,9 @@ import { UserModel } from "../models/userSchema.js";
 import { Job } from "../models/jobSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 
+import { sendEmail } from "../utils/sendEmail.js"
+import { applicationViewed } from "../utils/emailTemplate.js"
+
 /////////////////////////////////////// job seeker will apply to job now ///////////////////////////////////////////////////
 
 export const postApplication = catchAsyncErrors(async (req, res, next) => {
@@ -99,7 +102,7 @@ export const employerGetAllApplication = catchAsyncErrors(
 
             return res.status(200).json({ success: true, applications, pageCount })
         } catch (error) {
-            return next(new ErrorHandler(error||"Internal Server Error!", 500))
+            return next(new ErrorHandler(error || "Internal Server Error!", 500))
         }
     }
 );
@@ -178,13 +181,19 @@ export const employerViewedApplication = catchAsyncErrors(
     async (req, res, next) => {
 
         const { id } = req.params;//application id
-        console.log("id from viewed",id)
+        console.log("id from viewed", id)
 
         try {
             const application = await Application.findById(id);
             if (application.viewed == true) {
                 return next(new ErrorHandler("Application already set as viewed.", 400));
             }
+
+            let data = { jobTitle: req.body.jobTitle, email: req.body.email }
+
+            const message = applicationViewed("", data)
+
+            await sendEmail({ email: data.email, subject: "Application viewed!", message })
 
             const updatedUser = await Application.findByIdAndUpdate(
                 id,
@@ -194,7 +203,7 @@ export const employerViewedApplication = catchAsyncErrors(
 
             return res.status(200).json({ success: true, message: "Application Viewed.", updatedUser })
         } catch (error) {
-            return next(new ErrorHandler(error?.message||"Internal Server Error!", 500))
+            return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
         }
     }
 );
