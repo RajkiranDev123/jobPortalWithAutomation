@@ -17,7 +17,7 @@ import Stack from '@mui/material/Stack';
 
 const Applications = () => {
   const [page, setPage] = useState(1)
-  const { applications, loading, error, message, pageCount ,viewed} = useSelector(
+  const { applications, loading, error, message, pageCount, viewed, isDeleted } = useSelector(
     (state) => state.applications
   );
 
@@ -30,10 +30,10 @@ const Applications = () => {
     }
     if (message) {
       toast.success(message);
-      dispatch(resetApplicationSlice());
+      dispatch(resetApplicationSlice());//back to normal state after success
     }
     dispatch(fetchEmployerApplications(page));
-  }, [dispatch, error, message]);
+  }, [error, message]);
 
   const handleDeleteApplication = (id) => {
     setPage(1)
@@ -41,8 +41,8 @@ const Applications = () => {
     dispatch(deleteApplication(id));
   };
 
-  const handleViewedApplication = (id,jobTitle,email) => {
-    dispatch(viewedApplication(id,jobTitle,email));
+  const handleViewedApplication = (id, jobTitle, email) => {
+    dispatch(viewedApplication(id, jobTitle, email));
   };
 
   // pagination 1
@@ -116,7 +116,7 @@ const Applications = () => {
 
                         onClick={() => handleDeleteApplication(element._id)}
                       >
-                        {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
+                        {isDeleted ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
                       </button>
 
 

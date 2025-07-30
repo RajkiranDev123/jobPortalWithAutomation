@@ -9,7 +9,8 @@ const applicationSlice = createSlice({
         error: null,
         message: null,
         pageCount: 1,
-        viewed:false
+        viewed:false,
+        isDeleted:false
     },
     reducers: {
         // employer will get all application (applied jobs) for jobs he posted
@@ -65,17 +66,17 @@ const applicationSlice = createSlice({
 
         // delete job by the employer
         requestForDeleteApplication(state, action) {
-            state.loading = true;
+            state.isDeleted = true;
             state.error = null;
             state.message = null;
         },
         successForDeleteApplication(state, action) {
-            state.loading = false;
+            state.isDeleted = false;
             state.error = null;
             state.message = action.payload;
         },
         failureForDeleteApplication(state, action) {
-            state.loading = false;
+            state.isDeleted = false;
             state.error = action.payload;
             state.message = null;
         },
@@ -109,6 +110,7 @@ const applicationSlice = createSlice({
             state.message = null;//imp
             state.loading = false;
             state.viewed=false
+            state.isDeleted=false
         },
     },
 });
