@@ -20,9 +20,6 @@ const Jobs = () => {
   const [city, setCity] = useState("");
   const [page, setPage] = useState(1);
 
-
-
-
   const [niche, setNiche] = useState("");
 
   const [searchKeyword, setSearchKeyword] = useState("");

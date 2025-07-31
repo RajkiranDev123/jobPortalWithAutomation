@@ -22,6 +22,7 @@ import { VscGitStashApply } from "react-icons/vsc";
 import { IoIosLogOut } from "react-icons/io";
 
 import { RxDashboard } from "react-icons/rx";
+import EmployerDashboard from "../components/EmployerDashboard";
 
 const Dashboard = () => {
   const [show, setShow] = useState(false);
@@ -49,9 +50,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <section  className="account">
+      <section className="account">
         <div className="component_header">
-          <p style={{display:"flex",alignItems:"center"}}><RxDashboard/> Dashboard</p>
+          <p style={{ display: "flex", alignItems: "center" }}><RxDashboard /> Dashboard</p>
           <p>
             hi! <span>{user && user?.name}</span>
           </p>
@@ -61,6 +62,17 @@ const Dashboard = () => {
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
               <h4>Start Managing!</h4>
+              {user && user?.role === "Employer" && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setComponentName("Employer Dashboard");
+                      setShow(!show);
+                    }}
+                  >
+                    <CiUser style={{ height: 13 }} />  Stats
+                  </button>
+                </li>)}
               <li>
                 <button
                   onClick={() => {
@@ -136,7 +148,7 @@ const Dashboard = () => {
                       setShow(!show);
                     }}
                   >
-                   <VscGitStashApply style={{ height: 13 }} />    My Applications
+                    <VscGitStashApply style={{ height: 13 }} />    My Applications
                   </button>
                 </li>
               )}
@@ -162,6 +174,8 @@ const Dashboard = () => {
               switch (componentName) {
                 case "My Profile":
                   return <MyProfile />;
+                case "Employer Dashboard":
+                  return <EmployerDashboard />;
 
                 case "Update Profile":
                   return <UpdateProfile />;
