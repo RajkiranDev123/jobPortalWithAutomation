@@ -5,7 +5,7 @@ const MyProfile = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <div className="account_components">
-      <p style={{color:"blue",display:"flex",alignItems:"center"}}>  <CiUser style={{ height: 22 }} /> My Profile</p>
+      <p style={{color:"blue",display:"flex",alignItems:"center",marginTop:13}}>  <CiUser style={{ height: 22 }} /> My Profile</p>
       <div>
         <label>Full Name :</label>
         <input
