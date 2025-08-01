@@ -21,12 +21,15 @@ const DateRange = ({ handleFetchMeta }) => {
     function clear() {
 
         handleFetchMeta()
+        setDateRangeFrom(dayjs())
+        setDateRangeTo(dayjs())
+
     }
 
     return (<>
 
 
-        <div style={{ display: "flex", gap: 5 }}>
+        <div style={{ display: "flex", gap: 5 ,flexWrap:"wrap"}}>
             <div>
                 {/* start */}
 
