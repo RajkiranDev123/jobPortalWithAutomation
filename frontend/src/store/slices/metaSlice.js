@@ -45,7 +45,7 @@ export const fetchMetaData = (date) => async (dispatch) => {
     dispatch(metaSlice.actions.requestForMeta());
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/applications-stats`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/employer/applications-stats`,
             {
                 withCredentials: true,
                 headers: {

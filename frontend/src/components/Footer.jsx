@@ -12,6 +12,9 @@ import { RxDashboard } from "react-icons/rx";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { CiPhone } from "react-icons/ci";
+import { FaHandsHelping } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { GiGiftOfKnowledge } from "react-icons/gi";
 
 const Footer = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -22,7 +25,7 @@ const Footer = () => {
         
         </div>
         <div>
-          <h4>Support</h4>
+          <h4 style={{display:"flex",alignItems:"center"}}><FaHandsHelping/>Support</h4>
           <ul>
             <li><IoLocationOutline/>Bengaluru, India</li>
             <li><MdOutlineMailOutline/> rajtech645@gmail.com</li>
@@ -31,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4>Quick Links</h4>
+          <h4 style={{display:"flex",alignItems:"center",gap:1}}><FaExternalLinkAlt/>Quick Links</h4>
           <ul>
             <li >
               <Link to={"/"}><FcHome/>Home</Link>
@@ -47,7 +50,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4>Know Us</h4>
+          <h4 style={{display:"flex",alignItems:"center",gap:1}}><GiGiftOfKnowledge/>Know Us</h4>
           <ul>
            
       

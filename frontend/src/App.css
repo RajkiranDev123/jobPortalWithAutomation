@@ -701,12 +701,12 @@ footer div ul a span {
 .authPage .container form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5px;
 }
 
 .authPage .container form .wrapper {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .authPage .container form .inputTag {
@@ -750,6 +750,7 @@ footer div ul a span {
 .authPage .container form .inputTag label {
 
   color: #1c0a83;
+  font-size: 14px;
 }
 
 .authPage .container form button {

@@ -16,7 +16,7 @@ export default function Pie() {
             ]}
 
             width={300}
-            height={180}
+            height={150}
             hideLegend
         />
         <div style={{border:"1px solid grey",padding:3,borderRadius:3}}>
