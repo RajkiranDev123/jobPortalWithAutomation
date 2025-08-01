@@ -47,7 +47,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4>Follow Us</h4>
+          <h4>Know Us</h4>
           <ul>
            
       

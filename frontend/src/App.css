@@ -372,6 +372,8 @@ footer div ul a span {
   background: #111;
   display: flex;
   justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
   text-align: center;
   color: #f7efefdc;
   /* font-weight: 300; */
