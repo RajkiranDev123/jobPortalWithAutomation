@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout, clearAllUserErrors } from "../store/slices/userSlice";
 import { LuMoveRight } from "react-icons/lu";
-
+import { FcStatistics } from "react-icons/fc";
 import MyProfile from "../components/MyProfile";
 import UpdateProfile from "../components/UpdateProfile";
 import UpdatePassword from "../components/UpdatePassword";
@@ -62,17 +62,7 @@ const Dashboard = () => {
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
               <h4>Start Managing!</h4>
-              {user && user?.role === "Employer" && (
-                <li>
-                  <button
-                    onClick={() => {
-                      setComponentName("Employer Dashboard");
-                      setShow(!show);
-                    }}
-                  >
-                    <CiUser style={{ height: 13 }} />  Stats
-                  </button>
-                </li>)}
+
               <li>
                 <button
                   onClick={() => {
@@ -83,6 +73,17 @@ const Dashboard = () => {
                   <CiUser style={{ height: 13 }} />  My Profile
                 </button>
               </li>
+              {user && user?.role === "Employer" && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setComponentName("Employer Dashboard");
+                      setShow(!show);
+                    }}
+                  >
+                    <FcStatistics style={{ height: 13 }} />  Stats
+                  </button>
+                </li>)}
               <li>
                 <button
                   onClick={() => {

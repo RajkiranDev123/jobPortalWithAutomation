@@ -19,7 +19,7 @@ const metaSlice = createSlice({
         successForMeta(state, action) {
             state.loading = false;
             state.error = null;
-            state.metaData = action.payload;
+            state.metaData = action.payload.counts;
         },
         failureForMeta(state, action) {
             state.loading = false;
@@ -53,10 +53,7 @@ export const fetchMetaData = (sd,ed) => async (dispatch) => {
                 }
             }
         );
-        // dispatch(metaSlice.actions.successForMeta(response.data));
-        console.log(9087,response.data)
-   
-
+        dispatch(metaSlice.actions.successForMeta(response?.data));
         dispatch(metaSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(
