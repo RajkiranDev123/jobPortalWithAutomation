@@ -40,7 +40,7 @@ const metaSlice = createSlice({
     },
 });
 
-export const fetchMetaData = (sd,ed) => async (dispatch) => {
+export const fetchMetaData = (date) => async (dispatch) => {
 
     dispatch(metaSlice.actions.requestForMeta());
     try {
@@ -49,7 +49,7 @@ export const fetchMetaData = (sd,ed) => async (dispatch) => {
             {
                 withCredentials: true,
                 headers: {
-                    // "page": page
+                    "date-range": date
                 }
             }
         );

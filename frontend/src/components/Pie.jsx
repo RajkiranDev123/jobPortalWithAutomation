@@ -1,13 +1,7 @@
 import { useSelector } from "react-redux";
 import { PieChart } from '@mui/x-charts/PieChart';
-import { BsEmojiHeartEyes } from "react-icons/bs";
-import { PiSmileyXEyesBold } from "react-icons/pi";
-
 
 export default function Pie() {
-
-
-
     const { metaData } = useSelector((state) => state.meta);
     return (<>
         <PieChart
@@ -21,19 +15,14 @@ export default function Pie() {
                 },
             ]}
 
-            width={320}
-            height={200}
+            width={300}
+            height={180}
             hideLegend
         />
-        <div>
-            <p style={{ color: "#4254FB",display:"flex",alignItems:"center" ,gap:1}}><BsEmojiHeartEyes /> Viewed Aplications : {metaData?.viewedApplications}</p>
-            <p style={{ color: "#FFB422",display:"flex",alignItems:"center",gap:1 }}><PiSmileyXEyesBold />Not-Viewed Applications : {metaData?.unviewedApplications}</p>
+        <div style={{border:"1px solid grey",padding:3,borderRadius:3}}>
+            <p style={{ color: "#4254FB",display:"flex",alignItems:"center" ,gap:1,fontSize:13}}> Viewed Aplications : {metaData?.viewedApplications}</p>
+            <p style={{ color: "#FFB422",display:"flex",alignItems:"center",gap:1,fontSize:13 }}> Not-Viewed Applications : {metaData?.unviewedApplications}</p>
 
         </div>
-
-
-
-
-
     </>);
 }
