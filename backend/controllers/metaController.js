@@ -8,31 +8,31 @@ export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) 
     const employerId = req.user._id;
     const dateRange = req.headers["date-range"]
 
-    let startDate = dateRange?.split("--")[0] + "T00:00:00Z"
-    // console.log(startDate.split("T")[0])
-    let endDate = dateRange?.split("--")[1] + "T23:59:59Z"
+
 
     const dateFilter = {};
     const jobDateFilter = {};
+    if (typeof dateRange === "string" && dateRange.includes("--")) {
+        const [start, end] = dateRange.split("--");
 
-    if (startDate.split("T")[0]!=="undefined") {
+        const startDate = new Date(start + "T00:00:00Z");
+        const endDate = new Date(end + "T23:59:59Z");
 
-        if (startDate && endDate) {
-            dateFilter.createdAt = {
-                $gte: startDate,
-                $lte: endDate
-            };
-        }
+        dateFilter.createdAt = {
+            $gte: startDate,
+            $lte: endDate
+        };
 
+        jobDateFilter.jobPostedOn = {
+            $gte: startDate,
+            $lte: endDate
+        };
 
-        if (startDate && endDate) {
-            jobDateFilter.jobPostedOn = {
-                $gte: startDate,
-                $lte: endDate
-            };
-        }
-
+        console.log("createdAt:", dateFilter);
+        console.log("jobPostedOn:", jobDateFilter);
     }
+
+
 
     try {
         const [applicationStats, jobsPostedCount] = await Promise.all([
