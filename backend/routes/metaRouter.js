@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
-    getApplicationsWithStats
+    getApplicationsWithStatsEmployer
 } from "../controllers/metaController.js";
 
 const router = express.Router();
@@ -9,10 +9,10 @@ const router = express.Router();
 
 
 router.get(
-    "/applications-stats",
+    "/employer/applications-stats",
     isAuthenticated,
     isAuthorized("Employer"),
-    getApplicationsWithStats
+    getApplicationsWithStatsEmployer
 );
 
 

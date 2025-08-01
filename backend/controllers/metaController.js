@@ -4,7 +4,7 @@ import { Job } from "../models/jobSchema.js";
 import { Application } from "../models/applicationSchema.js";
 
 
-export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) => {
+export const getApplicationsWithStatsEmployer = catchAsyncErrors(async (req, res, next) => {
     const employerId = req.user._id;
     const dateRange = req.headers["date-range"]
 
