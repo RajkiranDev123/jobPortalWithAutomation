@@ -4,7 +4,7 @@ const Intro = () => {
     const { isAuthenticated } = useSelector((state) => state.user);
     return (
         <section className="hero">
-            <h1>Find Your Dream Job Today!</h1>
+            <h1 style={{color:"#321414"}}>Find Your Dream Job Today!</h1>
             <h4>
                 Connecting Developers to Opportunities — From Junior to Senior, Nationwide
             </h4>

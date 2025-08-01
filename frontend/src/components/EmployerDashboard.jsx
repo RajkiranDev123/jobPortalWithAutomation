@@ -43,7 +43,7 @@ const EmployerDashboard = () => {
             background: "white", color: "black",
           }}
         >
-          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1 }}>
+          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1,color:"grey" }}>
             <MdAddChart />Total Jobs Posted&nbsp;  </p>
           <p style={{ fontSize: 14, textAlign: "center" }}> {metaData?.jobsPosted} </p>
         </div>
@@ -59,7 +59,7 @@ const EmployerDashboard = () => {
             background: "white", color: "black",
           }}
         >
-          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1 }}>
+          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1,color:"grey" }}>
             <MdAddChart />Total Applications&nbsp;  </p>
           <p style={{ fontSize: 14, textAlign: "center" }}>
             {metaData?.viewedApplications + metaData?.unviewedApplications} </p>
@@ -72,7 +72,7 @@ const EmployerDashboard = () => {
       </div>
       {/* date range */}
       <div style={{ border: "1px solid grey", borderRadius: 4, padding: 3 }}>
-        <p style={{ fontFamily: "monospace", textDecoration: "", display: "flex", alignItems: "center", gap: 1 }}><TbFilterDown />  Filters </p>
+        <p style={{ fontFamily: "monospace", textDecoration: "", display: "flex", alignItems: "center", gap: 1,marginBottom:3,color:"grey" }}><TbFilterDown />Date-Range Filter </p>
         <div style={{ marginTop: 2 }}>
           <DateRange handleFetchMeta={handleFetchMeta} />
         </div>
