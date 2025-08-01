@@ -6,8 +6,6 @@ import { Application } from "../models/applicationSchema.js";
 
 export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) => {
     const employerId = req.user._id;
-
-
     const dateRange = req.headers["date-range"]
 
     let startDate = dateRange?.split("--")[0] + "T00:00:00Z"
@@ -16,8 +14,6 @@ export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) 
 
     const dateFilter = {};
     const jobDateFilter = {};
-
-
 
     if (startDate.split("T")[0]!=="undefined") {
 
@@ -37,9 +33,6 @@ export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) 
         }
 
     }
-
-
-
 
     try {
         const [applicationStats, jobsPostedCount] = await Promise.all([
