@@ -7,25 +7,39 @@ import { Application } from "../models/applicationSchema.js";
 export const getApplicationsWithStats = catchAsyncErrors(async (req, res, next) => {
     const employerId = req.user._id;
 
-    const { startDate, endDate } = req.headers;
+
+    const dateRange = req.headers["date-range"]
+
+    let startDate = dateRange?.split("--")[0] + "T00:00:00Z"
+    // console.log(startDate.split("T")[0])
+    let endDate = dateRange?.split("--")[1] + "T23:59:59Z"
 
     const dateFilter = {};
-
-    if (startDate && endDate) {
-        dateFilter.createdAt = {
-            $gte: new Date(startDate),
-            $lte: new Date(endDate)
-        };
-    }
-
     const jobDateFilter = {};
 
-    if (startDate && endDate) {
-        jobDateFilter.jobPostedOn = {
-            $gte: new Date(startDate),
-            $lte: new Date(endDate)
-        };
+
+
+    if (startDate.split("T")[0]!=="undefined") {
+
+        if (startDate && endDate) {
+            dateFilter.createdAt = {
+                $gte: startDate,
+                $lte: endDate
+            };
+        }
+
+
+        if (startDate && endDate) {
+            jobDateFilter.jobPostedOn = {
+                $gte: startDate,
+                $lte: endDate
+            };
+        }
+
     }
+
+
+
 
     try {
         const [applicationStats, jobsPostedCount] = await Promise.all([
