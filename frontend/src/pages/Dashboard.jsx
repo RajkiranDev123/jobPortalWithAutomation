@@ -23,6 +23,7 @@ import { IoIosLogOut } from "react-icons/io";
 
 import { RxDashboard } from "react-icons/rx";
 import EmployerDashboard from "../components/EmployerDashboard";
+import JobSeekerDashboard from "../components/JobSeekerDashboard";
 
 const Dashboard = () => {
   const [show, setShow] = useState(false);
@@ -78,6 +79,17 @@ const Dashboard = () => {
                   <button
                     onClick={() => {
                       setComponentName("Employer Dashboard");
+                      setShow(!show);
+                    }}
+                  >
+                    <FcStatistics style={{ height: 13 }} />  Stats
+                  </button>
+                </li>)}
+              {user && user?.role === "Job Seeker" && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setComponentName("JobSeeker Dashboard");
                       setShow(!show);
                     }}
                   >
@@ -177,6 +189,9 @@ const Dashboard = () => {
                   return <MyProfile />;
                 case "Employer Dashboard":
                   return <EmployerDashboard />;
+
+                case "JobSeeker Dashboard":
+                  return <JobSeekerDashboard />
 
                 case "Update Profile":
                   return <UpdateProfile />;
