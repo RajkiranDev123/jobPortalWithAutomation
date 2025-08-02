@@ -94,7 +94,10 @@ const MyApplications = () => {
 
                   <p style={{ fontSize: 12 }}>
                     ‣ Location : &nbsp;
-                    {element?.jobInfo?.jobId?.location[0]?.toUpperCase() + element?.jobInfo?.jobId?.location?.slice(1)}
+                    {typeof element?.jobInfo?.jobId?.location === "string" && element.jobInfo.jobId.location.length > 0
+                      ? element.jobInfo.jobId.location[0].toUpperCase() + element.jobInfo.jobId.location.slice(1)
+                      : ""}
+
                   </p>
                   <p style={{ fontSize: 12 }}>
                     ‣ Company : {element?.jobInfo?.jobId?.companyName}
@@ -113,7 +116,8 @@ const MyApplications = () => {
                         element.jobSeekerInfo &&
                         element.jobSeekerInfo.resume.url
                       }
-                      style={{margin:2,
+                      style={{
+                        margin: 2,
                         fontSize: 14, display: "flex", justifyContent: "center", alignItems: "center", gap: 2, borderBottom: "1px solid grey",
                         textDecoration: "none", color: "black", borderRadius: 3, cursor: "pointer", paddingLeft: 1, paddingRight: 1
                       }}
