@@ -82,12 +82,12 @@ const MyApplications = () => {
                     borderTopRightRadius: 19
                   }}
                 >
-                  {element?.viewed && <p style={{
+                  <p style={{visibility:element?.viewed?"unset":"hidden",
                     alignItems: "center",
                     fontSize: 10, background: "green", color: "white", display: "inline-block", borderRadius: 3, padding: 2
                   }}>
                     <GoThumbsup size={11} /> <span style={{ fontSize: 11 }}>Viewed by Employer!</span>
-                  </p>}
+                  </p>
                   <p style={{ fontSize: 12 }}>
                     ‣ For :  {element.jobInfo.jobTitle}
                   </p>
