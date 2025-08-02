@@ -25,6 +25,7 @@ import { RxDashboard } from "react-icons/rx";
 import EmployerDashboard from "../components/EmployerDashboard";
 import JobSeekerDashboard from "../components/JobSeekerDashboard";
 
+
 const Dashboard = () => {
   const [show, setShow] = useState(false);
   const [componentName, setComponentName] = useState("My Profile");

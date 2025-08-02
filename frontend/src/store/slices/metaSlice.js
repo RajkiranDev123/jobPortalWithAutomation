@@ -8,7 +8,9 @@ const metaSlice = createSlice({
         loading: false,
         error: null,
         message: null,
-     
+        monthlyPostedJobs: [],
+        metaLoading:false
+
     },
     reducers: {
         // employer will get all application (applied jobs) for jobs he posted
@@ -23,6 +25,20 @@ const metaSlice = createSlice({
         },
         failureForMeta(state, action) {
             state.loading = false;
+            state.error = action.payload;
+        },
+        //jobs count
+        requestForMonthlyJobsCounts(state, action) {
+            state.metaLoading = true;
+            state.error = null;
+        },
+        successForMonthlyJobsCounts(state, action) {
+            state.metaLoading = false;
+            state.error = null;
+            state.monthlyPostedJobs = action.payload;
+        },
+        failureForMonthlyJobsCounts(state, action) {
+            state.metaLoading = false;
             state.error = action.payload;
         },
 
@@ -85,6 +101,30 @@ export const fetchMetaDataJobSeeker = (date) => async (dispatch) => {
     } catch (error) {
         dispatch(
             metaSlice.actions.failureForMeta(
+                error.response.data.message
+            )
+        );
+    }
+};
+
+export const monthlyJobsPostedCounts = () => async (dispatch) => {
+
+    dispatch(metaSlice.actions.requestForMonthlyJobsCounts());
+    try {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/monthly-jobs-posted-counts`,
+            {
+                withCredentials: true,
+                headers: {
+                    // "date-range": date
+                }
+            }
+        );
+        dispatch(metaSlice.actions.successForMonthlyJobsCounts(response?.data?.data));
+        dispatch(metaSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(
+            metaSlice.actions.failureForMonthlyJobsCounts(
                 error.response.data.message
             )
         );

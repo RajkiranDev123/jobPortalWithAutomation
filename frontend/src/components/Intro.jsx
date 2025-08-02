@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
+
+import BarGraph from "./BarGraph";
 import { useSelector } from "react-redux";
+import "../pages/loader2.css"
 const Intro = () => {
     const { isAuthenticated } = useSelector((state) => state.user);
+    const { monthlyPostedJobs } = useSelector((state) => state.meta);
+
+
+
+
     return (
         <section className="hero">
-            <h1 style={{color:"#321414"}}>Find Your Dream Job Today!</h1>
+            <h1 style={{ color: "#321414" }}>Find Your Dream Job Today!</h1>
             <h4>
                 Connecting Developers to Opportunities — From Junior to Senior, Nationwide
             </h4>
@@ -13,7 +21,15 @@ const Intro = () => {
                 Whether you're just starting out or looking to advance your career, our platform connects you with the right web dev jobs—quickly and effortlessly.
             </div>
 
+
+            <div>
+                <p style={{ color: "white", fontWeight: "bold" }}>Our Montly Jobs Added Counts :</p>
+
+                {monthlyPostedJobs?.length > 0 ? <BarGraph /> : <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div>}
+            </div>
+
             {!isAuthenticated && <p style={{ color: "white", fontSize: 30 }}>Are you busy ? <Link style={{ color: "white", fontSize: 30 }} to={"/login"}> Click here to start demo!</Link></p>}
+
         </section>
     );
 };

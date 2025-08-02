@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { getUser } from "./store/slices/userSlice";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import { monthlyJobsPostedCounts } from "./store/slices/metaSlice";
 // import { useLocation } from "react-router-dom";
 const App = () => {
   console.log("app.jsx")
@@ -23,6 +24,8 @@ const App = () => {
   // const location = useLocation();
 
   useEffect(() => {
+    dispatch(monthlyJobsPostedCounts())
+
     // if (location.pathname !== "/register") {
     dispatch(getUser());
     // }
