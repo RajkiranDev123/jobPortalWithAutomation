@@ -45,7 +45,34 @@ export const fetchMetaData = (date) => async (dispatch) => {
     dispatch(metaSlice.actions.requestForMeta());
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/employer/applications-stats`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/employer`,
+            {
+                withCredentials: true,
+                headers: {
+                    "date-range": date
+                }
+            }
+        );
+        dispatch(metaSlice.actions.successForMeta(response?.data));
+        dispatch(metaSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(
+            metaSlice.actions.failureForMeta(
+                error.response.data.message
+            )
+        );
+    }
+};
+
+
+//meta job-seeker
+
+export const fetchMetaDataJobSeeker = (date) => async (dispatch) => {
+
+    dispatch(metaSlice.actions.requestForMeta());
+    try {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/job-seeker`,
             {
                 withCredentials: true,
                 headers: {
