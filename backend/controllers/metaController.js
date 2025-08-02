@@ -4,7 +4,7 @@ import { Job } from "../models/jobSchema.js";
 import { Application } from "../models/applicationSchema.js";
 
 
-export const getApplicationsWithStatsEmployer = catchAsyncErrors(async (req, res, next) => {
+export const getMetaEmployer = catchAsyncErrors(async (req, res, next) => {
     const employerId = req.user._id;
     const dateRange = req.headers["date-range"]
 
@@ -79,6 +79,52 @@ export const getApplicationsWithStatsEmployer = catchAsyncErrors(async (req, res
                 jobsPosted: jobsPostedCount
             },
             message: "Meta data for application stats fetched!"
+
+        });
+    } catch (error) {
+        return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
+
+    }
+})
+
+
+
+//getMetaJobSeeker
+
+export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
+    const jobSeekerId = req.user._id;
+    const dateRange = req.headers["date-range"]
+    const dateFilter = {};
+
+    if (typeof dateRange === "string" && dateRange.includes("--")) {
+        const [start, end] = dateRange.split("--");
+
+        const startDate = new Date(start + "T00:00:00Z");
+        const endDate = new Date(end + "T23:59:59Z");
+
+        dateFilter.createdAt = {
+            $gte: startDate,
+            $lte: endDate
+        };
+        // console.log("createdAt:", dateFilter);
+}
+
+    try {
+        const [appliedCounts] = await Promise.all([
+
+            Job.countDocuments({
+                "jobSeekerInfo.id": jobSeekerId,
+                "deletedBy.jobSeeker": false,
+                ...dateFilter
+            })
+        ]);
+
+        res.status(200).json({
+            success: true,
+            counts: {
+                appliedCounts: appliedCounts
+            },
+            message: "Meta data for job seeker  fetched!"
 
         });
     } catch (error) {

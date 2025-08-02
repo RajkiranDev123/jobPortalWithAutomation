@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
-    getApplicationsWithStatsEmployer
+    getMetaEmployer,getMetaJobSeeker
 } from "../controllers/metaController.js";
 
 const router = express.Router();
@@ -9,10 +9,17 @@ const router = express.Router();
 
 
 router.get(
-    "/employer/applications-stats",
+    "/employer",
     isAuthenticated,
     isAuthorized("Employer"),
-    getApplicationsWithStatsEmployer
+    getMetaEmployer
+);
+
+router.get(
+    "/job-seeker",
+    isAuthenticated,
+    isAuthorized("Job Seeker"),
+    getMetaJobSeeker
 );
 
 
