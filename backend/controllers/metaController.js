@@ -87,8 +87,6 @@ export const getMetaEmployer = catchAsyncErrors(async (req, res, next) => {
     }
 })
 
-
-
 //getMetaJobSeeker
 
 export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
@@ -107,7 +105,7 @@ export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
             $lte: endDate
         };
         // console.log("createdAt:", dateFilter);
-}
+    }
 
     try {
         const [appliedCounts] = await Promise.all([
@@ -132,3 +130,57 @@ export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
 
     }
 })
+
+
+//monthly job count
+export const getMonthlyJobCounts = catchAsyncErrors(async (req, res, next) => {
+
+    const year = parseInt(req.query.year) || new Date().getFullYear();
+
+    try {
+        // Aggregate job counts grouped by month
+        const result = await Job.aggregate([
+            {
+                $match: {
+                    jobPostedOn: {
+                        $gte: new Date(`${year}-01-01T00:00:00Z`),
+                        $lte: new Date(`${year}-12-31T23:59:59Z`)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { month: { $month: "$jobPostedOn" } },
+                    count: { $sum: 1 }
+                }
+            }
+            //groups documents by month (extracted from the jobPostedOn date field), and then counts how many jobs were posted in each month.
+        ]);
+
+        // Initialize all 12 months
+        const allMonths = Array.from({ length: 12 }, (_, i) => ({
+            month: i + 1,
+            name: new Date(2000, i).toLocaleString("default", { month: "short" }),
+            count: 0
+        }));
+
+        //  Merge actual data into the full list
+        result.forEach(({ _id, count }) => {
+            const index = allMonths.findIndex(m => m.month === _id.month);
+            if (index > -1) {
+                allMonths[index].count = count;
+            }
+        });
+
+        return res.status(200).json({
+            success: true,
+            year,
+            data: allMonths,
+            message: "All month counts fetched!"
+        });
+    } catch (error) {
+
+        return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
+
+    }
+});
