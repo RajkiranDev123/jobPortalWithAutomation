@@ -112,7 +112,7 @@ export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
     try {
         const [appliedCounts] = await Promise.all([
 
-            Job.countDocuments({
+            Application.countDocuments({
                 "jobSeekerInfo.id": jobSeekerId,
                 "deletedBy.jobSeeker": false,
                 ...dateFilter
