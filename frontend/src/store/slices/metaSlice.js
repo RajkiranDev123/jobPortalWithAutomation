@@ -9,7 +9,9 @@ const metaSlice = createSlice({
         error: null,
         message: null,
         monthlyPostedJobs: [],
-        metaLoading:false
+        metaLoading: false,
+        downloading: false,
+    
 
     },
     reducers: {
@@ -25,6 +27,21 @@ const metaSlice = createSlice({
         },
         failureForMeta(state, action) {
             state.loading = false;
+            state.error = action.payload;
+        },
+        //
+        requestForPdf(state, action) {
+            state.downloading = true;
+            state.error = null;
+        },
+        successForPdf(state, action) {
+            state.downloading = false;
+            state.error = null;
+       
+
+        },
+        failureForPdf(state, action) {
+            state.downloading = false;
             state.error = action.payload;
         },
         //jobs count
@@ -46,6 +63,7 @@ const metaSlice = createSlice({
         clearAllErrors(state, action) {
             state.error = null;
             state.metaData = state.metaData;
+ 
         },
         resetMetaSlice(state, action) {
             state.error = null;
@@ -125,6 +143,34 @@ export const monthlyJobsPostedCounts = () => async (dispatch) => {
     } catch (error) {
         dispatch(
             metaSlice.actions.failureForMonthlyJobsCounts(
+                error.response.data.message
+            )
+        );
+    }
+};
+
+//pdf download
+export const pdfDownload = (url) => async (dispatch) => {
+
+    dispatch(metaSlice.actions.requestForPdf());
+    try {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/pdf`,
+            {
+                withCredentials: true,
+                headers: {
+                    // "url": url
+                }
+            }
+        );
+
+        window.open(response?.data?.downloadUrl, "blank")
+
+        dispatch(metaSlice.actions.successForPdf());
+        dispatch(metaSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(
+            metaSlice.actions.failureForPdf(
                 error.response.data.message
             )
         );

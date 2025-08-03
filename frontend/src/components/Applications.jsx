@@ -14,10 +14,14 @@ import { VscGitStashApply } from "react-icons/vsc";
 //
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { FaFilePdf } from "react-icons/fa";
+import { pdfDownload, clearMetaErrors } from "../store/slices/metaSlice"
 
 const Applications = () => {
   const [page, setPage] = useState(1)
-  const [elId, setElId] = useState("")
+  // const [elId, setElId] = useState("")
+
+
 
   const { applications, loading, error, message, pageCount, viewed, isDeleted } = useSelector(
     (state) => state.applications
@@ -54,6 +58,8 @@ const Applications = () => {
     setPage(value)
   }
 
+
+
   return (
     <>
       {loading ? (
@@ -63,8 +69,17 @@ const Applications = () => {
       ) : (
         <>
           <div >
-            <p style={{ color: "blue", display: "flex", alignItems: "center" }}>
-              <VscGitStashApply style={{ height: 22, color: "blue" }} /> Applicant's For Your Posted Jobs</p>
+            <p style={{ color: "blue", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
+              <span> <VscGitStashApply style={{ height: 22, color: "blue" }} />Applicant's For Your Posted Jobs</span>
+              <button
+                onClick={() => dispatch(pdfDownload())}
+                style={{
+                  display: "flex", alignItems: "center", background: "red", color: "white", border: "none", borderRadius: 4,
+                  fontSize: 14, padding: 2
+
+                }}>Download pdf <FaFilePdf /></button>
+            </p>
+
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 4, marginTop: 4 }}>
               {applications?.map((element) => {
                 return (
@@ -138,7 +153,7 @@ const Applications = () => {
         </>
       )}
       {/* loader for set as viewed */}
-      {(isDeleted || viewed) && <div style={{ display: "flex", justifyContent: "center", margin: 2 }}><div style={{color:"red"}} className="loader"></div></div>}
+      {(isDeleted || viewed) && <div style={{ display: "flex", justifyContent: "center", margin: 2 }}><div style={{ color: "red" }} className="loader"></div></div>}
 
 
       {/*  */}
