@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
-    getMetaEmployer,getMetaJobSeeker,getMonthlyJobCounts
+    getMetaEmployer,getMetaJobSeeker,getMonthlyJobCounts,pdfDownload
 } from "../controllers/metaController.js";
 
 const router = express.Router();
@@ -25,6 +25,13 @@ router.get(
 router.get(
     "/monthly-jobs-posted-counts",
     getMonthlyJobCounts
+);
+
+router.get(
+    "/pdf",
+    isAuthenticated,
+
+    pdfDownload
 );
 
 

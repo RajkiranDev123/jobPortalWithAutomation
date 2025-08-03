@@ -26,6 +26,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/csv/files", express.static("./csv/files"))
 
 app.use(
     fileUpload({

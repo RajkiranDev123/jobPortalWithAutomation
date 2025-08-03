@@ -2,6 +2,8 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Job } from "../models/jobSchema.js";
 import { Application } from "../models/applicationSchema.js";
+import csv from "fast-csv"
+import fs from "fs"
 
 
 export const getMetaEmployer = catchAsyncErrors(async (req, res, next) => {
@@ -178,6 +180,53 @@ export const getMonthlyJobCounts = catchAsyncErrors(async (req, res, next) => {
             data: allMonths,
             message: "All month counts fetched!"
         });
+    } catch (error) {
+
+        return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
+
+    }
+});
+
+//monthly job count
+export const pdfDownload = catchAsyncErrors(async (req, res, next) => {
+    const { _id } = req.user;//employer id 
+    try {
+        const Data = await Application.find({
+            "employerInfo.id": _id,
+            "deletedBy.employer": false,
+        })
+   
+
+        const csvStream = csv.format({ headers: true })
+
+        if (!fs.existsSync("csv")) {
+            fs.mkdirSync("csv")
+            if (fs.existsSync("csv")) {
+                fs.mkdirSync("csv/files")
+            }
+        }
+        const writableStream = fs.createWriteStream(
+            "csv/files/pdf.csv"
+        )
+        csvStream.pipe(writableStream)
+        writableStream.on("finish", () => {
+  
+            res.status(200).json({ downloadUrl: `${process.env.b_url}/csv/files/pdf.csv` })
+        })
+        if (Data.length > 0) {
+            Data.map(e => {
+                csvStream.write({
+                    Name: e.jobSeekerInfo?.name ? e.jobSeekerInfo?.name : "-",
+                    Email: e.jobSeekerInfo?.email ? e.jobSeekerInfo?.email : "-",
+                    Phone: e.jobSeekerInfo?.phone ? e.jobSeekerInfo?.phone : "-",
+                    "Applied For": e.jobInfo?.jobTitle ? e.jobInfo?.jobTitle : "-",
+                    Date: e.createdAt ? e.createdAt : "-",
+                    Viewed:e.viewed ? e.viewed : "-",
+                })
+            })
+        }
+        csvStream.end()
+        writableStream.end()
     } catch (error) {
 
         return next(new ErrorHandler(error?.message || "Internal Server Error!", 500))
