@@ -86,11 +86,12 @@ input::-webkit-outer-spin-button {
 .navbar {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(133, 133, 133);
+  border-bottom: 0px solid rgb(133, 133, 133);
   padding: 20px 110px;
   align-items: center;
 
-  background: linear-gradient(159deg, rgba(0, 0, 128, 1) 0%, rgba(0, 191, 255, 1) 100%);
+   background: linear-gradient(250deg, #57606F, #D3D3D3 50%);
+
 }
 
 .navbar .hamburger {
@@ -299,9 +300,10 @@ input::-webkit-outer-spin-button {
 
 footer {
 
-  background: linear-gradient(159deg, rgba(8, 146, 208, 1) 0%, rgba(75, 0, 130, 1) 100%);
+    background: linear-gradient(1deg, #57606F, #D3D3D3 100%);
+
   display: flex;
-  border-bottom: 1px solid rgb(133, 133, 133);
+  /* border-bottom: 1px solid rgb(133, 133, 133); */
   /* padding: 40px 20px 20px 20px; */
   padding: 5px;
 
@@ -434,11 +436,7 @@ footer div ul a span {
   background: linear-gradient(2deg, #57606F, #D3D3D3 50%);
 }
 
-.hero:hover {
 
-  background: linear-gradient(2deg, #5a667c, #bab5b5 50%);
-
-}
 
 .hero h1 {
   font-size: 2rem;
@@ -565,7 +563,8 @@ footer div ul a span {
   align-items: center;
   margin: 0 auto;
   gap: 10px;
-  background: rgb(3, 62, 90);
+    background: linear-gradient(1deg, #D3D3D3 , #57606F 100%);
+
 }
 
 .howItWorks h3 {
@@ -715,6 +714,7 @@ footer div ul a span {
   flex-direction: column;
   gap: 10px;
   flex: 1;
+ border-bottom: 0.8px solid rgb(169, 174, 180) ;
 }
 
 .authPage .container form .inputTag div {
@@ -726,8 +726,8 @@ footer div ul a span {
 .authPage .container form .inputTag div input,
 .authPage .container form .inputTag div select,
 .authPage .container form .inputTag div textarea {
-  background: #87878778;
-  padding: 3px;
+  background: white;
+  padding: 2px;
   border: none;
   width: 100%;
   /* height: 100%; */
