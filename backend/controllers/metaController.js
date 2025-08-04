@@ -110,11 +110,17 @@ export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
     }
 
     try {
-        const [appliedCounts] = await Promise.all([
+        const [appliedCounts,viewedApplicationCounts] = await Promise.all([
 
             Application.countDocuments({
                 "jobSeekerInfo.id": jobSeekerId,
                 "deletedBy.jobSeeker": false,
+                ...dateFilter
+            }),
+            Application.countDocuments({
+                "jobSeekerInfo.id": jobSeekerId,
+                "deletedBy.jobSeeker": false,
+                viewed:true,
                 ...dateFilter
             })
         ]);
@@ -122,7 +128,8 @@ export const getMetaJobSeeker = catchAsyncErrors(async (req, res, next) => {
         res.status(200).json({
             success: true,
             counts: {
-                appliedCounts: appliedCounts
+                appliedCounts: appliedCounts,
+                viewedApplicationCounts:viewedApplicationCounts
             },
             message: "Meta data for job seeker  fetched!"
 
@@ -195,7 +202,7 @@ export const pdfDownload = catchAsyncErrors(async (req, res, next) => {
             "employerInfo.id": _id,
             "deletedBy.employer": false,
         })
-   
+
 
         const csvStream = csv.format({ headers: true })
 
@@ -210,7 +217,7 @@ export const pdfDownload = catchAsyncErrors(async (req, res, next) => {
         )
         csvStream.pipe(writableStream)
         writableStream.on("finish", () => {
-  
+
             res.status(200).json({ downloadUrl: `${process.env.b_url}/csv/files/pdf.csv` })
         })
         if (Data.length > 0) {
@@ -221,7 +228,7 @@ export const pdfDownload = catchAsyncErrors(async (req, res, next) => {
                     Phone: e.jobSeekerInfo?.phone ? e.jobSeekerInfo?.phone : "-",
                     "Applied For": e.jobInfo?.jobTitle ? e.jobInfo?.jobTitle : "-",
                     Date: e.createdAt ? e.createdAt : "-",
-                    Viewed:e.viewed ? "Viewed" : "Not-Viewed",
+                    Viewed: e.viewed ? "Viewed" : "Not-Viewed",
                 })
             })
         }
