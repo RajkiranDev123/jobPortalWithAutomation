@@ -24,6 +24,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { RxDashboard } from "react-icons/rx";
 import EmployerDashboard from "../components/EmployerDashboard";
 import JobSeekerDashboard from "../components/JobSeekerDashboard";
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 
 const Dashboard = () => {
@@ -63,7 +64,7 @@ const Dashboard = () => {
           {/* sb */}
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
-             <h5 >Start Managing!</h5>
+             <h5 style={{display:"flex",alignItems:"center"}} ><MdOutlineManageAccounts/>Start Managing!</h5>
 
               <li>
                 <button
