@@ -69,7 +69,7 @@ const Applications = () => {
       ) : (
         <>
           <div >
-            <p style={{ color: "blue", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
+            <p style={{ color: "blue", display: "flex", alignItems: "center",gap:3,flexWrap:"wrap", justifyContent: "space-between", margin:6 }}>
               <span> <VscGitStashApply style={{ height: 22, color: "blue" }} />Applicant's For Your Posted Jobs</span>
               <button
                 onClick={() => dispatch(pdfDownload())}

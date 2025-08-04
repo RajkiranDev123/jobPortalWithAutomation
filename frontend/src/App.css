@@ -1308,10 +1308,9 @@ footer div ul a span {
   .sidebar_icon {
     display: flex;
     width: fit-content;
-    padding: 5px;
+    padding: 2px;
     border-radius: 100%;
-    position: relative;
-    bottom: -18px;
+
   }
 
   .move_left {
@@ -1324,13 +1323,17 @@ footer div ul a span {
   .move_right {
     left: 252px;
     transition: 0.3s;
-    background: #fff;
+    background: #0e0101;
     z-index: 2;
+        position: absolute;
+    left: 200px;
+
+    top: 1px;
   }
 
   .move_right svg {
     font-size: 30px;
-    color: #111;
+    color: #9e0b0b;
   }
 
   .move_left svg {
@@ -1352,11 +1355,13 @@ footer div ul a span {
     left: 0;
     transition: 0.3s;
     background: #1a0b0b;
+    color: wheat;
     height: 900px;
-    width: 308px;
-    padding: 15px 5px;
+    width: 120px;
+    padding: 5px 5px;
     z-index: 2;
     border-radius: 6px;
+    overflow-x: scroll;
 
 
   }

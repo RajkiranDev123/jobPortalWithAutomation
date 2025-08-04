@@ -63,7 +63,7 @@ const Dashboard = () => {
           {/* sb */}
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
-              <h4>Start Managing!</h4>
+            { !show&& <h5 >Start Managing!</h5>}
 
               <li>
                 <button
@@ -174,12 +174,12 @@ const Dashboard = () => {
           {/* sb ends */}
 
           <div className="banner" style={{ border: "0px solid red" }}>
-            <div style={{ border: "2px solid white" }}
+            <div style={{ border: "2px solid white" ,marginLeft:5}}
               className={
                 show ? "sidebar_icon move_right" : "sidebar_icon move_left"
               }
             >
-              <LuMoveRight
+              <LuMoveRight style={{}}
                 onClick={() => setShow(!show)}
                 className={show ? "left_arrow" : "right_arrow"}
               />
