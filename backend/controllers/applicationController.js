@@ -143,10 +143,10 @@ export const jobSeekerGetAllApplication = catchAsyncErrors(
 
 export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
     const { id } = req.params;//application id
-    console.log("Application id", id)
+    // console.log("Application id", id)
     try {
         const application = await Application.findById(id);
-        console.log("job id", application.jobInfo.jobId.toString())
+        // console.log("job id", application.jobInfo.jobId.toString())
         if (!application) {
             return next(new ErrorHandler("Application not found.", 404));
         }
