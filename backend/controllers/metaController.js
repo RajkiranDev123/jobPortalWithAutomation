@@ -221,7 +221,7 @@ export const pdfDownload = catchAsyncErrors(async (req, res, next) => {
                     Phone: e.jobSeekerInfo?.phone ? e.jobSeekerInfo?.phone : "-",
                     "Applied For": e.jobInfo?.jobTitle ? e.jobInfo?.jobTitle : "-",
                     Date: e.createdAt ? e.createdAt : "-",
-                    Viewed:e.viewed ? e.viewed : "-",
+                    Viewed:e.viewed ? "Viewed" : "Not-Viewed",
                 })
             })
         }
