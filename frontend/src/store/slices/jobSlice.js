@@ -131,22 +131,20 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
             queryParams.push(`city=${city}`);
         }
 
-        /***************************************************/
-        /* BUG No.3 */
+   
         if (city && city === "All") {
             queryParams = [];
             if (searchKeyword) {
                 queryParams.push(`searchKeyword=${searchKeyword}`);
             }
         }
-        /***************************************************/
+  
 
         if (niche) {
             queryParams.push(`niche=${niche}`);
         }
 
-        /***************************************************/
-        /* BUG No.4 */
+    
         if (niche && niche === "All") {
             queryParams = [];
             if (searchKeyword) {
@@ -156,7 +154,7 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
                 queryParams.push(`city=${city}`);
             }
         }
-        /***************************************************/
+
 
         link += queryParams.join("&");
         const response = await axios.get(
@@ -175,7 +173,7 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
 
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
-        dispatch(jobSlice.actions.failureForAllJobs(error.response.data.message));
+        dispatch(jobSlice.actions.failureForAllJobs(error?.response?.data?.message));
     }
 };
 
@@ -208,7 +206,7 @@ export const postJob = (data) => async (dispatch) => {
         dispatch(jobSlice.actions.successForPostJob(response.data.message));
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
-        dispatch(jobSlice.actions.failureForPostJob(error.response.data.message));
+        dispatch(jobSlice.actions.failureForPostJob(error?.response?.data?.message));
     }
 };
 
@@ -230,7 +228,7 @@ export const getMyJobs = (page) => async (dispatch) => {
 
         dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
-        dispatch(jobSlice.actions.failureForMyJobs(error.response.data.message));
+        dispatch(jobSlice.actions.failureForMyJobs(error?.response?.data?.message));
     }
 };
 
@@ -242,10 +240,10 @@ export const deleteJob = (id) => async (dispatch) => {
             `${import.meta.env.VITE_BASE_URL}/api/v1/job/delete/${id}`,
             { withCredentials: true }
         );
-        dispatch(jobSlice.actions.successForDeleteJob(response.data.message));
+        dispatch(jobSlice.actions.successForDeleteJob(response?.data?.message));
         dispatch(clearAllJobErrors());
     } catch (error) {
-        dispatch(jobSlice.actions.failureForDeleteJob(error.response.data.message));
+        dispatch(jobSlice.actions.failureForDeleteJob(error?.response?.data?.message));
     }
 };
 
