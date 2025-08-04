@@ -63,7 +63,7 @@ const Dashboard = () => {
           {/* sb */}
           <div className={show ? "sidebar showSidebar" : "sidebar"}>
             <ul className="sidebar_links">
-            { !show&& <h5 >Start Managing!</h5>}
+             <h5 >Start Managing!</h5>
 
               <li>
                 <button

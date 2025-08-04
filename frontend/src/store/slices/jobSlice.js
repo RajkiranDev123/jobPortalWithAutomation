@@ -10,7 +10,8 @@ const jobSlice = createSlice({
         message: null,
         singleJob: {},
         myJobs: [],
-        pageCount: null
+        pageCount: null,
+        isDeleted:false
     },
     reducers: {
         requestForAllJobs(state, action) {
@@ -68,16 +69,21 @@ const jobSlice = createSlice({
             state.loading = true;
             state.error = null;
             state.message = null;
+            state.isDeleted=true
         },
         successForDeleteJob(state, action) {
             state.loading = false;
             state.error = null;
             state.message = action.payload;
+            state.isDeleted=false
+
         },
         failureForDeleteJob(state, action) {
             state.loading = false;
             state.error = action.payload;
             state.message = null;
+            state.isDeleted=false
+
         },
         /////////////////// get jobs posted by employer ////////////////
         requestForMyJobs(state, action) {

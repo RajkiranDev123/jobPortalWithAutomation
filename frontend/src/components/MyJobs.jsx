@@ -13,11 +13,12 @@ import { TbArrowBadgeRightFilled } from "react-icons/tb";
 //
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import "../pages/loader2.css"
 
 const MyJobs = () => {
   const [page, setPage] = useState(1)
 
-  const { loading, error, myJobs, message, pageCount } = useSelector(
+  const { loading, error, myJobs, message, pageCount, isDeleted } = useSelector(
     (state) => state.jobs
   );
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const MyJobs = () => {
           <div >
             <p style={{ display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 10 }}>
               <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</p>
-            <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap",marginTop:5 }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap", marginTop: 5 }}>
               {myJobs?.map((element) => (
                 <div
                   style={{
@@ -106,15 +107,16 @@ const MyJobs = () => {
 
                     onClick={() => handleDeleteJob(element._id)}
                   >
-         {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
+                    Delete
                   </button>
                 </div>
               ))}
             </div>
 
           </div>
+              {isDeleted && <div style={{ display: "flex", justifyContent: "center",}}><div  className="loader2"></div></div>}
           {/* pagin */}
-          <div style={{ display: "flex", justifyContent: "center",margin:3 }}>
+          <div style={{ display: "flex", justifyContent: "center", margin: 3 }}>
             <Stack spacing={2}>
               <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
             </Stack>

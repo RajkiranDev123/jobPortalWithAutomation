@@ -1323,21 +1323,21 @@ footer div ul a span {
   .move_right {
     left: 252px;
     transition: 0.3s;
-    background: #0e0101;
+    background: #1a1616;
     z-index: 2;
         position: absolute;
-    left: 200px;
+    left: 190px;
 
-    top: 1px;
+    top: 5px;
   }
 
   .move_right svg {
-    font-size: 30px;
-    color: #9e0b0b;
+    font-size: 20px;
+    color: white;
   }
 
   .move_left svg {
-    font-size: 30px;
+    font-size: 20px;
     color: #fff;
   }
 
@@ -1354,14 +1354,15 @@ footer div ul a span {
   .account .container .showSidebar {
     left: 0;
     transition: 0.3s;
-    background: #1a0b0b;
-    color: wheat;
+    background: white;
+    /* color: wheat; */
     height: 900px;
     width: 120px;
     padding: 5px 5px;
     z-index: 2;
     border-radius: 6px;
     overflow-x: scroll;
+    font-size: 14px;
 
 
   }

@@ -88,9 +88,9 @@ const Jobs = () => {
               placeholder=" Role / Company / etc"
             />
 
-            <button style={{ background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+            <button style={{fontSize:14, background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={handleSearch}>Search</button>
-            <button style={{ background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+            <button style={{fontSize:14, background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={() => clearSearch()}>Clear</button>
 
 

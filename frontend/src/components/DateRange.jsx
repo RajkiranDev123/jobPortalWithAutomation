@@ -54,14 +54,14 @@ const DateRange = ({ handleFetchMeta }) => {
         </div>
         {/* buttons */}
         <div style={{ display: "flex", gap: 3, padding: 3, justifyContent: "center" }}>
-            <button style={{
+            <button style={{fontSize:13,
                 border: "none", borderRadius: 4, cursor: "pointer", background: "blue", color: "white", padding: 1,
             }}
                 onClick={() => search()}
             >
                 Search
             </button>
-            <button style={{
+            <button style={{fontSize:13,
                 border: "none", borderRadius: 4, cursor: "pointer", background: "green", color: "white", padding: 1,
             }}
                 onClick={() => clear()}
