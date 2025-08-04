@@ -1,5 +1,5 @@
 
-import { ClipLoader } from "react-spinners";
+import { DotLoader } from "react-spinners";
 
 const Spinner = () => {
   return (
@@ -12,7 +12,7 @@ const Spinner = () => {
           alignItems: "center",
         }}
       >
-        <ClipLoader size={150} />
+        <DotLoader size={60} />
       </section>
     </>
   );

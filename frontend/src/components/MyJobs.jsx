@@ -78,19 +78,21 @@ const MyJobs = () => {
                     {element.title}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Niche :</span> {element.jobNiche}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Niche : </span>
+                     {element.jobNiche[0]?.toUpperCase()+element.jobNiche?.slice(1)}
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Salary : </span> {element.salary}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Location :</span> {element.location}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Location : </span>
+                     {element.location[0]?.toUpperCase()+element.location?.slice(1)}
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Type :</span> {element.jobType}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Job Type : </span> {element.jobType}
                   </p>
                   <p style={{ fontSize: 14 }} >
-                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Company Name :</span> {element.companyName}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Company Name : </span> {element.companyName}
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Introduction :</span>
