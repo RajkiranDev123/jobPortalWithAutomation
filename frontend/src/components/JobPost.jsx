@@ -101,7 +101,7 @@ const JobPost = () => {
         <select value={location} onChange={(e) => setLocation(e.target.value)}>
           <option value="">Select Job Type</option>
           {cities.map((element) => {
-            return <option value={element}>{element}</option>;
+            return <option key={element} value={element}>{element}</option>;
           })}
         </select>
       </div>

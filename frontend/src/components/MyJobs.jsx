@@ -131,23 +131,23 @@ const MyJobs = () => {
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Introduction :</span>
-                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.introduction}</textarea>
+                    <textarea defaultValue={element.introduction} readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35} />
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Qualifications :</span>
-                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element?.qualifications}</textarea>
+                    <textarea defaultValue={element?.qualifications} readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35} />
 
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Responsibilities :</span>
-                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.responsibilities}</textarea>
+                    <textarea defaultValue={element.responsibilities} readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35} />
 
                   </p>
                   {element.offers && (
                     <p style={{ fontSize: 14 }}>
                       <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />What Are We Offering :</span>
-                      <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }}
-                        rows={2} cols={35}>{element?.offers}</textarea>
+                      <textarea defaultValue={element?.offers} readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }}
+                        rows={2} cols={35} />
 
 
                     </p>
