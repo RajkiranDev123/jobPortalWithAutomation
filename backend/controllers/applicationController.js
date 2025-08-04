@@ -142,16 +142,23 @@ export const jobSeekerGetAllApplication = catchAsyncErrors(
 ////////////////////////////////////////// delete application ///////////////////////////////////
 
 export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
-    const { id } = req.params;
+    const { id } = req.params;//application id
+    console.log("Application id", id)
     try {
         const application = await Application.findById(id);
+        console.log("job id", application.jobInfo.jobId.toString())
         if (!application) {
             return next(new ErrorHandler("Application not found.", 404));
         }
-        const { role } = req.user;
+        const { role, _id: userId } = req.user;
         switch (role) {
             case "Job Seeker":
                 application.deletedBy.jobSeeker = true;
+                await UserModel.findByIdAndUpdate(
+                    userId,
+                    { $pull: { appliedJobIds: application.jobInfo.jobId.toString() } }
+                );
+
                 await application.save();
                 break;
             case "Employer":
