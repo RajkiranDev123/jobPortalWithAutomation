@@ -2,9 +2,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { FcStatistics } from "react-icons/fc";
 import "../pages/loader.css"
-import { useEffect, useRef } from "react";
-import { fetchMetaData, fetchMetaDataJobSeeker } from "../store/slices/metaSlice"
-import Pie from "./Pie";
+import { useEffect, useRef, useState } from "react";
+import { fetchMetaDataJobSeeker } from "../store/slices/metaSlice"
+
 import { MdAddChart } from "react-icons/md";
 import { TbFilterDown } from "react-icons/tb";
 import DateRange from "../components/DateRange"
@@ -12,6 +12,9 @@ import "../pages/loader2.css"
 import downloadPdf from "../utils/downloadAsPdf.js"
 import QRCode from "react-qr-code"
 import pdfIcon from "../assets/pdfDown.png"
+import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import "../pages/loader2.css"
+
 
 
 const JobSeekerDashboard = () => {
@@ -19,15 +22,31 @@ const JobSeekerDashboard = () => {
     const pdfRef = useRef()
     const dispatch = useDispatch();
     const { metaData, loading } = useSelector((state) => state.meta);
+    const [data, setData] = useState([])
 
     const handleFetchMeta = (arg) => {
-        { user && user?.role == "Employer" ? dispatch(fetchMetaData(arg)) : dispatch(fetchMetaDataJobSeeker(arg)) }
+        dispatch(fetchMetaDataJobSeeker(arg))
     };
 
 
     useEffect(() => {
-        { user && user?.role == "Employer" ? dispatch(fetchMetaData()) : dispatch(fetchMetaDataJobSeeker()) }
+        console.log(metaData)
+        dispatch(fetchMetaDataJobSeeker())
     }, [])
+
+
+
+    useEffect(() => {
+        let successRate = ((metaData?.viewedApplicationCounts / metaData?.appliedCounts) * 100).toFixed(2);
+        let failureRate = (100 - successRate).toFixed(2);
+        const data = [
+            { value: successRate, label: "Success" },
+            { value: failureRate, label: "Failure" },
+
+        ];
+        setData(data)
+
+    }, [metaData])
     return (
         <div className="">
             <p style={{
@@ -35,51 +54,63 @@ const JobSeekerDashboard = () => {
                 , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
                 boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
             }}>  <FcStatistics style={{ height: 22 }} /> &nbsp; Stats</p>
+
+
+
             {/* meta starts */}
-            <div ref={pdfRef} style={{
+            {Object?.keys(metaData)?.length > 0 ? <div ref={pdfRef} style={{
                 display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10, background: "white",
                 boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px", margin: 5, padding: 4
             }}>
-                {user && user?.role == "Employer" && <div><Pie /></div>}
-                {/*  */}
 
-                {user && user?.role == "Employer" && <>
-                    <div
-                        style={{
-                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                            padding: 5,
-                            borderRadius: 3,
-                            width: 195,
-                            height: 60,
-                            fontFamily: "monospace", fontSize: 14,
-                            background: "white", color: "black",
-                        }}
-                    >
-                        <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
-                            <MdAddChart />Total Jobs Posted&nbsp;  </p>
-                        <p style={{ fontSize: 14, textAlign: "center" }}> {metaData?.jobsPosted} </p>
-                    </div>
-
-
-                    <div
-                        style={{
-                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                            padding: 5,
-                            borderRadius: 3,
-                            width: 195,
-                            height: 60,
-                            fontFamily: "monospace", fontSize: 14,
-                            background: "white", color: "black",
-                        }}
-                    >
-                        <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
-                            <MdAddChart />Total Applied&nbsp;  </p>
-                        <p style={{ fontSize: 14, textAlign: "center" }}>
-                            {metaData?.viewedApplications + metaData?.unviewedApplications} </p>
-                    </div>
-                </>}
 
                 {user && user?.role == "Job Seeker" && <>
+
+                    {/* pie */}
+                    <div
+                        style={{
+                            // boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                            padding: 5,
+                            borderRadius: 3,
+                            width: 160,
+                            height: 160,
+                            fontFamily: "monospace", fontSize: 14,
+                            background: "white", color: "black",
+                        }}
+                    >
+
+                        <PieChart
+                            hideLegend
+                            colors={["green", "red"]}
+
+                            series={[
+                                {
+                                    arcLabel: (item) => `${item.value} %`,
+                                    arcLabelMinAngle: 45,
+                                    data,
+                                    valueFormatter: (item) => `${item.value}%`,
+
+                                },
+                            ]}
+                            sx={{
+                                [`& .${pieArcLabelClasses.root}`]: {
+                                    fill: "white",
+                                    fontWeight: "",
+                                    fontSize: 10
+                                },
+                            }}
+
+                            width={100}
+                            height={100}
+                        />
+                        <p style={{ color: "green", fontSize: 12, textAlign: "center" }}>Success %</p>
+                        <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>Failure %</p>
+
+                    </div>
+
+
+
+                    {/* pie */}
 
                     <div
                         style={{
@@ -99,7 +130,7 @@ const JobSeekerDashboard = () => {
                     </div>
 
                     {/* viewed counts*/}
-                     <div
+                    <div
                         style={{
                             boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
                             padding: 5,
@@ -120,30 +151,12 @@ const JobSeekerDashboard = () => {
 
 
 
-            </div>
+            </div> : <div style={{ display: "flex", justifyContent: "center", }}><div className="loader2"></div></div>}
             {/* meta ends */}
 
             {/* qr and pdf */}
             <p style={{ color: "grey", fontSize: 14 }}>Share the stats!</p>
-            {user && user?.role == "Employer" && <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", flexWrap: "wrap", gap: 2, margin: 4 }}>
-                {/* qr */}
-                <QRCode style={{ height: 80, width: 100 }}
-                    value={
-                        `Viewed Applications : ${metaData?.viewedApplications},
-           Not-Viewed Applications : ${metaData?.unviewedApplications},
-           Total Jobs Posted  : ${metaData?.jobsPosted},
-           Total Applied  : ${metaData?.viewedApplications + metaData?.unviewedApplications} `
 
-                    } />
-
-                {/* qr */}
-                <p style={{ color: "grey", fontSize: 14 }}>or</p>
-
-                <button onClick={() => downloadPdf(pdfRef)}
-                    style={{ border: "none", borderRadius: 4, cursor: "pointer" }}>
-                    <img src={pdfIcon} alt="pdf" style={{ width: 75, height: 75 }} />
-                </button>
-            </div>}
 
             {/* job seeker */}
             {user && user?.role == "Job Seeker" && <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", flexWrap: "wrap", gap: 2, margin: 4 }}>
