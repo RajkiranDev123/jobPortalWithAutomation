@@ -69,7 +69,11 @@ const Applications = () => {
       ) : (
         <>
           <div >
-            <p style={{ color: "blue", display: "flex", alignItems: "center", gap: 3, flexWrap: "wrap", justifyContent: "space-between", margin: 6 }}>
+            <p style={{
+              color: "blue", display: "flex", alignItems: "center", gap: 3, flexWrap: "wrap", justifyContent: "space-between", margin: 6
+              , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
+              boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+            }}>
               <span> <VscGitStashApply style={{ height: 22, color: "blue" }} />Applicant's For Your Posted Jobs</span>
               <button
                 onClick={() => dispatch(pdfDownload())}
@@ -160,11 +164,11 @@ const Applications = () => {
 
       {/*  */}
       {/* pagin */}
-      <div style={{ display: "flex", justifyContent: "center", margin: 3 }}>
+      {applications?.length > 0 && <div style={{ display: "flex", justifyContent: "center", margin: 3 }}>
         <Stack spacing={2}>
           <Pagination color="primary" onChange={changePage} page={page} count={pageCount} />
         </Stack>
-      </div>
+      </div>}
       {/* pagin */}
     </>
   );

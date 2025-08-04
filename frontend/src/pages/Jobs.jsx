@@ -81,7 +81,7 @@ const Jobs = () => {
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
 
-            <input style={{ border: "none", outline: "none", padding: 2, borderRadius: 3,fontSize:14 }}
+            <input style={{ border: "none", outline: "none", padding: 4, borderRadius: 3,fontSize:14 }}
               type="text"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}

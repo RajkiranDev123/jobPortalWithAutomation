@@ -43,7 +43,7 @@ const PostApplication = () => {
       formData.append("resume", resume);
     }
     dispatch(postApplication(formData, jobId));
-   
+
   };
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const PostApplication = () => {
     }
     if (message) {
       toast.success(message);
-       dispatch(getUser());
+      dispatch(getUser());
       dispatch(resetApplicationSlice());
     }
     dispatch(fetchSingleJob(jobId));
@@ -85,6 +85,11 @@ const PostApplication = () => {
     const file = e.target.files[0];
     setResume(file);
   };
+
+  const formatUrl = (url) =>
+    url.startsWith("http://") || url.startsWith("https://")
+      ? url
+      : `https://${url}`;
 
   return (
     <>
@@ -185,9 +190,13 @@ const PostApplication = () => {
           <header>
             <h3>{singleJob.title}</h3>
             {singleJob.personalWebsite && (
-              <Link target="_blank" to={singleJob.personalWebsite.url}>
+              <a
+                href={formatUrl(singleJob.personalWebsite.url)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {singleJob.personalWebsite.title}
-              </Link>
+              </a>
             )}
             <p>{singleJob?.location && singleJob?.location[0]?.toUpperCase() + singleJob?.location?.slice(1)}</p>
             <p>Rs. {singleJob.salary} p.a.</p>

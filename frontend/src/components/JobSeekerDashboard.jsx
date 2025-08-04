@@ -30,7 +30,11 @@ const JobSeekerDashboard = () => {
     }, [])
     return (
         <div className="">
-            <p style={{ color: "blue", display: "flex", alignItems: "center", marginTop: 12 }}>  <FcStatistics style={{ height: 22 }} /> &nbsp; Stats</p>
+            <p style={{
+                color: "blue", display: "flex", alignItems: "center", marginTop: 12
+                , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+            }}>  <FcStatistics style={{ height: 22 }} /> &nbsp; Stats</p>
             {/* meta starts */}
             <div ref={pdfRef} style={{
                 display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10, background: "white",

@@ -74,7 +74,11 @@ const JobPost = () => {
 
   return (
     <div className="account_components">
-      <p style={{color:"blue",display:"flex",alignItems:"center"}}>  <BsFillPostcardFill style={{ height: 22 }} />&nbsp; Post A Job</p>
+      <p style={{
+        color: "blue", display: "flex", alignItems: "center"
+        , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
+        boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+      }}>  <BsFillPostcardFill style={{ height: 22 }} />&nbsp; Post A Job</p>
       <div>
         <label>Title</label>
         <input
@@ -213,9 +217,9 @@ const JobPost = () => {
           placeholder="Peronsal Website Link (URL)"
         />
       </div>
-    
-         {/*  */}
-       <button style={{ display: "flex", justifyContent: "center", background: "#2A5792", color: "white", border: "none", borderRadius: 4 }}
+
+      {/*  */}
+      <button style={{ display: "flex", justifyContent: "center", background: "#2A5792", color: "white", border: "none", borderRadius: 4 }}
 
         onClick={handlePostJob}
 

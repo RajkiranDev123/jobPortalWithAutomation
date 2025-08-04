@@ -66,7 +66,7 @@ const jobSlice = createSlice({
         },
         //////////////////////////////////////////////////////
         requestForDeleteJob(state, action) {
-            state.loading = true;
+       
             state.error = null;
             state.message = null;
             state.isDeleted=true

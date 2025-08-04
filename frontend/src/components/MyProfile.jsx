@@ -5,7 +5,11 @@ const MyProfile = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <div className="account_components">
-      <p style={{color:"blue",display:"flex",alignItems:"center",marginTop:13}}>  <CiUser style={{ height: 22 }} /> My Profile</p>
+      <p style={{
+        color: "blue", display: "flex", alignItems: "center", marginTop: 13
+        , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
+        boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+      }}>  <CiUser style={{ height: 22 }} /> My Profile</p>
       <div>
         <label>Full Name :</label>
         <input
@@ -65,7 +69,7 @@ const MyProfile = () => {
         <input
           type="text"
           disabled
-          value={user && Object.keys(user)?.length > 0  && user?.address[0]?.toUpperCase()+user?.address?.slice(1)}
+          value={user && Object.keys(user)?.length > 0 && user?.address[0]?.toUpperCase() + user?.address?.slice(1)}
           onChange={(e) => e.target.value}
         />
       </div>
@@ -83,7 +87,7 @@ const MyProfile = () => {
         <input
           type="text"
           disabled
-          value={user && user.createdAt?.slice(0,10)}
+          value={user && user.createdAt?.slice(0, 10)}
           onChange={(e) => e.target.value}
         />
       </div>

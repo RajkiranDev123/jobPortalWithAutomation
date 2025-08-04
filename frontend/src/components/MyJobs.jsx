@@ -29,14 +29,16 @@ const MyJobs = () => {
     }
     if (message) {
       toast.success(message);
+      setPage(1)
       dispatch(resetJobSlice());
     }
     dispatch(getMyJobs(page));//call api
   }, [dispatch, error, message]);
 
   const handleDeleteJob = (id) => {
-    setPage(1)
     dispatch(deleteJob(id));
+
+
   };
 
   // pagination 1
@@ -57,13 +59,17 @@ const MyJobs = () => {
       ) : (
         <>
           <div >
-            <p style={{ display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 10 }}>
+            <p style={{
+              display: "flex", alignItems: "center", gap: 3, color: "blue", marginTop: 10
+              , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
+              boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
+            }}>
               <TfiLayoutListPost style={{ height: 22 }} /> My Posted Jobs</p>
             <div style={{ display: "flex", justifyContent: "center", gap: 5, flexWrap: "wrap", marginTop: 5 }}>
               {myJobs?.map((element) => (
                 <div
                   style={{
-                    padding: 3, borderRadius: 3, background: "#FAFAFA",
+                    padding: 5, borderRadius: 3, background: "#FAFAFA", height: 400, position: "relative",
                     boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
                   }}
                   key={element?._id} >
@@ -88,22 +94,28 @@ const MyJobs = () => {
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Introduction :</span>
-                    <textarea style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.introduction}</textarea>
+                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.introduction}</textarea>
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Qualifications :</span> {element.qualifications}
+                    <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Qualifications :</span>
+                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element?.qualifications}</textarea>
+
                   </p>
                   <p style={{ fontSize: 14 }}>
                     <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />Responsibilities :</span>
-                    <textarea style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.responsibilities}</textarea>
+                    <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }} rows={2} cols={35}>{element.responsibilities}</textarea>
 
                   </p>
                   {element.offers && (
                     <p style={{ fontSize: 14 }}>
-                      <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />What Are We Offering :</span> {element.offers}
+                      <span style={{ fontSize: 14 }}><TbArrowBadgeRightFilled size={10} />What Are We Offering :</span>
+                      <textarea readOnly style={{ display: "block", fontSize: 12, outline: "none", border: "none" }}
+                        rows={2} cols={35}>{element?.offers}</textarea>
+
+
                     </p>
                   )}
-                  <button style={{ background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2, fontSize: 14 }}
+                  <button style={{ position: "absolute", bottom: 5, background: "red", color: "white", border: "none", borderRadius: 5, padding: 2, margin: 2, fontSize: 14 }}
 
                     onClick={() => handleDeleteJob(element._id)}
                   >
@@ -114,7 +126,7 @@ const MyJobs = () => {
             </div>
 
           </div>
-              {isDeleted && <div style={{ display: "flex", justifyContent: "center",}}><div  className="loader2"></div></div>}
+          {isDeleted && <div style={{ display: "flex", justifyContent: "center", }}><div className="loader2"></div></div>}
           {/* pagin */}
           <div style={{ display: "flex", justifyContent: "center", margin: 3 }}>
             <Stack spacing={2}>
