@@ -156,7 +156,7 @@ const PostApplication = () => {
                     to={user.resume && user.resume.url}
                     target="_blank"
 
-                    style={{ textDecoration: "none", padding: 3, color: "white", background: "black", borderRadius: 6 }}
+                    style={{ textDecoration: "none", padding: 3, color: "white", background: "green", borderRadius: 6 }}
                   >
                     View Resume
                   </Link>}
@@ -164,6 +164,7 @@ const PostApplication = () => {
 
 
                 </label>
+                <p style={{fontSize:13,color:"grey"}}>If you want to update resume then select choose file!</p>
                 <input type="file" onChange={resumeHandler} />
               </div>
             </>

@@ -188,12 +188,12 @@ const UpdateProfile = () => {
             {user && user?.resume && (
               <div>
 
-                <Link style={{ color: "grey" }}
+                <Link style={{ color: "white",background:"green",borderRadius:3,textAlign:"center" ,textDecoration:"none",fontSize:14}}
                   to={user?.resume && user?.resume.url}
                   target="_blank"
 
                 >
-                  View already uploaded Resume
+                 Or click here to View already uploaded Resume!
                 </Link>
               </div>
             )}

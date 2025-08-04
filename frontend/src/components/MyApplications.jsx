@@ -16,12 +16,13 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import moment from "moment"
 import { GoThumbsup } from "react-icons/go";
+import "../pages/loader2.css"
 
 const MyApplications = () => {
   const [page, setPage] = useState(1);
 
 
-  const { loading, error, applications, message, pageCount } = useSelector(
+  const { loading, error, applications, message, pageCount, isDeleted } = useSelector(
     (state) => state.applications
   );
   const dispatch = useDispatch();
@@ -43,8 +44,9 @@ const MyApplications = () => {
   }, [dispatch, error, message]);
 
   const handleDeleteApplication = (id) => {
-    setPage(1)
+
     dispatch(deleteApplication(id));
+    setPage(1)
 
 
   };
@@ -82,7 +84,8 @@ const MyApplications = () => {
                     borderTopRightRadius: 19
                   }}
                 >
-                  <p style={{visibility:element?.viewed?"unset":"hidden",
+                  <p style={{
+                    visibility: element?.viewed ? "unset" : "hidden",
                     alignItems: "center",
                     fontSize: 10, background: "green", color: "white", display: "inline-block", borderRadius: 3, padding: 2
                   }}>
@@ -134,7 +137,7 @@ const MyApplications = () => {
                       }}
                       onClick={() => handleDeleteApplication(element._id)}
                     >
-                      {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Delete"}
+                      Delete
 
                     </button>
 
@@ -145,6 +148,14 @@ const MyApplications = () => {
             })}
 
           </div>
+          {/* load */}
+          {isDeleted && <div style={{ display: "flex", justifyContent: "center" }}><div className="loader2"></div></div>}
+
+
+
+
+
+          {/* load */}
           {/* pagin */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 5 }}>
             <Stack spacing={2}>
