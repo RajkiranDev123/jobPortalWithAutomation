@@ -93,9 +93,27 @@ const JobSeekerDashboard = () => {
                         }}
                     >
                         <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
-                            <MdAddChart />Total Applied Jobs&nbsp;  </p>
+                            <MdAddChart />Total Applied &nbsp;  </p>
                         <p style={{ fontSize: 14, textAlign: "center" }}>
                             {metaData?.appliedCounts} </p>
+                    </div>
+
+                    {/* viewed counts*/}
+                     <div
+                        style={{
+                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                            padding: 5,
+                            borderRadius: 3,
+                            width: 195,
+                            height: 60,
+                            fontFamily: "monospace", fontSize: 14,
+                            background: "white", color: "black",
+                        }}
+                    >
+                        <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
+                            <MdAddChart />Viewed by Recruiter&nbsp;  </p>
+                        <p style={{ fontSize: 14, textAlign: "center" }}>
+                            {metaData?.viewedApplicationCounts} </p>
                     </div>
 
                 </>}
