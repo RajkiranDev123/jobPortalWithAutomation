@@ -17,6 +17,7 @@ import { getUser } from "../store/slices/userSlice";
 const PostApplication = () => {
   const { singleJob } = useSelector((state) => state.jobs);
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  console.log(8,user)
   const { loading, error, message } = useSelector((state) => state.applications);
 
   const { jobId } = useParams();
@@ -170,7 +171,7 @@ const PostApplication = () => {
             </>
           )}
 
-          {isAuthenticated && user.role === "Job Seeker" && (
+          {(isAuthenticated && user.role === "Job Seeker" && !user?.appliedJobIds?.includes(jobId)) && (
             <div style={{ alignItems: "flex-end" }}>
               <button
                 className="btn"

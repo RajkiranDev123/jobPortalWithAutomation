@@ -184,6 +184,9 @@ const MyJobs = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
+            <p onClick={handleClose} style={{ color: "red", fontSize: 14,cursor:"pointer",display:"flex",justifyContent:"flex-end" }}>X</p>
+
+
             <p style={{ color: "grey", fontSize: 14 }}>Ask password from Head Admin to delete!</p>
             <input value={typePass} onChange={(e) => setTypePass(e.target.value)} placeholder="Password"
               type="password" style={{ padding: 3, border: "1px solid grey", borderRadius: 4, width: "100%" }} />
