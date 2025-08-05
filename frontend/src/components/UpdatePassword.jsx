@@ -57,7 +57,7 @@ const UpdatePassword = () => {
   return (
     <div className="account_components update_password_component">
       <p style={{
-        color: "blue", display: "flex", alignItems: "center"
+        color: "#0E3386", display: "flex", alignItems: "center"
         , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
         boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
       }}>   <RiLockPasswordLine style={{ height: 22 }} />  Update Password</p>

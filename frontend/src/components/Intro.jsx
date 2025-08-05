@@ -23,7 +23,7 @@ const Intro = () => {
 
 
             <div>
-                <p style={{ color: "white", fontWeight: "bold" }}>Our Montly Jobs Added Counts :</p>
+                <p style={{ color: "#0E3386", fontWeight: "bold" }}>Our Montly Jobs Added Counts :</p>
 
                 {monthlyPostedJobs?.length > 0 ? <BarGraph /> : <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div>}
             </div>

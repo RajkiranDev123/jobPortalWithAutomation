@@ -649,7 +649,7 @@ footer div ul a span {
   max-width: 1500px;
   margin: 0 auto;
   min-height: 100vh;
-  background: linear-gradient(15deg, #9199a6, #d8d2d2 50%);
+  /* background: linear-gradient(15deg, #9199a6, #d8d2d2 50%); */
 
 }
 

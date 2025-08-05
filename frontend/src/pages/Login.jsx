@@ -51,7 +51,7 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h4 style={{ display: "flex", alignItems: "center", justifyContent: "center" }}><RiLoginBoxLine />Login here...</h4>
+            <h4 style={{ display: "flex", alignItems: "center", justifyContent: "center",color:"grey",fontSize:30 }}><RiLoginBoxLine />Login here...</h4>
           </div>
           <TestCredentials />
           <form onSubmit={handleLogin}>
@@ -94,14 +94,14 @@ const Login = () => {
 
 
 
-            <button style={{margin:3}} type="submit" disabled={loading}>
+            <button style={{ margin: 3,background:"blue",cursor:"pointer" }} type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
             <p style={{ color: "grey", fontStyle: "italic", fontSize: 14 }}>If you don't have an Account then click &nbsp;
-              <Link style={{margin:0, background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
+              <Link style={{ margin: 0, background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/register"}>Register Now</Link>
             </p>
-            <Link style={{margin:0,color:"red", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/forgot/password"}>Click here if you Forgot your Password ?</Link>
+            <Link style={{ margin: 0, color: "red", background: "none", border: "none", fontSize: 14, display: "inline" }} to={"/forgot/password"}>Click here if you Forgot your Password ?</Link>
 
           </form>
         </div>
@@ -109,13 +109,23 @@ const Login = () => {
         {/* rs */}
 
         <div style={{
-          borderLeft: "2px solid grey", opacity: 0.8, width: "60%",
+          opacity: 0.8,
+          width: "50%",
+          background: "",
 
-          background: "linear-gradient(159deg, rgba(8,146,208,1) 0%, rgba(75,0,130,1) 100%)",
-          display: "flex", justifyContent: "center", alignItems: "center"
+
+          display: "flex", justifyContent: "center",
         }}>
-          <p style={{ color: "white", display: "block", padding: 2 }}>console.log("hi, devs!")</p>&nbsp;
-          <img style={{ width: "60%", height: "60%", borderRadius: 210,boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px" }} src={jobsearch} alt="js" />
+
+          <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection:"column",background:""}}>
+            <p style={{ color:"grey",fontSize:35,fontWeight:"bold",fontFamily:"monospace",margin:12}}>Find your dream job today!</p>
+            <img style={{
+              width: "400px", height: "400px", borderRadius: 190,
+              boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+            }} src={jobsearch} alt="js" />
+          </div>
+
+
         </div>
 
         {/*  */}

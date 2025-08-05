@@ -70,11 +70,11 @@ const Applications = () => {
         <>
           <div >
             <p style={{
-              color: "blue", display: "flex", alignItems: "center", gap: 3, flexWrap: "wrap", justifyContent: "space-between", margin: 6
+              color: "#0E3386", display: "flex", alignItems: "center", gap: 3, flexWrap: "wrap", justifyContent: "space-between", margin: 6
               , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
               boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
             }}>
-              <span> <VscGitStashApply style={{ height: 22, color: "blue" }} />Applicant's For Your Posted Jobs</span>
+              <span> <VscGitStashApply style={{ height: 22, color: "#0E3386" }} />Applicant's For Your Posted Jobs</span>
               <button
                 onClick={() => dispatch(pdfDownload())}
                 style={{
@@ -85,6 +85,8 @@ const Applications = () => {
                   <div style={{ display: "flex", justifyContent: "center", margin: 2 }}><div style={{ color: "red" }} className="loader"></div></div>
                   : "Download pdf"}<FaFilePdf /></button>
             </p>
+
+            <p style={{color:"grey",fontSize:14,textAlign:"center",margin:2}}>Note : If you click Set as Viewed? then mail also will be sent to the job seeker !</p>
 
             <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 4, marginTop: 4 }}>
               {applications?.map((element) => {

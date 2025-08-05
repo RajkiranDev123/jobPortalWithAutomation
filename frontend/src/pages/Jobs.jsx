@@ -186,7 +186,7 @@ const Jobs = () => {
                     <span style={{ fontSize: 14 }}>Salary :</span> Rs. {element.salary} p.a.
                   </p>
                   <p style={{ fontSize: 14 }}>
-                    <span style={{ fontSize: 14 }}>Posted On:</span>{" "}
+                    <span style={{ fontSize: 14 }}>Posted On :</span>{" "}
                     {element.jobPostedOn.substring(0, 10)}
                   </p>
 
