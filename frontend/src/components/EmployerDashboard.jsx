@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { FcStatistics } from "react-icons/fc";
 import "../pages/loader.css"
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchMetaData } from "../store/slices/metaSlice"
 import Pie from "./Pie";
 import { MdAddChart } from "react-icons/md";
@@ -13,9 +13,14 @@ import downloadPdf from "../utils/downloadAsPdf.js"
 import QRCode from "react-qr-code"
 import pdfIcon from "../assets/pdfDown.png"
 
+import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
+import "../pages/loader2.css"
+
 
 const EmployerDashboard = () => {
   const pdfRef = useRef()
+  const [data, setData] = useState([])
+
   const dispatch = useDispatch();
   const { metaData, loading } = useSelector((state) => state.meta);
 
@@ -27,6 +32,19 @@ const EmployerDashboard = () => {
   useEffect(() => {
     dispatch(fetchMetaData())
   }, [])
+
+
+  useEffect(() => {
+    let successRate = (((metaData?.viewedApplications + metaData?.unviewedApplications) / metaData?.jobsPosted) * 100).toFixed(2);
+    let failureRate = (100 - successRate).toFixed(2);
+    const data = [
+      { value: successRate, label: "Success" },
+      { value: failureRate, label: "Failure" },
+
+    ];
+    setData(data)
+
+  }, [metaData])
   return (
     <div className="">
       <p style={{
@@ -34,13 +52,19 @@ const EmployerDashboard = () => {
         , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",
         boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
       }}>  <FcStatistics style={{ height: 22 }} /> &nbsp; Stats</p>
+
+
+
       {/* meta starts */}
-      <div ref={pdfRef} style={{
+      {Object?.keys(metaData)?.length > 0 ? <div ref={pdfRef} style={{
         display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10, background: "white",
         boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px", margin: 5, padding: 4
       }}>
+        {/* pie 1 */}
         <div><Pie /></div>
-        {/*  */}
+        {/* pie 1 ends */}
+
+
 
         <div
           style={{
@@ -48,34 +72,68 @@ const EmployerDashboard = () => {
             padding: 5,
             borderRadius: 3,
             width: 195,
-            height: 60,
+            height: 150,
             fontFamily: "monospace", fontSize: 14,
             background: "white", color: "black",
           }}
         >
           <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
-            <MdAddChart />Total Jobs Posted&nbsp;  </p>
+            <MdAddChart />Total Jobs Posted&nbsp;
+          </p>
           <p style={{ fontSize: 14, textAlign: "center" }}> {metaData?.jobsPosted} </p>
+
+          <hr />
+
+          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
+            <MdAddChart size={22} />Total Applied by Candidates&nbsp;
+          </p>
+          <p style={{ fontSize: 14, textAlign: "center" }}>{metaData?.viewedApplications + metaData?.unviewedApplications} </p>
         </div>
+
         {/*  */}
         <div
           style={{
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+            // boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
             padding: 5,
             borderRadius: 3,
             width: 195,
-            height: 60,
+            height: 190,
             fontFamily: "monospace", fontSize: 14,
             background: "white", color: "black",
           }}
         >
-          <p style={{ fontFamily: "monospace", fontSize: 14, textAlign: "center", display: "flex", alignItems: "center", gap: 1, color: "grey" }}>
-            <MdAddChart />Total Applied&nbsp;  </p>
-          <p style={{ fontSize: 14, textAlign: "center" }}>
-            {metaData?.viewedApplications + metaData?.unviewedApplications} </p>
+
+          <PieChart
+            hideLegend
+            colors={["green", "red"]}
+
+            series={[
+              {
+                arcLabel: (item) => `${item.value} %`,
+                arcLabelMinAngle: 45,
+                data,
+                valueFormatter: (item) => `${item.value}%`,
+
+              },
+            ]}
+            sx={{
+              [`& .${pieArcLabelClasses.root}`]: {
+                fill: "white",
+                fontWeight: "",
+                fontSize: 10
+              },
+            }}
+
+            width={140}
+            height={140}
+          />
+          <p style={{ color: "green", fontSize: 12, textAlign: "center" }}>Success %</p>
+          <p style={{ color: "red", fontSize: 12, textAlign: "center" }}>Failure %</p>
+
         </div>
 
       </div>
+        : <div style={{ display: "flex", justifyContent: "center", }}><div className="loader2"></div></div>}
       {/* meta ends */}
 
       {/* qr and pdf */}

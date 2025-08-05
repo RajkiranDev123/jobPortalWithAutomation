@@ -15,7 +15,7 @@ export default function Pie() {
                 },
             ]}
 
-            width={300}
+            width={150}
             height={150}
             hideLegend
         />
