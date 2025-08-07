@@ -141,7 +141,7 @@ export const register = (data) => async (dispatch) => {
             `/api/v1/user/register`,
             data,
             {
-       
+
                 headers: { "Content-Type": "multipart/form-data" },
             }
         );
@@ -159,13 +159,15 @@ export const login = (data) => async (dispatch) => {
             `/api/v1/user/login`,
             data,
             {
-       
+
                 headers: { "Content-Type": "application/json" },
             }
         );
+        localStorage.setItem("token", response?.data?.token);
+        localStorage.setItem("refreshToken", response?.data?.refreshToken);
+
         dispatch(userSlice.actions.loginSuccess(response.data));
-        localStorage.setItem("token", res?.data?.token);
-        localStorage.setItem("refreshToken", res?.data?.refreshToken);
+
         // dispatch(userSlice.actions.clearMessage());
 
         dispatch(userSlice.actions.clearAllErrors());
@@ -200,8 +202,9 @@ export const logout = () => async (dispatch) => {
             `/api/v1/user/logout`,
 
         );
-        dispatch(userSlice.actions.logoutSuccess());
         localStorage.clear()
+
+        dispatch(userSlice.actions.logoutSuccess());
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(userSlice.actions.logoutFailed(error.response.data.message));
@@ -216,7 +219,7 @@ export const forgotPassword = (email) => async (dispatch) => {
             `/api/v1/user/forgot/password`,
             { email },
             {
-          
+
                 headers: { "Content-Type": "application/json" },
             }
         );

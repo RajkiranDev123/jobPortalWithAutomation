@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
 
         //Triggers token refresh only if: It's a 401 Unauthorized error.
 
-        if (error.response.status === 401 && !originalRequest._retry && !originalRequest.url.includes("/auth/refreshAccessToken")) {
+        if (error.response.status === 401 && !originalRequest._retry && !originalRequest.url.includes("/user/refreshAccessToken")) {
 
             if (isRefreshing) {//already rereshing ?
                 return new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ axiosInstance.interceptors.response.use(
                 if (!refreshToken) throw new Error("No refresh token available");
 
                 const response = await axios.post(
-                    `${import.meta.env.VITE_BASE_URL}/api/v1/auth/refreshAccessToken`,
+                    `${import.meta.env.VITE_BASE_URL}/api/v1/user/refreshAccessToken`,
                     { refreshToken }
                 );
 
