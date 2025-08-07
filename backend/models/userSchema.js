@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     },
     appliedJobIds: [],
 
-    resetPasswordToken: String, 
+    resetPasswordToken: String,
     resetPasswordExpire: Date,
 
     createdAt: {
@@ -77,7 +77,9 @@ userSchema.methods.getJWTToken = function () {
         expiresIn: process.env.JWT_EXPIRE,
     });
 };
-
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_EXPIRE })
+}
 // getResetPasswordToken
 userSchema.methods.getResetPasswordToken = function () {
     const resetToken = crypto.randomBytes(20).toString("hex")
