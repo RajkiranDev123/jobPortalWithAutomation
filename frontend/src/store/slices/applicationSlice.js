@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../services/setupAxios";
+
 
 const applicationSlice = createSlice({
     name: "applications",
@@ -118,10 +119,10 @@ const applicationSlice = createSlice({
 export const fetchEmployerApplications = (page) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForAllApplications());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/application/employer/getall`,
+        const response = await axiosInstance.get(
+            `/api/v1/application/employer/getall`,
             {
-                withCredentials: true,
+        
                 headers: {
                     "page": page
                 }
@@ -144,10 +145,10 @@ export const fetchEmployerApplications = (page) => async (dispatch) => {
 export const fetchJobSeekerApplications = (page) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForMyApplications());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/application/jobseeker/getall`,
+        const response = await axiosInstance.get(
+            `/api/v1/application/jobseeker/getall`,
             {
-                withCredentials: true,
+    
                 headers: {
                     "page": page
                 }
@@ -171,11 +172,11 @@ export const fetchJobSeekerApplications = (page) => async (dispatch) => {
 export const postApplication = (data, jobId) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForPostApplication());
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/application/post/${jobId}`,
+        const response = await axiosInstance.post(
+            `/api/v1/application/post/${jobId}`,
             data,
             {
-                withCredentials: true,
+      
                 headers: { "Content-Type": "multipart/form-data" },
             }
         );
@@ -195,9 +196,9 @@ export const postApplication = (data, jobId) => async (dispatch) => {
 export const deleteApplication = (id) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForDeleteApplication());
     try {
-        const response = await axios.delete(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/application/delete/${id}`,
-            { withCredentials: true }
+        const response = await axiosInstance.delete(
+            `/api/v1/application/delete/${id}`,
+    
         );
         dispatch(applicationSlice.actions.successForDeleteApplication(response?.data?.message));
         // dispatch(fetchJobSeekerApplications(1));
@@ -216,10 +217,10 @@ export const deleteApplication = (id) => async (dispatch) => {
 export const viewedApplication = (id,jobTitle,email) => async (dispatch) => {
     dispatch(applicationSlice.actions.requestForViewedApplication());
     try {
-        const response = await axios.put(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/application/viewed/${id}`,
+        const response = await axiosInstance.put(
+            `/api/v1/application/viewed/${id}`,
             {jobTitle,email},
-            { withCredentials: true }
+     
         );
         dispatch(applicationSlice.actions.successForViewedApplication(response?.data?.message));
         // dispatch(fetchJobSeekerApplications(1));

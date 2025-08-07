@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+
+import axiosInstance from "../../services/setupAxios";
+
 
 const userSlice = createSlice({
     name: "user",
@@ -135,11 +137,11 @@ const userSlice = createSlice({
 export const register = (data) => async (dispatch) => {
     dispatch(userSlice.actions.registerRequest());
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/register`,
+        const response = await axiosInstance.post(
+            `/api/v1/user/register`,
             data,
             {
-                withCredentials: true,
+       
                 headers: { "Content-Type": "multipart/form-data" },
             }
         );
@@ -153,15 +155,17 @@ export const register = (data) => async (dispatch) => {
 export const login = (data) => async (dispatch) => {
     dispatch(userSlice.actions.loginRequest());
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/login`,
+        const response = await axiosInstance.post(
+            `/api/v1/user/login`,
             data,
             {
-                withCredentials: true,
+       
                 headers: { "Content-Type": "application/json" },
             }
         );
         dispatch(userSlice.actions.loginSuccess(response.data));
+        localStorage.setItem("token", res?.data?.token);
+        localStorage.setItem("refreshToken", res?.data?.refreshToken);
         // dispatch(userSlice.actions.clearMessage());
 
         dispatch(userSlice.actions.clearAllErrors());
@@ -173,10 +177,10 @@ export const login = (data) => async (dispatch) => {
 export const getUser = (isAuthenticationToggle) => async (dispatch) => {
     dispatch(userSlice.actions.fetchUserRequest(isAuthenticationToggle));
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/getuser`,
+        const response = await axiosInstance.get(
+            `/api/v1/user/getuser`,
             {
-                withCredentials: true,
+                // withCredentials: true,
                 // is used to send cookies and authentication headers along with cross-origin requests. 5173 to 3000
                 // frontend and backend are on different domains
             }
@@ -192,13 +196,12 @@ export const getUser = (isAuthenticationToggle) => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/logout`,
-            {
-                withCredentials: true,
-            }
+        const response = await axiosInstance.get(
+            `/api/v1/user/logout`,
+
         );
         dispatch(userSlice.actions.logoutSuccess());
+        localStorage.clear()
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(userSlice.actions.logoutFailed(error.response.data.message));
@@ -209,11 +212,11 @@ export const logout = () => async (dispatch) => {
 export const forgotPassword = (email) => async (dispatch) => {
     dispatch(userSlice.actions.forgotPasswordRequest());
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/forgot/password`,
+        const response = await axiosInstance.post(
+            `/api/v1/user/forgot/password`,
             { email },
             {
-                withCredentials: true,
+          
                 headers: { "Content-Type": "application/json" },
             }
         );
@@ -230,8 +233,8 @@ export const forgotPassword = (email) => async (dispatch) => {
 export const resetPassword = (token, data) => async (dispatch) => {
     dispatch(userSlice.actions.resetPasswordRequest());
     try {
-        const response = await axios.put(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/reset/password/${token}`,
+        const response = await axiosInstance.put(
+            `/api/v1/user/reset/password/${token}`,
             data,
             {
                 withCredentials: true,

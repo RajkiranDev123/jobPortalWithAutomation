@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../services/setupAxios";
+
 
 const updateProfileSlice = createSlice({
     name: "updateProfile",
@@ -46,11 +47,11 @@ const updateProfileSlice = createSlice({
 export const updateProfile = (data) => async (dispatch) => {
     dispatch(updateProfileSlice.actions.updateProfileRequest());
     try {
-        const response = await axios.put(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/update/profile`,
+        const response = await axiosInstance.put(
+            `/api/v1/user/update/profile`,
             data,
             {
-                withCredentials: true,
+           
                 headers: { "Content-Type": "multipart/form-data" },
             }
         );
@@ -66,11 +67,11 @@ export const updateProfile = (data) => async (dispatch) => {
 export const updatePassword = (data) => async (dispatch) => {
     dispatch(updateProfileSlice.actions.updatePasswordRequest());
     try {
-        const response = await axios.put(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/user/update/password`,
+        const response = await axiosInstance.put(
+            `/api/v1/user/update/password`,
             data,
             {
-                withCredentials: true,
+      
                 headers: { "Content-Type": "application/json" },
             }
         );

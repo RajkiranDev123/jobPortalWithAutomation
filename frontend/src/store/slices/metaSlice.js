@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../services/setupAxios";
+
 
 const metaSlice = createSlice({
     name: "meta",
@@ -78,10 +79,10 @@ export const fetchMetaData = (date) => async (dispatch) => {
 
     dispatch(metaSlice.actions.requestForMeta());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/employer`,
+        const response = await axiosInstance.get(
+            `/api/v1/meta/employer`,
             {
-                withCredentials: true,
+         
                 headers: {
                     "date-range": date
                 }
@@ -105,10 +106,10 @@ export const fetchMetaDataJobSeeker = (date) => async (dispatch) => {
 
     dispatch(metaSlice.actions.requestForMeta());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/job-seeker`,
+        const response = await axiosInstance.get(
+            `/api/v1/meta/job-seeker`,
             {
-                withCredentials: true,
+ 
                 headers: {
                     "date-range": date
                 }
@@ -129,10 +130,10 @@ export const monthlyJobsPostedCounts = () => async (dispatch) => {
 
     dispatch(metaSlice.actions.requestForMonthlyJobsCounts());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/monthly-jobs-posted-counts`,
+        const response = await axiosInstance.get(
+            `/api/v1/meta/monthly-jobs-posted-counts`,
             {
-                withCredentials: true,
+        
                 headers: {
                     // "date-range": date
                 }
@@ -154,10 +155,10 @@ export const pdfDownload = (url) => async (dispatch) => {
 
     dispatch(metaSlice.actions.requestForPdf());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/meta/pdf`,
+        const response = await axiosInstance.get(
+            `/api/v1/meta/pdf`,
             {
-                withCredentials: true,
+      
                 headers: {
                     // "url": url
                 }

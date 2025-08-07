@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../services/setupAxios";
+
 
 const jobSlice = createSlice({
     name: "jobs",
@@ -11,7 +12,7 @@ const jobSlice = createSlice({
         singleJob: {},
         myJobs: [],
         pageCount: null,
-        isDeleted:false
+        isDeleted: false
     },
     reducers: {
         requestForAllJobs(state, action) {
@@ -66,23 +67,23 @@ const jobSlice = createSlice({
         },
         //////////////////////////////////////////////////////
         requestForDeleteJob(state, action) {
-       
+
             state.error = null;
             state.message = null;
-            state.isDeleted=true
+            state.isDeleted = true
         },
         successForDeleteJob(state, action) {
             state.loading = false;
             state.error = null;
             state.message = action.payload;
-            state.isDeleted=false
+            state.isDeleted = false
 
         },
         failureForDeleteJob(state, action) {
             state.loading = false;
             state.error = action.payload;
             state.message = null;
-            state.isDeleted=false
+            state.isDeleted = false
 
         },
         /////////////////// get jobs posted by employer ////////////////
@@ -120,7 +121,7 @@ const jobSlice = createSlice({
 export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispatch) => {
     try {
         dispatch(jobSlice.actions.requestForAllJobs());
-        let link = `${import.meta.env.VITE_BASE_URL}/api/v1/job/getall?`;
+        let link = `/api/v1/job/getall?`;
 
         let queryParams = [];
 
@@ -131,20 +132,20 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
             queryParams.push(`city=${city}`);
         }
 
-   
+
         if (city && city === "All") {
             queryParams = [];
             if (searchKeyword) {
                 queryParams.push(`searchKeyword=${searchKeyword}`);
             }
         }
-  
+
 
         if (niche) {
             queryParams.push(`niche=${niche}`);
         }
 
-    
+
         if (niche && niche === "All") {
             queryParams = [];
             if (searchKeyword) {
@@ -157,10 +158,10 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
 
 
         link += queryParams.join("&");
-        const response = await axios.get(
+        const response = await axiosInstance.get(
             link,
             {
-                withCredentials: true,
+
                 headers: {
 
                     "page": page,
@@ -182,9 +183,9 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
 export const fetchSingleJob = (jobId) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForSingleJob());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/job/get/${jobId}`,
-            { withCredentials: true }
+        const response = await axiosInstance.get(
+            `/api/v1/job/get/${jobId}`,
+
         );
         dispatch(jobSlice.actions.successForSingleJob(response?.data?.job));
         console.log("single job", response?.data?.job)
@@ -198,10 +199,10 @@ export const fetchSingleJob = (jobId) => async (dispatch) => {
 export const postJob = (data) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForPostJob());
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/job/post`,
+        const response = await axiosInstance.post(
+            `/api/v1/job/post`,
             data,
-            { withCredentials: true, headers: { "Content-Type": "application/json" } }
+            { headers: { "Content-Type": "application/json" } }
         );
         dispatch(jobSlice.actions.successForPostJob(response.data.message));
         dispatch(jobSlice.actions.clearAllErrors());
@@ -214,10 +215,10 @@ export const postJob = (data) => async (dispatch) => {
 export const getMyJobs = (page) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForMyJobs());
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/job/getmyjobs`,
+        const response = await axiosInstance.get(
+            `/api/v1/job/getmyjobs`,
             {
-                withCredentials: true,
+       
                 headers: {
                     "page": page
                 }
@@ -236,9 +237,9 @@ export const getMyJobs = (page) => async (dispatch) => {
 export const deleteJob = (id) => async (dispatch) => {
     dispatch(jobSlice.actions.requestForDeleteJob());
     try {
-        const response = await axios.delete(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/job/delete/${id}`,
-            { withCredentials: true }
+        const response = await axiosInstance.delete(
+            `/api/v1/job/delete/${id}`,
+     
         );
         dispatch(jobSlice.actions.successForDeleteJob(response?.data?.message));
         dispatch(clearAllJobErrors());
