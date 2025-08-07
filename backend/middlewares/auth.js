@@ -5,7 +5,6 @@ import { UserModel } from "../models/userSchema.js";
 
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
 
-
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -14,14 +13,10 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
     const token = authHeader.split(" ")[1];
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-
         req.user = await UserModel.findById(decoded?.id);
         if (!req.user) {
             return next(new ErrorHandler("User not found.", 401));
         }
-
-
         next();
     } catch (error) {
 

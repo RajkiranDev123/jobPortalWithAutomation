@@ -15,11 +15,7 @@ import metaRouter from "./routes/metaRouter.js";
 const app = express()
 
 app.use(
-    cors({
-        // origin: [process.env.FRONTEND_URL],
-        // methods: ["GET", "POST", "PUT", "DELETE"],
-        // credentials: true,
-    })
+    cors()
 );
 
 app.use(cookieParser());
