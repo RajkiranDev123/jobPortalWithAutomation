@@ -51,7 +51,7 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h4 style={{ display: "flex", alignItems: "center", justifyContent: "center",color:"grey",fontSize:30 }}><RiLoginBoxLine />Login here...</h4>
+            <h4 style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "grey", fontSize: 30 }}><RiLoginBoxLine />Login here...</h4>
           </div>
           <TestCredentials />
           <form onSubmit={handleLogin}>
@@ -91,10 +91,12 @@ const Login = () => {
               </div>
             </div>
 
+            {loading && <p style={{ color: "red", fontSize: 13 }}>Note : Sometimes it may take 40 secs for Login, Since I deployed backend server in free tier, be patient!
+              Things will be normal after Login !
+            </p>}
 
 
-
-            <button style={{ margin: 3,background:"blue",cursor:"pointer" }} type="submit" disabled={loading}>
+            <button style={{ margin: 3, background: "blue", cursor: "pointer" }} type="submit" disabled={loading}>
               {loading ? <div style={{ display: "flex", justifyContent: "center" }}><div className="loader"></div></div> : "Login"}
 
             </button>
@@ -117,8 +119,8 @@ const Login = () => {
           display: "flex", justifyContent: "center",
         }}>
 
-          <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection:"column",background:""}}>
-            <p style={{ color:"grey",fontSize:35,fontWeight:"bold",fontFamily:"monospace",margin:12}}>Find your dream job today!</p>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", background: "" }}>
+            <p style={{ color: "grey", fontSize: 35, fontWeight: "bold", fontFamily: "monospace", margin: 12 }}>Find your dream job today!</p>
             <img style={{
               width: "400px", height: "400px", borderRadius: 190,
               boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
