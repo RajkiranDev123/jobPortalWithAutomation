@@ -1,14 +1,11 @@
 export const sendToken = (user, statusCode, res, message) => {
     const token = user.getJWTToken();
-    const refeshToken = user.generateRefreshToken()
-
-
-
-    res.status(statusCode).json({
+    const refreshToken = user.generateRefreshToken()
+     res.status(statusCode).json({
         success: true,
         user,
         message,
         token,
-        refeshToken
+        refreshToken
     });
 };
