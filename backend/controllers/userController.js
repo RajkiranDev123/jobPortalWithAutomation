@@ -287,9 +287,6 @@ export const refreshAccessToken = catchAsyncErrors(
                 process.env.REFRESH_TOKEN_SECRET
             )
 
-      
-
-
             const user = await UserModel.findById(decodedToken?.id)
 
             if (!user) {
