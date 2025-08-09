@@ -96,7 +96,7 @@ const userSlice = createSlice({
 
         //////////////////////////////////////////////////
         fetchUserRequest(state, action) {
-            state.loading = true;
+            // state.loading = true;
             state.isAuthenticated = action.payload == true ? true : false;
             state.user = {};
             state.error = null;
