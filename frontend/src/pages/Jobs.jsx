@@ -259,6 +259,7 @@ const Jobs = () => {
             }
 
           </div>
+          {loading && <p style={{color:"green",fontFamily:"monospace",textAlign:"center"}}>I am using free cloud deployment for backend.Be patient !</p>}
           {/* pagin */}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Stack spacing={2}>
