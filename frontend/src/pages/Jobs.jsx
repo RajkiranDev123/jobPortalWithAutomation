@@ -81,16 +81,16 @@ const Jobs = () => {
           {/* search */}
           <div style={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap", margin: 4 }}>
 
-            <input style={{ border: "none", outline: "none", padding: 4, borderRadius: 3,fontSize:14 }}
+            <input style={{ border: "none", outline: "none", padding: 4, borderRadius: 3, fontSize: 14 }}
               type="text"
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
               placeholder=" Role / Company / etc"
             />
 
-            <button style={{fontSize:14, background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+            <button style={{ fontSize: 14, background: "rgba(8, 146, 208, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={handleSearch}>Search</button>
-            <button style={{fontSize:14, background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
+            <button style={{ fontSize: 14, background: "rgba(20, 189, 11, 1)", color: "#fff", border: "none", outline: "none", padding: 2, borderRadius: 3 }}
               onClick={() => clearSearch()}>Clear</button>
 
 
@@ -259,7 +259,6 @@ const Jobs = () => {
             }
 
           </div>
-          {loading && <p style={{color:"green",fontFamily:"monospace",textAlign:"center"}}>I am using free cloud deployment for backend.Be patient !</p>}
           {/* pagin */}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Stack spacing={2}>
@@ -268,8 +267,13 @@ const Jobs = () => {
           </div>
           {/* pagin */}
 
+
         </section>
       )}
+      {loading && <p style={{ color: "green", fontFamily: "monospace", textAlign: "center" }}>
+        I am using free cloud deployment for backend,be patient!
+      </p>}
+
     </>
   );
 };
