@@ -15,6 +15,9 @@ import pdfIcon from "../assets/pdfDown.png"
 
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import "../pages/loader2.css"
+import Tooltip from '@mui/material/Tooltip';
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 
 const EmployerDashboard = () => {
@@ -47,6 +50,20 @@ const EmployerDashboard = () => {
   }, [metaData])
   return (
     <div className="">
+
+
+      <Tooltip title={`You have ${metaData?.unviewedApplications} not viewed Applications!`}>
+
+        <span style={{ position: "relative" }}>
+          <IoMdNotificationsOutline color="blue" />
+          <span style={{ height: 14, width: 14, textAlign: "center", position: "absolute", color: "white", fontSize: 10, right: -9, background: "red", borderRadius: 50 }}>{metaData?.unviewedApplications}</span>
+        </span>
+
+      </Tooltip>
+
+
+
+
       <p style={{
         color: "#0E3386", display: "flex", alignItems: "center", marginTop: 12
         , borderRadius: 3, paddingLeft: 3, borderBottom: "2px ridge grey",

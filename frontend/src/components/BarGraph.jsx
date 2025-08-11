@@ -14,7 +14,7 @@ const chartSetting = {
             // label: 'Jobs',
         },
     ],
-    width: 600,
+    width: 320,
     height: 320,
 };
 
