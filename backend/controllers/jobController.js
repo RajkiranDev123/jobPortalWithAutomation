@@ -35,12 +35,29 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
     //
     const page = req.headers.page || 1
+    const dateRange = req.headers["date-range"]
+
     const ITEM_PER_PAGE = 5
     const skip = (page - 1) * ITEM_PER_PAGE
     //
+    const query = {};
+
+ 
+
+    if (typeof dateRange === "string" && dateRange.includes("--")) {
+        const [start, end] = dateRange.split("--");
+
+        const startDate = new Date(start + "T00:00:00Z");
+        const endDate = new Date(end + "T23:59:59Z");
+
+        query.jobPostedOn = {
+            $gte: startDate,
+            $lte: endDate
+        };
+
+    }
 
     const { city, niche, searchKeyword } = req.query;
-    const query = {};
     if (city) {
         query.location = { $regex: `^${city}$`, $options: "i" };
     }
@@ -58,6 +75,7 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
 
 
     try {
+        console.log(query)
         const jobs = await Job.find(query).skip(skip).limit(ITEM_PER_PAGE);
         //
         const totalDocs = await Job.countDocuments(query)
