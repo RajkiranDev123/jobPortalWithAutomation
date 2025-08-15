@@ -118,7 +118,7 @@ const jobSlice = createSlice({
     },
 });
 
-export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispatch) => {
+export const fetchJobs = (city, niche, searchKeyword = "", page, date) => async (dispatch) => {
     try {
         dispatch(jobSlice.actions.requestForAllJobs());
         let link = `/api/v1/job/getall?`;
@@ -165,6 +165,7 @@ export const fetchJobs = (city, niche, searchKeyword = "", page) => async (dispa
                 headers: {
 
                     "page": page,
+                    "date-range": date
 
                 }
             }
@@ -218,7 +219,7 @@ export const getMyJobs = (page) => async (dispatch) => {
         const response = await axiosInstance.get(
             `/api/v1/job/getmyjobs`,
             {
-       
+
                 headers: {
                     "page": page
                 }
@@ -239,7 +240,7 @@ export const deleteJob = (id) => async (dispatch) => {
     try {
         const response = await axiosInstance.delete(
             `/api/v1/job/delete/${id}`,
-     
+
         );
         dispatch(jobSlice.actions.successForDeleteJob(response?.data?.message));
         dispatch(clearAllJobErrors());

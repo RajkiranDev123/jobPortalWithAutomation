@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { clearAllJobErrors, fetchJobs } from "../store/slices/jobSlice";
 import Spinner from "../components/Spinner";
+import { yesterdayDate, todayDate, thisMonthDate, thisWeekDate, lastMonthDateRange } from '../utils/customDates.js'
+
 
 import { Link } from "react-router-dom";
 //
@@ -14,8 +16,29 @@ import pdfIcon from "../assets/pdfDown.png"
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
+import Box from '@mui/material/Box';
+
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  borderRadius: 3,
+  boxShadow: 24,
+  p: 4,
+};
+
 
 const Jobs = () => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
+
   const pdfRefs = useRef({})
   const [city, setCity] = useState("");
   const [page, setPage] = useState(1);
@@ -39,6 +62,8 @@ const Jobs = () => {
     }
     dispatch(fetchJobs(city, niche, searchKeyword, 1));
     console.log(pdfRefs)
+
+    console.log(780, thisMonthDate)
 
   }, [dispatch, error, city, niche]);
 
@@ -118,6 +143,7 @@ const Jobs = () => {
                 </option>
               ))}
             </select>
+            <button style={{ color: "grey", borderRadius: 3, cursor: "pointer", border: "none", background: "white" }} onClick={() => handleOpen()}>Date</button>
           </div>
 
           {/* nf */}
@@ -273,6 +299,34 @@ const Jobs = () => {
       {loading && <p style={{ color: "green", fontFamily: "monospace", textAlign: "center" }}>
         I am using free cloud deployment for backend,be patient!
       </p>}
+
+      {/* modal */}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <p onClick={handleClose} style={{ color: "red", fontSize: 14, cursor: "pointer", display: "flex", justifyContent: "flex-end" }}>X</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+
+
+            <button style={{ border: "none", color: "grey", cursor: "pointer", borderRadius: 3 }} onClick={() => { dispatch(fetchJobs(city, niche, searchKeyword, 1, todayDate)); handleClose() }}>Today</button>
+            <button style={{ border: "none", color: "grey", cursor: "pointer", borderRadius: 3 }} onClick={() => { dispatch(fetchJobs(city, niche, searchKeyword, 1, yesterdayDate)); handleClose() }}>Yesterday</button>
+            <button style={{ border: "none", color: "grey", cursor: "pointer", borderRadius: 3 }} onClick={() => { dispatch(fetchJobs(city, niche, searchKeyword, 1, thisMonthDate)); handleClose() }}>This Month</button>
+            <button style={{ border: "none", color: "grey", cursor: "pointer", borderRadius: 3 }} onClick={() => { dispatch(fetchJobs(city, niche, searchKeyword, 1, thisWeekDate)); handleClose() }}>This Week</button>
+            <button style={{ border: "none", color: "grey", cursor: "pointer", borderRadius: 3 }} onClick={() => { dispatch(fetchJobs(city, niche, searchKeyword, 1, lastMonthDateRange)); handleClose() }}>Previous Month</button>
+
+          </div>
+
+
+
+        </Box>
+      </Modal>
+      {/* modal */}
 
     </>
   );
