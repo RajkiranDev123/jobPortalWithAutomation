@@ -10,9 +10,12 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 export default function ParseResume() {
     const [parsedData, setParsedData] = useState(null);
+    const [load, setLoad] = useState(false);
+
     const fileInputRef = useRef(null);
 
     const handleFileUpload = async (e) => {
+        setLoad(true)
         const file = e.target.files[0];
         if (!file) return;
 
@@ -31,6 +34,7 @@ export default function ParseResume() {
         const parsed = parseResume(text);
         console.log("Parsed Resume Data:", parsed);
         setParsedData(parsed);
+        setLoad(false)
     };
 
     // -------- PDF Extract ----------
@@ -63,29 +67,26 @@ export default function ParseResume() {
             name: text.match(nameRegex)?.[0] || "Not found",
             email: text.match(emailRegex)?.[0] || "Not found",
             phone: text.match(phoneRegex)?.[0] || "Not found",
-            skills: extractSkills(text),
+            "some skills": extractSkills(text),
         };
     }
 
     function extractSkills(text) {
         const skillsList = [
             "JavaScript",
-            "React",
+            "React.js",
             "Node.js",
             "Python",
             "Java",
             "SQL",
             "AWS",
             "Express.js",
-            "Mongo Db",
             "Typescript",
             "CSS",
             "Material UI",
-            "Tailwind",
-            "Angular JS",
-            "Vue JS",
-            "C++",
-            
+            "Tailwind"
+
+
         ];
         return skillsList.filter((skill) =>
             new RegExp(`\\b${skill}\\b`, "i").test(text)
@@ -97,7 +98,7 @@ export default function ParseResume() {
             <p style={{ fontFamily: "monospace", color: "grey", margin: 3 }}>
                 Throw your resume to see name, email & skills!
             </p>
-
+            {load && <p style={{ color: "grey" }}>wait...</p>}
             {/* Hidden Input */}
             <input
                 type="file"
