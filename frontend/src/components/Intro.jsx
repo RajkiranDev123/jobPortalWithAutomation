@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import BarGraph from "./BarGraph";
 import { useSelector } from "react-redux";
 import "../pages/loader2.css"
+import ParseResume from "../pages/ParseResume";
 const Intro = () => {
     const { isAuthenticated } = useSelector((state) => state.user);
     const { monthlyPostedJobs } = useSelector((state) => state.meta);
@@ -29,6 +30,14 @@ const Intro = () => {
             </div>
 
             {!isAuthenticated && <p style={{ color: "white", fontSize: 30 }}>Are you busy ? <Link style={{ color: "white", fontSize: 30 }} to={"/login"}> Click here to start demo!</Link></p>}
+
+
+
+
+            <div>
+ 
+                <ParseResume/>
+            </div>
 
         </section>
     );
